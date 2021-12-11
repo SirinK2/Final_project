@@ -1,4 +1,4 @@
-package com.tuwaiq.finalproject.ui.setting
+package com.tuwaiq.finalproject.presentation.profile.presentation.setting
 
 import androidx.lifecycle.ViewModel
 

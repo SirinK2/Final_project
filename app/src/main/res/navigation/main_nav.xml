@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/homePageFragment">
+
+    <fragment
+        android:id="@+id/homePageFragment"
+        android:name="com.tuwaiq.finalproject.presentation.Homepage.presentation.HomePageFragment"
+        android:label="home_page_fragment"
+        tools:layout="@layout/home_page_fragment" />
+    <fragment
+        android:id="@+id/myProfileFragment"
+        android:name="com.tuwaiq.finalproject.presentation.profile.presentation.myProfile.MyProfileFragment"
+        android:label="my_profile_fragment"
+        tools:layout="@layout/my_profile_fragment" />
+    <fragment
+        android:id="@+id/usersProfileFragment"
+        android:name="com.tuwaiq.finalproject.presentation.profile.presentation.usersProfile.UsersProfileFragment"
+        android:label="users_profile_fragment"
+        tools:layout="@layout/users_profile_fragment" />
+    <fragment
+        android:id="@+id/itemsFragment"
+        android:name="com.tuwaiq.finalproject.presentation.post.presentation.newPost.ItemsFragment"
+        android:label="items_fragment"
+        tools:layout="@layout/items_fragment" />
+</navigation>

@@ -1,4 +1,4 @@
-package com.tuwaiq.finalproject.ui.setting
+package com.tuwaiq.finalproject.presentation.profile.presentation.setting
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.databinding.SettingFragmentBinding
 
 class SettingFragment : Fragment() {

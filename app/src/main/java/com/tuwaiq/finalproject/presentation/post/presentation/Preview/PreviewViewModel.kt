@@ -1,4 +1,4 @@
-package com.tuwaiq.finalproject.ui.Preview
+package com.tuwaiq.finalproject.presentation.post.presentation.Preview
 
 import androidx.lifecycle.ViewModel
 

@@ -1,4 +1,4 @@
-package com.tuwaiq.finalproject.ui.directMessage
+package com.tuwaiq.finalproject.presentation.messages.presentation.directMessage
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.databinding.DirectMessageFragmentBinding
 import com.tuwaiq.finalproject.databinding.DirectMessageItemListBinding
 

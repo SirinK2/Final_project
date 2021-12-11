@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Final project</string>
+    <string name="item_title">Title</string>
+    <string name="item_description">Description</string>
+    <string name="item_price">Price</string>
+    <string name="item_done_btn">Done</string>
+    <string name="setting_language">Language</string>
+    <string name="setting_edit_profile">Edit profile</string>
 </resources>

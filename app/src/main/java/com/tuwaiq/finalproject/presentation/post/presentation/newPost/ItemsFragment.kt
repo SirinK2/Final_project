@@ -1,4 +1,4 @@
-package com.tuwaiq.finalproject.ui.addItem
+package com.tuwaiq.finalproject.presentation.post.presentation.newPost
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.databinding.ItemsFragmentBinding
 
 class ItemsFragment : Fragment() {
@@ -22,6 +21,9 @@ class ItemsFragment : Fragment() {
     ): View {
         binding = ItemsFragmentBinding.inflate(layoutInflater)
         return binding.root
+
+
+
     }
 
 

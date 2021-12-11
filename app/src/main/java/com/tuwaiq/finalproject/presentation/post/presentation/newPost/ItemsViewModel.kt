@@ -1,4 +1,4 @@
-package com.tuwaiq.finalproject.ui.addItem
+package com.tuwaiq.finalproject.presentation.post.presentation.newPost
 
 import androidx.lifecycle.ViewModel
 

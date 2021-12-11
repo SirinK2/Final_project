@@ -1,4 +1,4 @@
-package com.tuwaiq.finalproject.ui.directMessage
+package com.tuwaiq.finalproject.presentation.messages.presentation.directMessage
 
 import androidx.lifecycle.ViewModel
 

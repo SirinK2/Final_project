@@ -1,4 +1,4 @@
-package com.tuwaiq.finalproject.ui.usersProfile
+package com.tuwaiq.finalproject.presentation.profile.presentation.usersProfile
 
 import androidx.lifecycle.ViewModel
 

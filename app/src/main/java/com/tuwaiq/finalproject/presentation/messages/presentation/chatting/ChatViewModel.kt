@@ -1,4 +1,4 @@
-package com.tuwaiq.finalproject.ui.chatting
+package com.tuwaiq.finalproject.presentation.messages.presentation.chatting
 
 import androidx.lifecycle.ViewModel
 

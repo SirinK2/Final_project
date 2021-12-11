@@ -1,4 +1,4 @@
-package com.tuwaiq.finalproject.database
+package com.tuwaiq.finalproject.core
 
 data class Test (
                   var title: String = "",

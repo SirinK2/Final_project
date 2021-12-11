@@ -1,4 +1,4 @@
-package com.tuwaiq.finalproject.ui.Homepage
+package com.tuwaiq.finalproject.presentation.Homepage.presentation
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -8,8 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.tuwaiq.finalproject.R
-import com.tuwaiq.finalproject.database.Test
+import com.tuwaiq.finalproject.core.Test
 import com.tuwaiq.finalproject.databinding.HomePageFragmentBinding
 import com.tuwaiq.finalproject.databinding.HomePageItemsBinding
 
@@ -40,7 +39,7 @@ class HomePageFragment : Fragment() {
     private inner class HomeHolder(val binding: HomePageItemsBinding):RecyclerView.ViewHolder(binding.root){
 
         fun bind(test: Test){
-            binding.textView.text = test.title
+            binding.homeTitleTv.text= test.title
         }
 
     }

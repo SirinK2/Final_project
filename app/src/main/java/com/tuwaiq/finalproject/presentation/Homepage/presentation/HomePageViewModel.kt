@@ -1,7 +1,7 @@
-package com.tuwaiq.finalproject.ui.Homepage
+package com.tuwaiq.finalproject.presentation.Homepage.presentation
 
 import androidx.lifecycle.ViewModel
-import com.tuwaiq.finalproject.database.Test
+import com.tuwaiq.finalproject.core.Test
 
 class HomePageViewModel : ViewModel() {
     val items = mutableListOf<Test>()

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.myProfile.MyProfileFragment">
+    tools:context=".presentation.profile.presentation.myProfile.MyProfileFragment">
 
     <ImageView
         android:id="@+id/my_prof_iv"

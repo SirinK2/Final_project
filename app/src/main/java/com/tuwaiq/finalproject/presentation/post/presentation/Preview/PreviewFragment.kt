@@ -1,4 +1,4 @@
-package com.tuwaiq.finalproject.ui.Preview
+package com.tuwaiq.finalproject.presentation.post.presentation.Preview
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.databinding.PreviewFragmentBinding
 
 class PreviewFragment : Fragment() {
