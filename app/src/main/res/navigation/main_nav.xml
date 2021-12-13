@@ -9,12 +9,32 @@
         android:id="@+id/homePageFragment"
         android:name="com.tuwaiq.finalproject.presentation.Homepage.presentation.HomePageFragment"
         android:label="home_page_fragment"
-        tools:layout="@layout/home_page_fragment" />
+        tools:layout="@layout/home_page_fragment" >
+        <action
+            android:id="@+id/action_homePageFragment_to_directMessageFragment"
+            app:destination="@id/directMessageFragment" />
+        <action
+            android:id="@+id/action_homePageFragment_to_itemsFragment"
+            app:destination="@id/itemsFragment" />
+        <action
+            android:id="@+id/action_homePageFragment_to_myProfileFragment"
+            app:destination="@id/myProfileFragment" />
+        <action
+            android:id="@+id/action_homePageFragment_to_previewFragment"
+            app:destination="@id/previewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myProfileFragment"
         android:name="com.tuwaiq.finalproject.presentation.profile.presentation.myProfile.MyProfileFragment"
         android:label="my_profile_fragment"
-        tools:layout="@layout/my_profile_fragment" />
+        tools:layout="@layout/my_profile_fragment" >
+        <action
+            android:id="@+id/action_myProfileFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/action_myProfileFragment_to_previewFragment"
+            app:destination="@id/previewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/usersProfileFragment"
         android:name="com.tuwaiq.finalproject.presentation.profile.presentation.usersProfile.UsersProfileFragment"
@@ -25,4 +45,32 @@
         android:name="com.tuwaiq.finalproject.presentation.post.presentation.newPost.ItemsFragment"
         android:label="items_fragment"
         tools:layout="@layout/items_fragment" />
+    <fragment
+        android:id="@+id/directMessageFragment"
+        android:name="com.tuwaiq.finalproject.presentation.messages.presentation.directMessage.DirectMessageFragment"
+        android:label="direct_message_fragment"
+        tools:layout="@layout/direct_message_fragment" >
+        <action
+            android:id="@+id/action_directMessageFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/previewFragment"
+        android:name="com.tuwaiq.finalproject.presentation.post.presentation.Preview.PreviewFragment"
+        android:label="preview_fragment"
+        tools:layout="@layout/preview_fragment" >
+        <action
+            android:id="@+id/action_previewFragment_to_usersProfileFragment"
+            app:destination="@id/usersProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.tuwaiq.finalproject.presentation.messages.presentation.chatting.ChatFragment"
+        android:label="chat_fragment"
+        tools:layout="@layout/chat_fragment" />
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.tuwaiq.finalproject.presentation.profile.presentation.setting.SettingFragment"
+        android:label="setting_fragment"
+        tools:layout="@layout/setting_fragment" />
 </navigation>
