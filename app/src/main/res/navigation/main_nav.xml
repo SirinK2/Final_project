@@ -73,4 +73,12 @@
         android:name="com.tuwaiq.finalproject.presentation.profile.presentation.setting.SettingFragment"
         android:label="setting_fragment"
         tools:layout="@layout/setting_fragment" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.tuwaiq.finalproject.presentation.auth.presentation.register.RegisterFragment"
+        android:label="RegisterFragment" />
+    <fragment
+        android:id="@+id/singInFragment"
+        android:name="com.tuwaiq.finalproject.presentation.auth.presentation.singIn.SingInFragment"
+        android:label="SingInFragment" />
 </navigation>

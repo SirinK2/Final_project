@@ -6,4 +6,5 @@
     <string name="item_done_btn">Done</string>
     <string name="setting_language">Language</string>
     <string name="setting_edit_profile">Edit profile</string>
+    <string name="register">Register</string>
 </resources>
