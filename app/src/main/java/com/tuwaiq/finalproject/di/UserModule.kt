@@ -18,9 +18,9 @@ object UserModule {
     @Provides
     fun provideUserRepo():UserRepo = UserRepoImpl()
 
-//    @Singleton
-//    @Provides
-//    fun provideSaveUserUseCase(repo: UserRepo): SaveUserUseCase = SaveUserUseCase(repo)
+    @Singleton
+    @Provides
+    fun provideSaveUserUseCase(repo: UserRepo): SaveUserUseCase = SaveUserUseCase(repo)
 
 
 }

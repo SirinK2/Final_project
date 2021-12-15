@@ -13,7 +13,7 @@
         tools:context=".presentation.post.presentation.newPost.ItemsFragment">
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/items_title_et"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="84dp"
@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/items_descrip_et"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
@@ -38,10 +38,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+            app:layout_constraintTop_toBottomOf="@+id/items_title_et" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName3"
+            android:id="@+id/items_price_et"
             android:layout_width="110dp"
             android:layout_height="48dp"
             android:layout_marginTop="76dp"
@@ -51,7 +51,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.335"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+            app:layout_constraintTop_toBottomOf="@+id/items_descrip_et" />
 
         <Button
             android:id="@+id/item_done_btn"

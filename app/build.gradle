@@ -71,6 +71,7 @@ dependencies {
     implementation "androidx.activity:activity-ktx:1.4.0"
 
 
+    implementation 'com.google.android.gms:play-services-location:19.0.0'
 //    //google sdk
 //    implementation 'com.google.android.gms:play-services-location:18.0.0'
 //

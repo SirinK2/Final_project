@@ -21,12 +21,12 @@ object AuthModule {
     fun provideAuthRepo():AuthRepo = AuthRepoImpl()
 
 
-//    @Singleton
-//    @Provides
-//    fun provideSingInUseCase(repo: AuthRepo): SingInUseCase = SingInUseCase(repo)
-//
-//
-//
+    @Singleton
+    @Provides
+    fun provideSingInUseCase(repo: AuthRepo): SingInUseCase = SingInUseCase(repo)
+
+
+
 //    @Singleton
 //    @Provides
 //    fun provideRegisterUseCase(repo: AuthRepo): RegisterUseCase = RegisterUseCase(repo)

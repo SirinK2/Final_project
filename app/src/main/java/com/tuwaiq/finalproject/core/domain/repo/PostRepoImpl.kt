@@ -18,4 +18,8 @@ class PostRepoImpl :PostRepo{
             Log.d(TAG,"from post repo impl", e)
         }
     }
+
+    override fun getLocation() {
+        TODO("Not yet implemented")
+    }
 }

@@ -2,7 +2,8 @@ package com.tuwaiq.finalproject.presentation.auth.domain.use_cases
 
 import com.tuwaiq.finalproject.presentation.auth.data.repo.AuthRepo
 
-class RegisterUseCase(
+
+class RegisterUseCase (
     private val repo: AuthRepo
 ) {
 

@@ -6,4 +6,7 @@ interface PostRepo {
 
     suspend fun savePost(post: Post)
 
+    fun getLocation()
+
+
 }
