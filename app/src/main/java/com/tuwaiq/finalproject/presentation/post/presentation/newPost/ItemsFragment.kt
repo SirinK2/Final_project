@@ -6,13 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.tuwaiq.finalproject.databinding.ItemsFragmentBinding
+import dagger.hilt.android.lifecycle.HiltViewModel
 
+@HiltViewModel
 class ItemsFragment : Fragment() {
 
 
 
-    private val itemsViewModel by lazy { ViewModelProvider(this)[ItemsViewModel::class.java] }
+    private val viewModel: ItemsViewModel by viewModels()
 
     lateinit var binding: ItemsFragmentBinding
     override fun onCreateView(
@@ -20,6 +23,10 @@ class ItemsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = ItemsFragmentBinding.inflate(layoutInflater)
+
+
+
+
         return binding.root
 
 

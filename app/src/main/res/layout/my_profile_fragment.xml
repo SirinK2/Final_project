@@ -22,13 +22,12 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
 
-        <TextView
+        <EditText
             android:id="@+id/my_prof_name_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="159dp"
+            android:layout_height="42dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="36dp"
-            android:text="TextView"
             app:layout_constraintStart_toEndOf="@+id/my_prof_iv"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,6 +50,37 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="132dp"
             app:layout_constraintStart_toEndOf="@+id/my_prof_iv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/my_prof_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="28dp"
+            android:text="Button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/my_prof_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="252dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.566"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/my_prof_text_rating"
+            android:layout_width="124dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="176dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.564"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <!--    <com.google.android.material.tabs.TabLayout-->

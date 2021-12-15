@@ -7,12 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tuwaiq.finalproject.databinding.SettingFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SettingFragment : Fragment() {
 
 
 
-    private val settingViewModel by lazy { ViewModelProvider(this)[SettingViewModel::class.java] }
+//    private val settingViewModel by lazy { ViewModelProvider(this)[SettingViewModel::class.java] }
 
     lateinit var binding: SettingFragmentBinding
 
