@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.profile.presentation.setting.SettingFragment">
+        tools:context=".features.profile.presentation.setting.SettingFragment">
 
         <Button
             android:id="@+id/setting_language_btn"

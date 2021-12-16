@@ -6,3 +6,5 @@ data class User(
     var bio: String,
     var ratings: List<Rating>
 )
+
+//fun UserDto.toUser
