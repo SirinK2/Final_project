@@ -4,18 +4,29 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/circle.xml" value="0.29384615384615387" />
+        <entry key="app/src/main/res/drawable/custom_button.xml" value="0.2984375" />
+        <entry key="app/src/main/res/drawable/custom_edit_text.xml" value="0.25462962962962965" />
+        <entry key="app/src/main/res/drawable/custom_email.xml" value="0.15648148148148147" />
+        <entry key="app/src/main/res/drawable/custom_lock.xml" value="0.15648148148148147" />
+        <entry key="app/src/main/res/drawable/ic_baseline_perm_identity_24.xml" value="0.29384615384615387" />
+        <entry key="app/src/main/res/drawable/ic_email.xml" value="0.26296296296296295" />
+        <entry key="app/src/main/res/drawable/ic_email_foucsed.xml" value="0.2984375" />
+        <entry key="app/src/main/res/drawable/ic_lock.xml" value="0.26296296296296295" />
+        <entry key="app/src/main/res/drawable/ic_lock_foucsed.xml" value="0.15648148148148147" />
+        <entry key="app/src/main/res/drawable/ic_person.xml" value="0.2814814814814815" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/chat_fragment.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/direct_message_fragment.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/direct_message_item_list.xml" value="0.2922083090899667" />
-        <entry key="app/src/main/res/layout/home_page_fragment.xml" value="0.49800796812749004" />
-        <entry key="app/src/main/res/layout/home_page_items.xml" value="0.15699054795721318" />
+        <entry key="app/src/main/res/layout/dorpdown_items.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/home_page_fragment.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/home_page_items.xml" value="0.46188793054096844" />
         <entry key="app/src/main/res/layout/items_fragment.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/my_profile_fragment.xml" value="0.315804214538902" />
         <entry key="app/src/main/res/layout/preview_fragment.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/register_fragment.xml" value="0.2682291666666667" />
         <entry key="app/src/main/res/layout/setting_fragment.xml" value="0.24585697610527063" />
-        <entry key="app/src/main/res/layout/sing_in_fragment.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/sing_in_fragment.xml" value="0.335" />
         <entry key="app/src/main/res/layout/users_profile_fragment.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/users_profile_items_list.xml" value="0.2505862122587436" />
       </map>

@@ -1,8 +1,8 @@
-package com.tuwaiq.finalproject.features.auth.domain.repo
+package com.tuwaiq.finalproject.features.auth.data.repo
 
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
-import com.tuwaiq.finalproject.features.auth.data.repo.AuthRepo
+import com.tuwaiq.finalproject.features.auth.domain.repo.AuthRepo
 
 private const val TAG = "AuthRepoImpl"
 

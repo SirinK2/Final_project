@@ -1,4 +1,4 @@
-package com.tuwaiq.finalproject.core.data.firebase
+package com.tuwaiq.finalproject.core.data.remote.dto
 
 
 data class Rating (

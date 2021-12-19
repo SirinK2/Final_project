@@ -1,6 +1,6 @@
 package com.tuwaiq.finalproject.features.auth.domain.use_cases
 
-import com.tuwaiq.finalproject.features.auth.data.repo.AuthRepo
+import com.tuwaiq.finalproject.features.auth.domain.repo.AuthRepo
 import javax.inject.Inject
 
 

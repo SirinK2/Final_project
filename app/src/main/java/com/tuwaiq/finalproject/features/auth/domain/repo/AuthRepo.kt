@@ -1,4 +1,4 @@
-package com.tuwaiq.finalproject.features.auth.data.repo
+package com.tuwaiq.finalproject.features.auth.domain.repo
 
 interface AuthRepo {
 

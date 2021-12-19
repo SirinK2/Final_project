@@ -9,21 +9,25 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="10sp">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="169dp"
-            android:layout_height="225dp"
-            android:layout_margin="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="50sp"
             app:cardCornerRadius="20sp"
+            android:shadowDx="@integer/material_motion_duration_short_1"
+            android:shadowDy="@integer/material_motion_duration_long_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="168dp"
-                android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10sp">
 
                 <ImageView
                     android:id="@+id/home_item_iv"
