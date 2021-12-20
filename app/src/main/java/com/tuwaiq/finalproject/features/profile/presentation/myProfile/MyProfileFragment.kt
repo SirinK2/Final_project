@@ -26,22 +26,22 @@ class MyProfileFragment : Fragment() {
     ): View {
         binding = MyProfileFragmentBinding.inflate(layoutInflater)
 
-        binding.myProfButton.setOnClickListener {
-            val name = binding.myProfNameTv.text.toString()
-            val bio = binding.myProfBioTv.text.toString()
-            val rate: List<Rating> = listOf()
+//        binding.myProfButton.setOnClickListener {
+//            val name = binding.myProfNameTv.text.toString()
+//            val bio = binding.myProfBioTv.text.toString()
+//            val rate: List<Rating> = listOf()
+//
+//            for (i in rate){
+//                binding.myProfTextRating.text.toString().toFloat()
+//            }
+//
+//            val user = UserDto(name,bio,rate)
+//
+//
+//                viewModel.saveUser(user)
+//
 
-            for (i in rate){
-                binding.myProfTextRating.text.toString().toFloat()
-            }
-
-            val user = UserDto(name,bio,rate)
-
-
-                viewModel.saveUser(user)
-
-
-        }
+//        }
 
         return binding.root
     }

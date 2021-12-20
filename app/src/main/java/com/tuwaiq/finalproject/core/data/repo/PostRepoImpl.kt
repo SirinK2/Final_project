@@ -10,6 +10,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.tuwaiq.finalproject.core.data.remote.dto.CurrentLocation
 import com.tuwaiq.finalproject.core.data.remote.dto.PostDto
+import com.tuwaiq.finalproject.core.domain.model.Post
 import com.tuwaiq.finalproject.core.domain.repo.PostRepo
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
@@ -21,7 +22,7 @@ class PostRepoImpl : PostRepo {
 
     private val postCollectionRef = Firebase.firestore.collection("post")
 
-    override suspend fun addPost(post: PostDto) {
+    override suspend fun addPost(post: Post) {
         try {
             postCollectionRef.add(post)
             Log.d(TAG, "add post ")
@@ -38,31 +39,20 @@ class PostRepoImpl : PostRepo {
 
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
 
-            if (ActivityCompat.checkSelfPermission(
-                    context,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                    context,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED
-            ){ return }
+            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED){ return }
 
         val location =  fusedLocationClient.lastLocation.await()
 
-        val myLocation = CurrentLocation(location.latitude, location.longitude)
+        val myLocation = CurrentLocation(location?.latitude, location?.longitude)
 
-        Log.d(TAG," from location ${location.longitude}  ${location.latitude} ")
+        Log.d(TAG," from location ${location?.longitude}  ${location?.latitude} ")
 
-        val items = PostDto(category,title,description,price,myLocation)
-
+        val items = Post(category,title,description,price,myLocation)
 
         addPost(items)
-
-
-
-
-
-
 
     }
 
