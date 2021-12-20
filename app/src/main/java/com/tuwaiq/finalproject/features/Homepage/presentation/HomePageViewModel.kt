@@ -1,40 +1,25 @@
 package com.tuwaiq.finalproject.features.Homepage.presentation
 
+import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.tuwaiq.finalproject.core.Test
+import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
+import com.tuwaiq.finalproject.core.domain.model.Post
+import com.tuwaiq.finalproject.core.domain.use_case.GetPostUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomePageViewModel : ViewModel() {
+private const val TAG = "HomePageViewModel"
+@HiltViewModel
+class HomePageViewModel @Inject constructor(private val getPostUseCase: GetPostUseCase) : ViewModel() {
 
-
-
-    fun click(){
-
-
-        HomePageFragmentDirections.actionHomePageFragmentToMyProfileFragment()
+    fun getPost(): LiveData<List<Post>> = liveData(Dispatchers.IO) {
+          emit(getPostUseCase())
 
 
     }
-    val items = mutableListOf<Test>()
 
-    val names = listOf(
-        "Hind",
-        "sirin",
-        "Asma",
-        "Ahmed",
-        "Reem",
-        "Rahaf",
-        "Rawan",
-        "Zienab",
-        "Manar",
-        "Hajar"
-    )
-
-    init {
-        for (i in 0 until 10){
-            val test = Test()
-            test.title = names[i]
-
-            items += test
-        }
-    }
 }

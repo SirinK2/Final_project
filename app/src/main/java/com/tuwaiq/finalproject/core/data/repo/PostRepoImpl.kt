@@ -5,11 +5,13 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.util.Log
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.tuwaiq.finalproject.core.data.remote.dto.CurrentLocation
-import com.tuwaiq.finalproject.core.data.remote.dto.PostDto
 import com.tuwaiq.finalproject.core.domain.model.Post
 import com.tuwaiq.finalproject.core.domain.repo.PostRepo
 import kotlinx.coroutines.tasks.await
@@ -31,6 +33,28 @@ class PostRepoImpl : PostRepo {
             Log.d(TAG,"from PostRepoImpl", e)
         }
     }
+
+
+
+
+    override suspend fun getPost(): List<Post> {
+         val listPost: MutableList<Post> = mutableListOf()
+        try {
+            postCollectionRef.get().await().documents.forEach {
+                val post = it.toObject(Post::class.java)
+                post?.let { p ->
+                    listPost += p
+                }
+                 Log.d(TAG, "getPost: $listPost")
+            }
+        }catch (e: Exception){
+            Log.e(TAG, "getPost: something wrong", e)
+        }
+
+        return listPost
+
+    }
+
 
 
 

@@ -44,7 +44,7 @@ class ItemsFragment : Fragment() {
 
 
             viewModel.addPost(requireContext(),category,title, description, price)
-//            viewModel.savePost(requireContext(),category,title, description, price)
+
         }
 
 
