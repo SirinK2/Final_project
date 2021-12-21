@@ -38,7 +38,7 @@ class PostRepoImpl : PostRepo {
 
 
     override suspend fun getPost(): List<Post> {
-         val listPost: MutableList<Post> = mutableListOf()
+        val listPost: MutableList<Post> = mutableListOf()
         try {
             postCollectionRef.get().await().documents.forEach {
                 val post = it.toObject(Post::class.java)

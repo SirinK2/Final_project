@@ -1,6 +1,5 @@
 package com.tuwaiq.finalproject.features.Homepage.presentation
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.tuwaiq.finalproject.core.Test
 import com.tuwaiq.finalproject.core.domain.model.Post
 import com.tuwaiq.finalproject.databinding.HomePageFragmentBinding
 import com.tuwaiq.finalproject.databinding.HomePageItemsBinding
@@ -28,15 +26,10 @@ class HomePageFragment : Fragment() {
     private lateinit var binding : HomePageFragmentBinding
 
 
-
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val post:List<Post> = listOf()
 
         binding = HomePageFragmentBinding.inflate(layoutInflater)
 
@@ -85,7 +78,13 @@ class HomePageFragment : Fragment() {
 
     private inner class HomeHolder(val binding: HomePageItemsBinding):RecyclerView.ViewHolder(binding.root), View.OnClickListener{
 
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
         fun bind(post: Post){
+//            binding.viewModel?.post = post
             binding.homeTitleTv.text = post.title
             binding.homePriceTv.text = post.price
         }
@@ -99,6 +98,7 @@ class HomePageFragment : Fragment() {
         }
 
     }
+
 
 
     private inner class HomeAdapter(val posts: List<Post>): RecyclerView.Adapter<HomeHolder>() {
