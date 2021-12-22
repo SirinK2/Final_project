@@ -1,6 +1,7 @@
 package com.tuwaiq.finalproject.core.domain.repo
 
 import android.content.Context
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import com.tuwaiq.finalproject.core.data.remote.dto.PostDto
 import com.tuwaiq.finalproject.core.domain.model.Post
@@ -19,6 +20,9 @@ interface PostRepo {
 
 
     suspend fun getPost():List<Post>
+
+
+//    suspend fun uploadImage()
 
 
 

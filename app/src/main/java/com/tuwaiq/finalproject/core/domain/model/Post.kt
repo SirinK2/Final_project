@@ -9,3 +9,4 @@ data class Post (
     var price: String = "",
     var location: CurrentLocation = CurrentLocation(0.0,0.0)
         )
+
