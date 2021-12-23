@@ -11,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tuwaiq.finalproject.databinding.CameraBinding
+import io.ak1.pix.helpers.PixEventCallback
 import java.io.File
 
 class Camera: BottomSheetDialogFragment() {
@@ -53,6 +54,8 @@ class Camera: BottomSheetDialogFragment() {
 //        photoFile =
 
         binding.cameraDialogBtn.setOnClickListener {
+
+//            PixEventCallback.Status.SUCCESS ->
 
             when(PackageManager.PERMISSION_GRANTED){
                 context?.let {

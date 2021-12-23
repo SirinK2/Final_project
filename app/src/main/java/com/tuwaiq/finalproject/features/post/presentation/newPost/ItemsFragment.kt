@@ -19,6 +19,10 @@ import com.tuwaiq.finalproject.core.util.Camera
 import com.tuwaiq.finalproject.core.util.Constant.imgFile
 import com.tuwaiq.finalproject.databinding.ItemsFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
+import io.ak1.pix.models.Flash
+import io.ak1.pix.models.Mode
+import io.ak1.pix.models.Options
+import io.ak1.pix.models.Ratio
 import java.io.File
 
 private const val TAG = "ItemsFragment"
@@ -51,10 +55,24 @@ class ItemsFragment : Fragment() {
         binding.autoCompleteTextView2.setAdapter(arrayAdapter)
 
         binding.cameraBtn.setOnClickListener {
-            Intent(Intent.ACTION_PICK).also {
-                it.type = "image/*"
-                startActivityForResult(it, REQUEST_CODE)
+//            Intent(Intent.ACTION_PICK).also {
+//                it.type = "image/*"
+//                startActivityForResult(it, REQUEST_CODE)
+//            }
+
+            val option = Options().apply {
+                ratio = Ratio.RATIO_AUTO
+                count = 5
+                spanCount = 4
+                path = "Pix/Camera"
+                isFrontFacing = false
+                mode = Mode.Picture
+                flash = Flash.Auto
+                preSelectedUrls = ArrayList<Uri>()
+
             }
+
+            option
         }
 
         binding.itemDoneBtn.setOnClickListener {

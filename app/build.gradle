@@ -90,4 +90,9 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2-native-mt'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
 
+
+    // image picker
+
+    implementation  'io.ak1.pix:piximagepicker:1.6.2'
+
 }
