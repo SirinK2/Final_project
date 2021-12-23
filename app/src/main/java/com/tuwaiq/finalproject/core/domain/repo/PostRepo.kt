@@ -22,7 +22,7 @@ interface PostRepo {
     suspend fun getPost():List<Post>
 
 
-//    suspend fun uploadImage()
+    suspend fun uploadImage()
 
 
 

@@ -11,11 +11,15 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import com.tuwaiq.finalproject.MainActivity
 import com.tuwaiq.finalproject.R
+import com.tuwaiq.finalproject.core.util.Camera
 import com.tuwaiq.finalproject.core.util.Constant.imgFile
 import com.tuwaiq.finalproject.databinding.ItemsFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
 
 private const val TAG = "ItemsFragment"
 private const val REQUEST_CODE = 0
@@ -26,7 +30,11 @@ class ItemsFragment : Fragment() {
 
     private val viewModel: ItemsViewModel by viewModels()
 
-    lateinit var binding: ItemsFragmentBinding
+    private lateinit var binding: ItemsFragmentBinding
+
+
+
+
 
 
 
@@ -42,12 +50,12 @@ class ItemsFragment : Fragment() {
         val arrayAdapter = ArrayAdapter(requireContext(),R.layout.dorpdown_items,categories)
         binding.autoCompleteTextView2.setAdapter(arrayAdapter)
 
-//        binding.cameraBtn.setOnClickListener {
-//            Intent(Intent.ACTION_GET_CONTENT).also {
-//                it.type = "image/*"
-//                startActivityForResult(it, REQUEST_CODE)
-//            }
-//        }
+        binding.cameraBtn.setOnClickListener {
+            Intent(Intent.ACTION_PICK).also {
+                it.type = "image/*"
+                startActivityForResult(it, REQUEST_CODE)
+            }
+        }
 
         binding.itemDoneBtn.setOnClickListener {
 
@@ -61,6 +69,18 @@ class ItemsFragment : Fragment() {
 
         }
 
+//        binding.cameraBtn.setOnClickListener {
+//            val args = Bundle()
+//
+//            val bottomSheet = Camera()
+//            bottomSheet.arguments = args
+//
+//            bottomSheet.show(parentFragmentManager, bottomSheet.tag)
+//
+//
+//
+//        }
+
 
         return binding.root
 
@@ -68,15 +88,18 @@ class ItemsFragment : Fragment() {
 
     }
 
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE){
-//            data?.data?.let {
-//                imgFile = it
-//                binding.imageView2.setImageURI(it)
-//            }
-//        }
-//    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE){
+            data?.data?.let {
+                imgFile = it
+                binding.imageView2.setImageURI(it)
+            }
+        }
+    }
+
+
+
 
 
 

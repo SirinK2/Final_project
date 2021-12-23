@@ -87,16 +87,16 @@ class PostRepoImpl : PostRepo {
 
 
 
-//    override suspend fun uploadImage() {
-//
-//        try {
-//            imgFile?.let { imgRef.putFile(it).await() }
-//
-//        } catch (e: Exception){
-//            Log.e(TAG, "uploadImage: ", e)
-//        }
-//
-//    }
+    override suspend fun uploadImage() {
+
+        try {
+            imgFile?.let { imgRef.putFile(it).await() }
+
+        } catch (e: Exception){
+            Log.e(TAG, "uploadImage: ", e)
+        }
+
+    }
 
 
 }

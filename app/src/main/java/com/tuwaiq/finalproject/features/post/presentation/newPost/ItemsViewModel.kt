@@ -29,6 +29,6 @@ class ItemsViewModel @Inject constructor(
         viewModelScope.launch (Dispatchers.IO){ addPostUseCase(context,category, title, description, price) }
 
 
-//    fun uploadImg() = viewModelScope.launch(Dispatchers.IO) { uploadImgUseCase() }
+    fun uploadImg() = viewModelScope.launch(Dispatchers.IO) { uploadImgUseCase() }
 
 }

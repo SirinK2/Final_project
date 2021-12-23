@@ -5,6 +5,6 @@ import javax.inject.Inject
 
 class UploadImgUseCase @Inject constructor(private val repo: PostRepo) {
 
-//    suspend operator fun invoke() = repo.uploadImage()
+    suspend operator fun invoke() = repo.uploadImage()
 
 }
