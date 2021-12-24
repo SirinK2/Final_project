@@ -25,6 +25,12 @@ class HomePageFragment : Fragment() {
 
     private lateinit var binding : HomePageFragmentBinding
 
+    var post = Post()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,15 +47,36 @@ class HomePageFragment : Fragment() {
 
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var lat: Double? = 0.0
+        var long: Double? = 0.0
+
+
+
         homePageViewModel.getPost().observe(
             viewLifecycleOwner, {
+                it.forEach { posts ->
+                    post = posts
+                    lat =  post.location.latitude
+                    long = post.location.longitude
+                    Log.d(TAG, "getLocation: $lat $long ")
+                   val locationFilter = homePageViewModel.getLocation(requireContext(),lat, long)
+
+                    val listPost = mutableListOf<Post>()
+                    locationFilter.observe(
+                        viewLifecycleOwner,{ distance ->
+                            if(distance <= 500){
+                                listPost += it
+                            }
+                        }
+                    )
+
+                }
                 binding.homeRv.adapter = HomeAdapter(it)
 
-                Log.d(TAG, "onCreate: ${it.size} ")
+                Log.d(TAG, "onViewCreated: ${it.size} ")
             }
         )
     }
@@ -62,6 +89,7 @@ class HomePageFragment : Fragment() {
         binding.homeProfileBtn.setOnClickListener {
             val action = HomePageFragmentDirections.actionHomePageFragmentToMyProfileFragment()
             navCon.navigate(action)
+//            homePageViewModel.getLocation(requireContext())
         }
 
         binding.floatingActionButton.setOnClickListener {
@@ -85,6 +113,7 @@ class HomePageFragment : Fragment() {
 
         fun bind(post: Post){
 //            binding.viewModel?.post = post
+
             binding.homeTitleTv.text = post.title
             binding.homePriceTv.text = post.price
         }

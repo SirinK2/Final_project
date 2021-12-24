@@ -1,6 +1,7 @@
 package com.tuwaiq.finalproject.core.domain.repo
 
 import android.content.Context
+import android.location.Location
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import com.tuwaiq.finalproject.core.data.remote.dto.PostDto
@@ -23,6 +24,9 @@ interface PostRepo {
 
 
     suspend fun uploadImage()
+
+
+    suspend fun getLocation(@ApplicationContext context: Context, latitude: Double?, longitude: Double?): Float
 
 
 

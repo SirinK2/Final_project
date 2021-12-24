@@ -1,22 +1,21 @@
 package com.tuwaiq.finalproject.core.data.repo
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
-import android.net.Uri
+import android.location.Location
 import android.util.Log
 import androidx.core.app.ActivityCompat
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.tuwaiq.finalproject.core.data.remote.dto.CurrentLocation
 import com.tuwaiq.finalproject.core.domain.model.Post
 import com.tuwaiq.finalproject.core.domain.repo.PostRepo
 import com.tuwaiq.finalproject.core.util.Constant.imgFile
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
 import java.util.*
@@ -41,8 +40,6 @@ class PostRepoImpl : PostRepo {
 
 
     }
-
-
 
 
     override suspend fun getPost(): List<Post> {
@@ -84,9 +81,8 @@ class PostRepoImpl : PostRepo {
         addPost(items)
 
     }
-
-
-
+    
+    
     override suspend fun uploadImage() {
 
         try {
@@ -95,6 +91,44 @@ class PostRepoImpl : PostRepo {
         } catch (e: Exception){
             Log.e(TAG, "uploadImage: ", e)
         }
+
+    }
+
+    
+    @SuppressLint("MissingPermission")
+    override suspend fun getLocation(
+        @ApplicationContext context: Context,
+        latitude: Double?, longitude: Double?): Float {
+        
+        val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
+        val location = fusedLocationClient.lastLocation.await()
+
+        val myLocation = Location("myLocation")
+        myLocation.latitude
+        myLocation.longitude
+
+        Log.d(TAG, "getLocation: ${location.latitude}  ${location.longitude}")
+
+
+        val toLocation = Location("toLocation")
+
+        if (latitude != null && longitude != null) {
+
+            toLocation.latitude = latitude
+
+            toLocation.longitude = longitude
+        }
+
+        val distance = location.distanceTo(toLocation) / 1000
+
+
+
+
+
+        Log.d(TAG, "getLocation: distance $distance")
+
+
+        return distance
 
     }
 
