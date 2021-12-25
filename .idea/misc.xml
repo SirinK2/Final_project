@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/bottom_sheet.xml" value="0.18055555555555555" />
         <entry key="app/src/main/res/drawable/circle.xml" value="0.29384615384615387" />
         <entry key="app/src/main/res/drawable/custom_button.xml" value="0.2984375" />
         <entry key="app/src/main/res/drawable/custom_edit_text.xml" value="0.25462962962962965" />

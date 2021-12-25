@@ -12,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.databinding.CameraBinding
 import io.ak1.pix.helpers.PixEventCallback
 import java.io.File
@@ -71,6 +72,7 @@ class CameraImagePicker: BottomSheetDialogFragment() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme)
 
     }
 
