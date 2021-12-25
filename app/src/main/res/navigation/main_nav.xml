@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/homePageFragment">
+    app:startDestination="@id/singInFragment">
 
     <fragment
         android:id="@+id/homePageFragment"
@@ -76,9 +76,23 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.tuwaiq.finalproject.features.auth.presentation.register.RegisterFragment"
-        android:label="RegisterFragment" />
+        android:label="RegisterFragment" >
+        <action
+            android:id="@+id/action_registerFragment_to_singInFragment"
+            app:destination="@id/singInFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_homePageFragment"
+            app:destination="@id/homePageFragment" />
+    </fragment>
     <fragment
         android:id="@+id/singInFragment"
         android:name="com.tuwaiq.finalproject.features.auth.presentation.singIn.SingInFragment"
-        android:label="SingInFragment" />
+        android:label="SingInFragment" >
+        <action
+            android:id="@+id/action_singInFragment_to_homePageFragment"
+            app:destination="@id/homePageFragment" />
+        <action
+            android:id="@+id/action_singInFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
 </navigation>

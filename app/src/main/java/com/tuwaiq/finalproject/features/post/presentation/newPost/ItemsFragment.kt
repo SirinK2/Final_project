@@ -9,13 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.activity.result.contract.ActivityResultContract
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import com.tuwaiq.finalproject.MainActivity
 import com.tuwaiq.finalproject.R
-import com.tuwaiq.finalproject.core.util.Camera
+import com.tuwaiq.finalproject.core.util.CameraImagePicker
 import com.tuwaiq.finalproject.core.util.Constant.imgFile
 import com.tuwaiq.finalproject.databinding.ItemsFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,7 +19,6 @@ import io.ak1.pix.models.Flash
 import io.ak1.pix.models.Mode
 import io.ak1.pix.models.Options
 import io.ak1.pix.models.Ratio
-import java.io.File
 
 private const val TAG = "ItemsFragment"
 private const val REQUEST_CODE = 0
@@ -54,26 +49,26 @@ class ItemsFragment : Fragment() {
         val arrayAdapter = ArrayAdapter(requireContext(),R.layout.dorpdown_items,categories)
         binding.autoCompleteTextView2.setAdapter(arrayAdapter)
 
-        binding.cameraBtn.setOnClickListener {
-//            Intent(Intent.ACTION_PICK).also {
-//                it.type = "image/*"
-//                startActivityForResult(it, REQUEST_CODE)
+//        binding.cameraBtn.setOnClickListener {
+////            Intent(Intent.ACTION_PICK).also {
+////                it.type = "image/*"
+////                startActivityForResult(it, REQUEST_CODE)
+////            }
+//
+//            val option = Options().apply {
+//                ratio = Ratio.RATIO_AUTO
+//                count = 5
+//                spanCount = 4
+//                path = "Pix/Camera"
+//                isFrontFacing = false
+//                mode = Mode.Picture
+//                flash = Flash.Auto
+//                preSelectedUrls = ArrayList<Uri>()
+//
 //            }
-
-            val option = Options().apply {
-                ratio = Ratio.RATIO_AUTO
-                count = 5
-                spanCount = 4
-                path = "Pix/Camera"
-                isFrontFacing = false
-                mode = Mode.Picture
-                flash = Flash.Auto
-                preSelectedUrls = ArrayList<Uri>()
-
-            }
-
-            option
-        }
+//
+//            option
+//        }
 
         binding.itemDoneBtn.setOnClickListener {
 
@@ -87,17 +82,17 @@ class ItemsFragment : Fragment() {
 
         }
 
-//        binding.cameraBtn.setOnClickListener {
-//            val args = Bundle()
-//
-//            val bottomSheet = Camera()
-//            bottomSheet.arguments = args
-//
-//            bottomSheet.show(parentFragmentManager, bottomSheet.tag)
-//
-//
-//
-//        }
+        binding.cameraBtn.setOnClickListener {
+            val args = Bundle()
+
+            val bottomSheet = CameraImagePicker()
+            bottomSheet.arguments = args
+
+            bottomSheet.show(parentFragmentManager, bottomSheet.tag)
+
+
+
+        }
 
 
         return binding.root

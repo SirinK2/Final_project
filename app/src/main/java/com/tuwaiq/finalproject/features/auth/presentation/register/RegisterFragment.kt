@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.tuwaiq.finalproject.databinding.RegisterFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,6 +30,8 @@ class RegisterFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        val navControl = findNavController()
+
         binding.registerBtn.setOnClickListener {
 
             val userName:String = binding.registerUsernameEt.text.toString()
@@ -41,11 +44,18 @@ class RegisterFragment : Fragment() {
                 email.isEmpty() -> showToast("please enter email")
                 password.isEmpty() -> showToast("please enter password")
                 password != confirmPass -> showToast("passwords must be matched")
-                else -> viewModel.register(userName,email,password)
+                else -> {
+                    viewModel.register(userName,email,password)
+                    navControl.navigate(RegisterFragmentDirections.actionRegisterFragmentToHomePageFragment())
+                }
 
             }
 
 
+        }
+
+        binding.toSinginTv.setOnClickListener {
+            navControl.navigate(RegisterFragmentDirections.actionRegisterFragmentToSingInFragment())
         }
 
     }

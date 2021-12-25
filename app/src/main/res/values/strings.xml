@@ -13,6 +13,7 @@
     <string name="forgot_password">Forgot password?</string>
     <string name="categories">Categories</string>
     <string name="choose_category">Choose Category...</string>
+    <string name="account">Don\'t have an account?</string>
 
     <string-array name="categories">
         <item> Electronic</item>

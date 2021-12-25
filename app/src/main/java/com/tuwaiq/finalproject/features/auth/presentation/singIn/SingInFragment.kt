@@ -5,7 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.tuwaiq.finalproject.databinding.SingInFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,16 +32,26 @@ class SingInFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-
+        val navControl = findNavController()
         binding.singinBtn.setOnClickListener {
 
             val email = binding.singinEmailEt.text.toString()
             val password = binding.singinPasswordEt.text.toString()
 
+            when{
+                email.isEmpty() -> Toast.makeText(context, "you should enter email",Toast.LENGTH_LONG).show()
+                password.isEmpty() -> Toast.makeText(context, "you should enter email",Toast.LENGTH_LONG).show()
+                else -> {
+                    viewModel.singIn(email, password)
 
-            viewModel.singIn(email, password)
+                    navControl.navigate(SingInFragmentDirections.actionSingInFragmentToHomePageFragment())
+                }
+            }
 
+        }
 
+        binding.toRegisterTv.setOnClickListener {
+            navControl.navigate(SingInFragmentDirections.actionSingInFragmentToRegisterFragment())
         }
 
     }

@@ -95,4 +95,7 @@ dependencies {
 
     implementation  'io.ak1.pix:piximagepicker:1.6.2'
 
+    // shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
 }

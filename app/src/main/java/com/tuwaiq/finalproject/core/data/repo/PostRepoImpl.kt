@@ -44,7 +44,7 @@ class PostRepoImpl : PostRepo {
 
     override suspend fun getPost(): List<Post> {
         val listPost: MutableList<Post> = mutableListOf()
-        try {
+
             postCollectionRef.get().await().documents.forEach {
                 val post = it.toObject(Post::class.java)
                 post?.let { p ->
@@ -52,9 +52,6 @@ class PostRepoImpl : PostRepo {
                 }
                  Log.d(TAG, "getPost: $listPost")
             }
-        }catch (e: Exception){
-            Log.e(TAG, "getPost: something wrong", e)
-        }
 
         return listPost
 
@@ -103,29 +100,62 @@ class PostRepoImpl : PostRepo {
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
         val location = fusedLocationClient.lastLocation.await()
 
+
         val myLocation = Location("myLocation")
         myLocation.latitude
         myLocation.longitude
 
-        Log.d(TAG, "getLocation: ${location.latitude}  ${location.longitude}")
+//        Log.d(TAG, "getLocation: my location ${location.latitude}  ${location.longitude}")
 
-
+        val listPost: MutableList<Post> = mutableListOf()
         val toLocation = Location("toLocation")
-
         if (latitude != null && longitude != null) {
-
             toLocation.latitude = latitude
-
             toLocation.longitude = longitude
         }
 
-        val distance = location.distanceTo(toLocation) / 1000
+        val distance = location.distanceTo(toLocation)
+
+        if (distance <= 3000){
+            postCollectionRef.get().await().documents.forEach {
+                val post = it.toObject(Post::class.java)
+                post?.let { p ->
+                    listPost += p
+                }
+            }
+        }
 
 
-
-
+//        postCollectionRef.get().await().documents.forEach {
+//            if (distance <= 5000) {
+//                val post = it.toObject(Post::class.java)
+//                post?.let { p ->
+//
+//
+//                    toLocation.latitude = p.location.latitude!!
+//                    toLocation.longitude = p.location.longitude!!
+//                    listPost += p
+//                    Log.d(TAG, "getLocation: less than 5000 meter $p")
+//
+//                }
+//                Log.d(TAG, "getPost: $listPost")
+//            }
+//        }
 
         Log.d(TAG, "getLocation: distance $distance")
+
+
+
+
+
+
+//        if (distance <= 5000){
+//
+//
+//        }
+
+
+
 
 
         return distance

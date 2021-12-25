@@ -2,6 +2,7 @@ package com.tuwaiq.finalproject.core.util
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,15 +10,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tuwaiq.finalproject.databinding.CameraBinding
 import io.ak1.pix.helpers.PixEventCallback
 import java.io.File
+import java.util.*
 
-class Camera: BottomSheetDialogFragment() {
+class CameraImagePicker: BottomSheetDialogFragment() {
     private lateinit var binding : CameraBinding
     private lateinit var photoFile: File
     private lateinit var photoUri: Uri
+    private val fileName
+        get() = "IMG_${UUID.randomUUID()}.jpg"
+    private val fileDir = context?.applicationContext?.filesDir
+
 
 
 
@@ -40,11 +47,32 @@ class Camera: BottomSheetDialogFragment() {
     ): View {
         binding = CameraBinding.inflate(layoutInflater)
 
+
+
+
         return binding.root
     }
 
 
+    private fun updatePhotoView(){
 
+        if (photoFile.exists()){
+
+            val bitmap = BitmapFactory.decodeFile(photoFile.path)
+
+            binding.ImgIv.setImageBitmap(bitmap)
+
+
+        }else{
+
+            binding.ImgIv.setImageDrawable(null)
+
+        }
+    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
 
     override fun onStart() {
         super.onStart()
@@ -55,7 +83,12 @@ class Camera: BottomSheetDialogFragment() {
 
         binding.cameraDialogBtn.setOnClickListener {
 
-//            PixEventCallback.Status.SUCCESS ->
+//            PixEventCallback.Status.SUCCESS ->\
+
+            photoFile = getPhotoFile()
+            photoUri = FileProvider.getUriForFile(requireContext(),"com.tuwaiq.finalproject.fileProvider",photoFile)
+
+            updatePhotoView()
 
             when(PackageManager.PERMISSION_GRANTED){
                 context?.let {
@@ -67,7 +100,16 @@ class Camera: BottomSheetDialogFragment() {
         }
 
 
+
+        binding.galleryDialogBtn.setOnClickListener {
+
+        }
+
+
     }
+
+
+    fun getPhotoFile():File = File(fileDir,fileName)
 
 
 
