@@ -26,7 +26,7 @@ interface PostRepo {
     suspend fun uploadImage()
 
 
-    suspend fun getLocation(@ApplicationContext context: Context, latitude: Double?, longitude: Double?): Float
+    suspend fun getLocation(@ApplicationContext context: Context):List<Post>
 
 
 

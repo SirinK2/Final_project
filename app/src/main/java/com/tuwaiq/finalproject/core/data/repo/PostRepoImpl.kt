@@ -94,71 +94,47 @@ class PostRepoImpl : PostRepo {
     
     @SuppressLint("MissingPermission")
     override suspend fun getLocation(
-        @ApplicationContext context: Context,
-        latitude: Double?, longitude: Double?): Float {
+        @ApplicationContext context: Context): List<Post> {
         
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
         val location = fusedLocationClient.lastLocation.await()
 
-
-        val myLocation = Location("myLocation")
-        myLocation.latitude
-        myLocation.longitude
-
-//        Log.d(TAG, "getLocation: my location ${location.latitude}  ${location.longitude}")
+        Log.d(TAG, "getLocation: my location ${location.latitude}  ${location.longitude}")
 
         val listPost: MutableList<Post> = mutableListOf()
-        val toLocation = Location("toLocation")
-        if (latitude != null && longitude != null) {
-            toLocation.latitude = latitude
-            toLocation.longitude = longitude
-        }
-
-        val distance = location.distanceTo(toLocation)
-
-        if (distance <= 3000){
             postCollectionRef.get().await().documents.forEach {
+
+                val toLocation = Location("ToLocation")
+
                 val post = it.toObject(Post::class.java)
                 post?.let { p ->
-                    listPost += p
+
+
+                    toLocation.apply {
+
+                            this.longitude = p.location.longitude ?: 0.0
+
+                       this.latitude = p.location.latitude ?: 0.0
+
+
+                    }
+                    Log.d(TAG, "getLocation: long ${ p.location.longitude} lat ${p.location.latitude}  ")
+                    val distance = location.distanceTo(toLocation)
+                    Log.d(TAG, "dist: $distance")
+                    if (distance <= 100.0f) {
+                        listPost += p
+                        Log.d(TAG, "getLocation: distance $distance")
+                    }
                 }
+
             }
-        }
 
 
-//        postCollectionRef.get().await().documents.forEach {
-//            if (distance <= 5000) {
-//                val post = it.toObject(Post::class.java)
-//                post?.let { p ->
-//
-//
-//                    toLocation.latitude = p.location.latitude!!
-//                    toLocation.longitude = p.location.longitude!!
-//                    listPost += p
-//                    Log.d(TAG, "getLocation: less than 5000 meter $p")
-//
-//                }
-//                Log.d(TAG, "getPost: $listPost")
-//            }
-//        }
-
-        Log.d(TAG, "getLocation: distance $distance")
+        Log.d(TAG, "getLocation: $listPost")
 
 
 
-
-
-
-//        if (distance <= 5000){
-//
-//
-//        }
-
-
-
-
-
-        return distance
+        return listPost
 
     }
 

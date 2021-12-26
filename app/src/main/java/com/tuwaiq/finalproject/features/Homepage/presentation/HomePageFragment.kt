@@ -8,13 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tuwaiq.finalproject.core.domain.model.Post
-import com.tuwaiq.finalproject.core.util.Resource
 import com.tuwaiq.finalproject.databinding.HomePageFragmentBinding
 import com.tuwaiq.finalproject.databinding.HomePageItemsBinding
+
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "HomePageFragment"
@@ -52,75 +51,13 @@ class HomePageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var lat: Double? = 0.0
-        var long: Double? = 0.0
-        var listPost: MutableList<Post> = mutableListOf()
-
-
-//        homePageViewModel.getLocation(requireContext(),lat, long).observe(
-//            viewLifecycleOwner,{
-//                lat = it.toDouble()
-//                long = it.toDouble()
-//                lat = myPost.location.latitude
-//                long = myPost.location.longitude
-//                Log.d(TAG, "onViewCreated: $lat $long")
-//                homePageViewModel.getPost().observe(
-//                    viewLifecycleOwner,{ posts ->
-//                        posts.forEach { post ->
-//                            myPost = post
-//
-//                        }
-//
-//                    }
-//
-//
-//
-//                )
-//
-//                binding.homeRv.adapter = HomeAdapter(posts)
-//
-//            }
-//        )
-        homePageViewModel.getPost().observe(
-            viewLifecycleOwner, {
-
-
-
-                listPost = it.toMutableList()
-                it.forEach { posts ->
-                    myPost = posts
-                    lat =  myPost.location.latitude
-                    long = myPost.location.longitude
-                    Log.d(TAG, "getLocation: $lat $long ")
-                   val locationFilter = homePageViewModel.getLocation(requireContext(),lat, long)
-                    locationFilter.observe(
-                        viewLifecycleOwner,{ distance ->
-                            if (distance <= 3000){
-                                listPost += posts
-                                Log.d(TAG, "getLocation: $distance from observe")
-                            }
-
-                        }
-                    )
-
-                    Log.d(TAG, "onViewCreated: locationFl $locationFilter")
-//                    locationFilter.observe(
-//                        viewLifecycleOwner,{ distance ->
-//                            if(distance <= 3000){
-//                                listPost = it
-//                            }
-//                        }
-//                    )
-                }
-
+            homePageViewModel.getLocation(requireContext()).observe(
+                viewLifecycleOwner, {
                     binding.shimmerLayout.visibility = View.GONE
-                    binding.homeRv.adapter = HomeAdapter(listPost)
+                    binding.homeRv.adapter = HomeAdapter(it)
+                }
+            )
 
-
-
-                Log.d(TAG, "onViewCreated: ${it.size} ")
-            }
-        )
     }
 
 
