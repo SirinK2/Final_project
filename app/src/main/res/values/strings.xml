@@ -14,11 +14,14 @@
     <string name="categories">Categories</string>
     <string name="choose_category">Choose Category...</string>
     <string name="account">Don\'t have an account?</string>
+    <string name="_100m">100m</string>
 
     <string-array name="categories">
         <item> Electronic</item>
         <item> Furniture</item>
         <item> Cars</item>
     </string-array>
+
+
 
 </resources>

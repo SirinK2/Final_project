@@ -42,20 +42,6 @@ class PostRepoImpl : PostRepo {
     }
 
 
-    override suspend fun getPost(): List<Post> {
-        val listPost: MutableList<Post> = mutableListOf()
-
-            postCollectionRef.get().await().documents.forEach {
-                val post = it.toObject(Post::class.java)
-                post?.let { p ->
-                    listPost += p
-                }
-                 Log.d(TAG, "getPost: $listPost")
-            }
-
-        return listPost
-
-    }
 
 
     override suspend fun savePost(context: Context, category: String, title: String, description: String, price: String) {
@@ -93,46 +79,35 @@ class PostRepoImpl : PostRepo {
 
     
     @SuppressLint("MissingPermission")
-    override suspend fun getLocation(
-        @ApplicationContext context: Context): List<Post> {
+    override suspend fun getPost(
+        @ApplicationContext context: Context, dist: Float): List<Post> {
         
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
         val location = fusedLocationClient.lastLocation.await()
 
-        Log.d(TAG, "getLocation: my location ${location.latitude}  ${location.longitude}")
-
         val listPost: MutableList<Post> = mutableListOf()
+        val toLocation = Location("ToLocation")
+
             postCollectionRef.get().await().documents.forEach {
 
-                val toLocation = Location("ToLocation")
-
                 val post = it.toObject(Post::class.java)
+
                 post?.let { p ->
 
-
                     toLocation.apply {
-
-                            this.longitude = p.location.longitude ?: 0.0
-
-                       this.latitude = p.location.latitude ?: 0.0
-
-
+                        this.longitude = p.location.longitude ?: 0.0
+                        this.latitude = p.location.latitude ?: 0.0
                     }
-                    Log.d(TAG, "getLocation: long ${ p.location.longitude} lat ${p.location.latitude}  ")
+
+                    Log.d(TAG, "getLocation: long ${p.location.longitude} lat ${p.location.latitude}  ")
                     val distance = location.distanceTo(toLocation)
                     Log.d(TAG, "dist: $distance")
-                    if (distance <= 100.0f) {
+                    if (distance <= dist) {
                         listPost += p
                         Log.d(TAG, "getLocation: distance $distance")
                     }
                 }
-
             }
-
-
-        Log.d(TAG, "getLocation: $listPost")
-
-
 
         return listPost
 
