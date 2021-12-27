@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.tuwaiq.finalproject.features.post.presentation.Preview.PreviewViewModel" />-->
 
     </data>
 
@@ -23,12 +26,11 @@
             tools:src="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/prev_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
-            android:text="TextView"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,10 +41,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="@+id/prev_username"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/prev_username" />
 
         <Button
             android:id="@+id/button3"
@@ -56,34 +58,39 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/prev_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="56dp"
             android:layout_marginTop="65dp"
-            android:text="TextView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
+<!--        android:text="@{viewModel.title}"-->
+
+
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/prev_descrip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="56dp"
             android:layout_marginTop="32dp"
-            android:text="TextView"
+
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintTop_toBottomOf="@+id/prev_title" />
+
+<!--        android:text="@{viewModel.description}"-->
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/prev_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="56dp"
             android:layout_marginTop="68dp"
-            android:text="TextView"
+
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintTop_toBottomOf="@+id/prev_descrip" />
+        <!--            android:text="@{viewModel.price}"-->
 
         <ImageView
             android:id="@+id/imageView3"

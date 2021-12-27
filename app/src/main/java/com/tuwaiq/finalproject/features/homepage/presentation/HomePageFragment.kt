@@ -15,18 +15,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tuwaiq.finalproject.R
-import com.tuwaiq.finalproject.core.data.repo.PostRepoImpl
 import com.tuwaiq.finalproject.core.domain.model.Post
-import com.tuwaiq.finalproject.core.domain.repo.PostRepo
-import com.tuwaiq.finalproject.core.domain.use_case.GetPostUseCase
 import com.tuwaiq.finalproject.core.util.Constant.mAdapter
 import com.tuwaiq.finalproject.databinding.HomePageFragmentBinding
 import com.tuwaiq.finalproject.databinding.HomePageItemsBinding
-
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.math.log
 
 private const val TAG = "HomePageFragment"
 @AndroidEntryPoint
@@ -42,7 +37,6 @@ class HomePageFragment : Fragment() {
     private val rotateClose: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_close_anim) }
     private val fromBottom: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.from_bottom_anim) }
     private val toBottom: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.to_bottom_anim) }
-
     private var clicked = false
 
 
@@ -238,7 +232,7 @@ class HomePageFragment : Fragment() {
             return newFilter
         }
 
-        val newFilter = object : Filter(){
+        private val newFilter = object : Filter(){
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val filteredList: MutableList<Post> = mutableListOf()
 

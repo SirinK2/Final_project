@@ -22,7 +22,6 @@ class HomePageViewModel @Inject constructor(private val getPostUseCase: GetPostU
     var post: Post? = null
         set(post) {
             field = post
-
         }
 
     val title: String?
