@@ -6,13 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.tuwaiq.finalproject.R
+import com.tuwaiq.finalproject.core.data.repo.PostRepoImpl
 import com.tuwaiq.finalproject.core.domain.model.Post
+import com.tuwaiq.finalproject.core.domain.repo.PostRepo
+import com.tuwaiq.finalproject.core.domain.use_case.GetPostUseCase
 import com.tuwaiq.finalproject.core.util.Constant.mAdapter
 import com.tuwaiq.finalproject.databinding.HomePageFragmentBinding
 import com.tuwaiq.finalproject.databinding.HomePageItemsBinding
@@ -32,13 +38,38 @@ class HomePageFragment : Fragment() {
 
     private lateinit var binding : HomePageFragmentBinding
 
+    private val rotateOpen: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_open_anim) }
+    private val rotateClose: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_close_anim) }
+    private val fromBottom: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.from_bottom_anim) }
+    private val toBottom: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.to_bottom_anim) }
+
+    private var clicked = false
 
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    private fun onAddButtonClicked(){
+        setAnimation(clicked)
+        clicked = !clicked
     }
+
+    private fun setAnimation(clicked: Boolean) {
+       if (!clicked){
+           binding.cars.startAnimation(fromBottom)
+           binding.electronic.startAnimation(fromBottom)
+           binding.furniture.startAnimation(fromBottom)
+           binding.clothes.startAnimation(fromBottom)
+           binding.realestate.startAnimation(fromBottom)
+
+       }else{
+           binding.cars.startAnimation(toBottom)
+           binding.electronic.startAnimation(toBottom)
+           binding.furniture.startAnimation(toBottom)
+           binding.clothes.startAnimation(toBottom)
+           binding.realestate.startAnimation(toBottom)
+       }
+    }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,8 +78,10 @@ class HomePageFragment : Fragment() {
 
         binding = HomePageFragmentBinding.inflate(layoutInflater)
 
+        binding.viewModel = homePageViewModel
 
         binding.homeRv.layoutManager = LinearLayoutManager(context)
+
 
 
 
@@ -61,9 +94,6 @@ class HomePageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        binding.cars.setOnClickListener {
-//            mAdapter.filter.filter("cars")
-//        }
 
         homePageViewModel.getPost(requireContext(), 100.0f).observe(
             viewLifecycleOwner, {
@@ -116,11 +146,15 @@ class HomePageFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        binding.floatingActionButton2.setOnClickListener {
+            onAddButtonClicked()
+        }
+
         val navCon = findNavController()
         binding.homeProfileBtn.setOnClickListener {
             val action = HomePageFragmentDirections.actionHomePageFragmentToMyProfileFragment()
             navCon.navigate(action)
-//            homePageViewModel.getLocation(requireContext())
         }
 
         binding.floatingActionButton.setOnClickListener {
@@ -142,13 +176,16 @@ class HomePageFragment : Fragment() {
 
 
         init {
+
+            binding.viewModel = homePageViewModel
+
             itemView.setOnClickListener(this)
         }
 
         fun bind(post: Post){
 
-            binding.homeTitleTv.text = post.title
-            binding.homePriceTv.text = post.price
+           binding.viewModel?.post = post
+
         }
 
         override fun onClick(v: View?) {

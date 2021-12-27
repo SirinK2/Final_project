@@ -12,14 +12,23 @@
     <string name="password">Password</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="categories">Categories</string>
-    <string name="choose_category">Choose Category...</string>
+    <string name="choose_category">Choose Category…</string>
     <string name="account">Don\'t have an account?</string>
     <string name="_100m">100m</string>
+    <string name="_3km">3km</string>
+    <string name="_5km">5km</string>
+    <string name="cars">Cars</string>
+    <string name="electronic">Electronic</string>
+    <string name="furniture">Furniture</string>
+    <string name="clothes">Clothes</string>
+    <string name="real_estate">real estate</string>
 
     <string-array name="categories">
         <item> Electronic</item>
         <item> Furniture</item>
         <item> Cars</item>
+        <item>Clothes</item>
+        <item>real estate</item>
     </string-array>
 
 

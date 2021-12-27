@@ -14,38 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context=".features.homepage.presentation.HomePageFragment">
+        tools:context=".features.homepage.presentation.HomePageFragment"
+        tools:layout_editor_absoluteX="-15dp"
+        tools:layout_editor_absoluteY="107dp">
 
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip9"
-            android:layout_width="60sp"
-            android:layout_height="100sp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="@color/green"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chip8" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip8"
-            android:layout_width="60sp"
-            android:layout_height="100sp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="@color/green"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chip7" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip7"
-            android:layout_width="60sp"
-            android:layout_height="100sp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="@color/green"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cars" />
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmer_layout"
@@ -91,7 +63,6 @@
 
         </com.facebook.shimmer.ShimmerFrameLayout>
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/home_rv"
             android:layout_width="318sp"
@@ -103,11 +74,12 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
+
         <ImageButton
             android:id="@+id/home_dm_btn"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="19dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/circle"
             android:backgroundTint="#FFFFFF"
@@ -121,7 +93,7 @@
             android:id="@+id/home_profile_btn"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="19dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/circle"
             android:backgroundTint="#FFFFFF"
@@ -143,34 +115,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="SpeakableTextPresentCheck" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/cars"
-            android:layout_width="60dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:onClick="@{()->viewModel.btn()}"
-            android:backgroundTint="@color/green"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/home_dm_btn" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip10"
-            android:layout_width="60sp"
-            android:layout_height="100sp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="@color/green"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chip9" />
-
         <TextView
             android:id="@+id/three_km"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="3km"
+            android:text="@string/_3km"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -180,9 +131,120 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="40dp"
-            android:text="5km"
+            android:text="@string/_5km"
             app:layout_constraintEnd_toStartOf="@+id/three_km"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:clickable="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_dm_btn"
+            app:srcCompat="@drawable/ic_filter_list"
+            tools:ignore="SpeakableTextPresentCheck">
+
+        </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/cars"
+            android:layout_width="100sp"
+            android:layout_height="60sp"
+            android:layout_marginStart="-6dp"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/green"
+            android:elevation="10sp"
+            android:shadowRadius="10"
+            android:gravity="center"
+            android:onClick="@{()->viewModel.carsBtn()}"
+            android:rotation="90"
+            android:text="@string/cars"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/floatingActionButton2" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/electronic"
+            android:layout_width="100sp"
+            android:layout_height="60sp"
+            android:layout_marginStart="-6dp"
+            android:layout_marginTop="40dp"
+            android:elevation="10sp"
+            android:shadowRadius="10"
+            android:backgroundTint="@color/green"
+            android:rotation="90"
+            android:text="@string/electronic"
+            android:textAlignment="center"
+            android:onClick="@{()->viewModel.electronicBtn()}"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cars" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/furniture"
+            android:layout_width="100sp"
+            android:layout_height="60sp"
+            android:elevation="10sp"
+            android:shadowRadius="10"
+            android:layout_marginStart="-6dp"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/green"
+            android:onClick="@{()->viewModel.furnitureBtn()}"
+            android:rotation="90"
+            android:text="@string/furniture"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/electronic" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/clothes"
+            android:layout_width="100sp"
+            android:layout_height="60sp"
+            android:elevation="10sp"
+            android:shadowRadius="10"
+            android:layout_marginStart="-6dp"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/green"
+            android:onClick="@{()->viewModel.clothesBtn()}"
+            android:rotation="90"
+            android:text="@string/clothes"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/furniture" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/realestate"
+            android:layout_width="100sp"
+            android:layout_height="60sp"
+            android:layout_marginStart="-6dp"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/green"
+            android:elevation="10sp"
+            android:fontFamily="sans-serif-black"
+            android:rotation="90"
+            android:onClick="@{()->viewModel.realEstateBtn()}"
+            android:shadowRadius="10"
+            android:text="@string/real_estate"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clothes" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -19,9 +19,33 @@ class HomePageViewModel @Inject constructor(private val getPostUseCase: GetPostU
           emit(getPostUseCase(context, dist))
     }
 
+    var post: Post? = null
+        set(post) {
+            field = post
 
-    fun btn(){
+        }
+
+    val title: String?
+         get() = post?.title
+
+    val price: String?
+        get() = post?.price
+
+
+    fun carsBtn(){
         mAdapter.filter.filter("cars")
+    }
+    fun electronicBtn(){
+        mAdapter.filter.filter("electronic")
+    }
+    fun furnitureBtn(){
+        mAdapter.filter.filter("Furniture")
+    }
+    fun clothesBtn(){
+        mAdapter.filter.filter("Clothes")
+    }
+    fun realEstateBtn(){
+        mAdapter.filter.filter("real estate")
     }
 
 
