@@ -85,7 +85,6 @@ class CameraImagePicker: BottomSheetDialogFragment() {
 
         binding.cameraDialogBtn.setOnClickListener {
 
-//            PixEventCallback.Status.SUCCESS ->\
 
             photoFile = getPhotoFile()
             photoUri = FileProvider.getUriForFile(requireContext(),"com.tuwaiq.finalproject.fileProvider",photoFile)

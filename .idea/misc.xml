@@ -26,7 +26,7 @@
         <entry key="app/src/main/res/layout/home_page_shimmer_items.xml" value="0.265625" />
         <entry key="app/src/main/res/layout/items_fragment.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/my_profile_fragment.xml" value="0.315804214538902" />
-        <entry key="app/src/main/res/layout/preview_fragment.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/preview_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/register_fragment.xml" value="0.25645253857786876" />
         <entry key="app/src/main/res/layout/setting_fragment.xml" value="0.24585697610527063" />
         <entry key="app/src/main/res/layout/sing_in_fragment.xml" value="0.25" />

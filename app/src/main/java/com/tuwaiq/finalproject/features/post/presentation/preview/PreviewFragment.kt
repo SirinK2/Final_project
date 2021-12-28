@@ -1,6 +1,5 @@
-package com.tuwaiq.finalproject.features.post.presentation.Preview
+package com.tuwaiq.finalproject.features.post.presentation.preview
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,6 +21,7 @@ class PreviewFragment : Fragment() {
 
     private val args:PreviewFragmentArgs by navArgs()
     lateinit var id : String
+    var post = Post()
 
     lateinit var binding: PreviewFragmentBinding
     override fun onCreateView(
@@ -36,6 +36,19 @@ class PreviewFragment : Fragment() {
 
 
         return binding.root
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.viewModel = previewViewModel
+        previewViewModel.getPost(requireContext(), 5000.0f).observe(
+            viewLifecycleOwner, {
+
+
+            }
+        )
+
     }
 
 

@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-<!--        <variable-->
-<!--            name="viewModel"-->
-<!--            type="com.tuwaiq.finalproject.features.post.presentation.Preview.PreviewViewModel" />-->
+        <variable
+            name="viewModel"
+            type="com.tuwaiq.finalproject.features.post.presentation.preview.PreviewViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".features.post.presentation.Preview.PreviewFragment">
+        tools:context=".features.post.presentation.preview.PreviewFragment">
 
         <ImageView
             android:id="@+id/imageView"
@@ -63,10 +63,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="56dp"
             android:layout_marginTop="65dp"
-            app:layout_constraintStart_toStartOf="parent"
+                android:text="@{viewModel.title}"
+
+        app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-<!--        android:text="@{viewModel.title}"-->
 
 
         <TextView

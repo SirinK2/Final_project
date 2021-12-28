@@ -34,11 +34,12 @@ class HomePageFragment : Fragment() {
 
     private lateinit var binding : HomePageFragmentBinding
 
-    private val rotateOpen: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_open_anim) }
-    private val rotateClose: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_close_anim) }
+
     private val fromBottom: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.from_bottom_anim) }
     private val toBottom: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.to_bottom_anim) }
     private var clicked = false
+
+//    private var dis = 100.0f
 
 
 
@@ -86,53 +87,38 @@ class HomePageFragment : Fragment() {
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-
-        homePageViewModel.getPost(requireContext(), 100.0f).observe(
+    private fun observe(dis: Float){
+        homePageViewModel.getPost(requireContext(), dis).observe(
             viewLifecycleOwner, {
                 binding.shimmerLayout.visibility = View.GONE
                 mAdapter = HomeAdapter(it as ArrayList<Post>)
 
                 binding.homeRv.adapter = mAdapter
+                Log.d(TAG, "onViewCreated: $dis")
             }
         )
+    }
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+
+
+        observe(100.0f)
 
 
         binding.threeKm.setOnClickListener {
-            homePageViewModel.getPost(requireContext(), 3000.0f).observe(
-                viewLifecycleOwner, {
-                    binding.shimmerLayout.visibility = View.GONE
-                    mAdapter = HomeAdapter(it as ArrayList<Post>)
-
-                    binding.homeRv.adapter = mAdapter
-                }
-            )
-
+           observe(3000.0f)
         }
 
 
         binding.fiveKm.setOnClickListener {
-            homePageViewModel.getPost(requireContext(), 5000.0f).observe(
-                viewLifecycleOwner, {
-                    binding.shimmerLayout.visibility = View.GONE
-                    mAdapter = HomeAdapter(it as ArrayList<Post>)
+           observe(5000.0f)
 
-                    binding.homeRv.adapter = mAdapter
-                }
-            )
         }
-
-
-
-
-
-
-
-
-
 
 
     }
@@ -184,14 +170,14 @@ class HomePageFragment : Fragment() {
         }
 
         override fun onClick(v: View?) {
+
+
             if (v == itemView){
                 val navCon1 =  findNavController()
                 
                 val action = HomePageFragmentDirections
-                    .actionHomePageFragmentToPreviewFragment(
-                    postCollectionRef.document().toString()
-                )
-                Log.d(TAG, "onClick: $action")
+                    .actionHomePageFragmentToPreviewFragment("")
+                Log.d(TAG, "onClick: $id")
                 navCon1.navigate(action)
             }
         }
