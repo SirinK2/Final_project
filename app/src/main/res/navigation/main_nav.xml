@@ -62,6 +62,9 @@
         <action
             android:id="@+id/action_previewFragment_to_usersProfileFragment"
             app:destination="@id/usersProfileFragment" />
+        <argument
+            android:name="id"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment"

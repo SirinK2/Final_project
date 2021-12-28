@@ -15,6 +15,7 @@ import com.tuwaiq.finalproject.core.data.remote.dto.CurrentLocation
 import com.tuwaiq.finalproject.core.domain.model.Post
 import com.tuwaiq.finalproject.core.domain.repo.PostRepo
 import com.tuwaiq.finalproject.core.util.Constant.imgFile
+import com.tuwaiq.finalproject.core.util.Constant.postCollectionRef
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
@@ -26,7 +27,6 @@ class PostRepoImpl : PostRepo {
 
 
     private val fileName = "${UUID.randomUUID()}.jpg"
-    private val postCollectionRef = Firebase.firestore.collection("post")
     private val imgRef = Firebase.storage.reference.child("images/$fileName")
 
 

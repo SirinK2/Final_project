@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.core.domain.model.Post
 import com.tuwaiq.finalproject.core.util.Constant.mAdapter
+import com.tuwaiq.finalproject.core.util.Constant.postCollectionRef
 import com.tuwaiq.finalproject.databinding.HomePageFragmentBinding
 import com.tuwaiq.finalproject.databinding.HomePageItemsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -185,7 +186,12 @@ class HomePageFragment : Fragment() {
         override fun onClick(v: View?) {
             if (v == itemView){
                 val navCon1 =  findNavController()
-                val action = HomePageFragmentDirections.actionHomePageFragmentToPreviewFragment()
+                
+                val action = HomePageFragmentDirections
+                    .actionHomePageFragmentToPreviewFragment(
+                    postCollectionRef.document().toString()
+                )
+                Log.d(TAG, "onClick: $action")
                 navCon1.navigate(action)
             }
         }
