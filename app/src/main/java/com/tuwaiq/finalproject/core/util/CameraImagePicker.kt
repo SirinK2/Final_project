@@ -2,7 +2,6 @@ package com.tuwaiq.finalproject.core.util
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,13 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
+import androidx.core.content.FileProvider.getUriForFile
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.databinding.CameraBinding
-import io.ak1.pix.helpers.PixEventCallback
 import java.io.File
 import java.util.*
+
+private const val REQUEST_CODE = 0
 
 class CameraImagePicker: BottomSheetDialogFragment() {
     private lateinit var binding : CameraBinding
@@ -24,7 +24,9 @@ class CameraImagePicker: BottomSheetDialogFragment() {
     private lateinit var photoUri: Uri
     private val fileName
         get() = "IMG_${UUID.randomUUID()}.jpg"
-    private val fileDir = context?.applicationContext?.filesDir
+    private val fileDir by lazy {   context?.applicationContext?.filesDir }
+
+
 
 
 
@@ -34,7 +36,17 @@ class CameraImagePicker: BottomSheetDialogFragment() {
     private val getCameraLauncher =
         registerForActivityResult(ActivityResultContracts.TakePicture()){
 
+
+
         }
+
+    private val getImageLauncher = registerForActivityResult(ActivityResultContracts.OpenMultipleDocuments() ){
+
+        it.forEach { uri ->
+            binding.ImgIv.setImageURI(uri)
+        }
+
+    }
 
     private val getPermissionRequest =
         registerForActivityResult(ActivityResultContracts.RequestPermission()){
@@ -55,24 +67,14 @@ class CameraImagePicker: BottomSheetDialogFragment() {
     }
 
 
-    private fun updatePhotoView(){
 
-        if (photoFile.exists()){
-
-            val bitmap = BitmapFactory.decodeFile(photoFile.path)
-
-            binding.ImgIv.setImageBitmap(bitmap)
-
-
-        }else{
-
-            binding.ImgIv.setImageDrawable(null)
-
-        }
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme)
+
+
+        photoFile = File(fileDir, fileName)
+        photoUri = getUriForFile(requireContext(),"com.tuwaiq.finalproject.fileProvider",photoFile)
 
     }
 
@@ -80,16 +82,9 @@ class CameraImagePicker: BottomSheetDialogFragment() {
         super.onStart()
 
 
-
-//        photoFile =
-
         binding.cameraDialogBtn.setOnClickListener {
 
 
-            photoFile = getPhotoFile()
-            photoUri = FileProvider.getUriForFile(requireContext(),"com.tuwaiq.finalproject.fileProvider",photoFile)
-
-            updatePhotoView()
 
             when(PackageManager.PERMISSION_GRANTED){
                 context?.let {
@@ -104,13 +99,12 @@ class CameraImagePicker: BottomSheetDialogFragment() {
 
         binding.galleryDialogBtn.setOnClickListener {
 
+            getImageLauncher.launch(arrayOf("image/*"))
         }
 
 
     }
 
-
-    fun getPhotoFile():File = File(fileDir,fileName)
 
 
 

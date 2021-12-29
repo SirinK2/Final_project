@@ -55,19 +55,6 @@ class ItemsFragment : Fragment() {
 ////                startActivityForResult(it, REQUEST_CODE)
 ////            }
 //
-//            val option = Options().apply {
-//                ratio = Ratio.RATIO_AUTO
-//                count = 5
-//                spanCount = 4
-//                path = "Pix/Camera"
-//                isFrontFacing = false
-//                mode = Mode.Picture
-//                flash = Flash.Auto
-//                preSelectedUrls = ArrayList<Uri>()
-//
-//            }
-//
-//            option
 //        }
 
         binding.itemDoneBtn.setOnClickListener {

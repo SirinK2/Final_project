@@ -43,7 +43,6 @@ class HomePageFragment : Fragment() {
     private val toBottom: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.to_bottom_anim) }
     private var clicked = false
 
-//    private var dis = 100.0f
 
 
 
