@@ -13,9 +13,6 @@ import javax.inject.Inject
 @HiltViewModel
 class PreviewViewModel @Inject constructor(private val getPostUseCase: GetPostUseCase) : ViewModel() {
 
-    fun getPost(context: Context, dist: Float): LiveData<List<Post>> = liveData(Dispatchers.IO) {
-        emit(getPostUseCase(context, dist))
-    }
 
     var post: Post? = null
         set(post) {
@@ -30,7 +27,5 @@ class PreviewViewModel @Inject constructor(private val getPostUseCase: GetPostUs
 
     val price: String?
         get() = post?.price
-
-
 
 }

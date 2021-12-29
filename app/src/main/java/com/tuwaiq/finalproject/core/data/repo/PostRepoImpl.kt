@@ -32,11 +32,9 @@ class PostRepoImpl : PostRepo {
 
     override suspend fun addPost(post: Post) {
 
-            postCollectionRef.add(post).addOnSuccessListener {
-                Log.d(TAG, "add post ")
-            }.addOnFailureListener {
-                Log.e(TAG, "addPost: error", it)
-            }
+            val ref = postCollectionRef.document()
+                    post.id = ref.id
+                ref.set(post)
 
     }
 
@@ -57,6 +55,8 @@ class PostRepoImpl : PostRepo {
         val myLocation = CurrentLocation(location?.latitude, location?.longitude)
 
         Log.d(TAG," from location ${location?.longitude}  ${location?.latitude} ")
+
+
 
         val items = Post(category,title,description,price,myLocation)
 
@@ -89,9 +89,12 @@ class PostRepoImpl : PostRepo {
 
             postCollectionRef.get().await().documents.forEach {
 
+
+
                 val post = it.toObject(Post::class.java)
 
                 post?.let { p ->
+
 
                     toLocation.apply {
                         this.longitude = p.location.longitude ?: 0.0

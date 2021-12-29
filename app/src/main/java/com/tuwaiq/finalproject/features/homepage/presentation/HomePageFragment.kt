@@ -21,6 +21,10 @@ import com.tuwaiq.finalproject.core.util.Constant.postCollectionRef
 import com.tuwaiq.finalproject.databinding.HomePageFragmentBinding
 import com.tuwaiq.finalproject.databinding.HomePageItemsBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -155,7 +159,7 @@ class HomePageFragment : Fragment() {
 
     inner class HomeHolder(val binding: HomePageItemsBinding):RecyclerView.ViewHolder(binding.root), View.OnClickListener{
 
-
+        var post = Post()
         init {
 
             binding.viewModel = homePageViewModel
@@ -165,20 +169,28 @@ class HomePageFragment : Fragment() {
 
         fun bind(post: Post){
 
+            this.post = post
            binding.viewModel?.post = post
 
         }
 
+
+
         override fun onClick(v: View?) {
+
+
+
 
 
             if (v == itemView){
                 val navCon1 =  findNavController()
                 
                 val action = HomePageFragmentDirections
-                    .actionHomePageFragmentToPreviewFragment("")
-                Log.d(TAG, "onClick: $id")
+                    .actionHomePageFragmentToPreviewFragment(post.id)
+
                 navCon1.navigate(action)
+
+                Log.d(TAG, "onClick: $action")
             }
         }
 

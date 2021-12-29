@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.tuwaiq.finalproject.core.domain.model.Post
+import com.tuwaiq.finalproject.core.util.Constant.postCollectionRef
 import com.tuwaiq.finalproject.databinding.PreviewFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,7 +33,8 @@ class PreviewFragment : Fragment() {
 
 
 
-         id = args.id
+
+
 
 
         return binding.root
@@ -42,12 +44,11 @@ class PreviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = previewViewModel
-        previewViewModel.getPost(requireContext(), 5000.0f).observe(
-            viewLifecycleOwner, {
 
-
-            }
-        )
+        postCollectionRef.document(args.id).get().addOnSuccessListener {
+            binding.viewModel?.post = it.toObject(Post::class.java)
+        }
+        //binding.prevTitle.text = post.title
 
     }
 
