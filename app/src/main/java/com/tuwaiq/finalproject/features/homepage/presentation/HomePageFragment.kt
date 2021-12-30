@@ -118,6 +118,8 @@ class HomePageFragment : Fragment() {
         }
 
 
+
+
     }
 
 
@@ -162,8 +164,11 @@ class HomePageFragment : Fragment() {
 
         fun bind(post: Post){
 
+
             this.post = post
            binding.viewModel?.post = post
+            binding.executePendingBindings()
+
 
         }
 
@@ -235,12 +240,12 @@ class HomePageFragment : Fragment() {
 
 
                 if (constraint == null || constraint.isEmpty()) {
-                    filteredList.addAll(allPost)
+                  //  filteredList.addAll(allPost)
                 } else {
                     val filterPattern = constraint.toString().lowercase(Locale.getDefault()).trim()
                     for (item in allPost) {
                         Log.e(TAG, "performFiltering: ${item.categoryName}")
-                        if (item.categoryName.lowercase(Locale.getDefault()).contains(filterPattern)) {
+                        if (item.categoryName.lowercase(Locale.getDefault()) == filterPattern) {
                             Log.e(TAG, "performFiltering: hi")
                             filteredList.add(item)
                         }

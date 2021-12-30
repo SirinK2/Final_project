@@ -46,7 +46,10 @@ class CameraImagePicker: BottomSheetDialogFragment() {
                 .OpenMultipleDocuments() ){
 
            GlobalScope.launch {
-               (ItemsFragment() as CallBack).uri(it)
+               targetFragment?.let {   f ->
+                   (f as CallBack).uri(it)
+               }
+
            }
 
 

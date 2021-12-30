@@ -38,10 +38,10 @@ class HomePageViewModel @Inject constructor(private val getPostUseCase: GetPostU
         mAdapter.filter.filter("electronic")
     }
     fun furnitureBtn(){
-        mAdapter.filter.filter("Furniture")
+        mAdapter.filter.filter("furniture")
     }
     fun clothesBtn(){
-        mAdapter.filter.filter("Clothes")
+        mAdapter.filter.filter("clothes")
     }
     fun realEstateBtn(){
         mAdapter.filter.filter("real estate")
