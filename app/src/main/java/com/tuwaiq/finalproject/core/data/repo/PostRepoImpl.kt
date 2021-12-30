@@ -5,16 +5,15 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
+import android.net.Uri
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.LocationServices
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.tuwaiq.finalproject.core.data.remote.dto.CurrentLocation
 import com.tuwaiq.finalproject.core.domain.model.Post
 import com.tuwaiq.finalproject.core.domain.repo.PostRepo
-import com.tuwaiq.finalproject.core.util.Constant.imgFile
 import com.tuwaiq.finalproject.core.util.Constant.postCollectionRef
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.tasks.await
@@ -26,60 +25,72 @@ private const val TAG = "PostRepoImpl"
 class PostRepoImpl : PostRepo {
 
 
-    private val fileName = "${UUID.randomUUID()}.jpg"
-    private val imgRef = Firebase.storage.reference.child("images/$fileName")
-
-
     override suspend fun addPost(post: Post) {
 
-            val ref = postCollectionRef.document()
-                    post.id = ref.id
-                ref.set(post)
+        val ref = postCollectionRef.document()
+        post.id = ref.id
+        ref.set(post)
 
     }
 
 
-
-
-    override suspend fun savePost(context: Context, category: String, title: String, description: String, price: String) {
+    override suspend fun savePost(
+        context: Context,
+        category: String,
+        title: String,
+        description: String,
+        price: String
+    ) {
 
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
 
-            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED){ return }
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(
+                context,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
 
-        val location =  fusedLocationClient.lastLocation.await()
+        val location = fusedLocationClient.lastLocation.await()
 
         val myLocation = CurrentLocation(location?.latitude, location?.longitude)
 
-        Log.d(TAG," from location ${location?.longitude}  ${location?.latitude} ")
+        Log.d(TAG, " from location ${location?.longitude}  ${location?.latitude} ")
 
 
-
-        val items = Post(category,title,description,price,myLocation)
+        val items = Post(category, title, description, price, myLocation)
 
         addPost(items)
 
     }
-    
-    
-    override suspend fun uploadImage() {
 
-        try {
-            imgFile?.let { imgRef.putFile(it).await() }
 
-        } catch (e: Exception){
-            Log.e(TAG, "uploadImage: ", e)
-        }
+    override suspend fun uploadImage(uri: Uri) {
+        val fileName = "${UUID.randomUUID()}.jpg"
+        val imgRef = Firebase.storage.reference.child("images/$fileName")
+
+         imgRef.putFile(uri).await()
+//        val upload =
+//        if (upload.task.isSuccessful){
+//            val uri = upload.storage.downloadUrl.await()
+//
+//        }
+
+
+
+
 
     }
 
     
     @SuppressLint("MissingPermission")
     override suspend fun getPost(
-        @ApplicationContext context: Context, dist: Float): List<Post> {
+        @ApplicationContext context: Context,
+        dist: Float): List<Post> {
         
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
         val location = fusedLocationClient.lastLocation.await()

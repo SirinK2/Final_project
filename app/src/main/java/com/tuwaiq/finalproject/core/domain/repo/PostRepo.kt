@@ -20,7 +20,7 @@ interface PostRepo {
     suspend fun addPost(post: Post)
 
 
-    suspend fun uploadImage()
+    suspend fun uploadImage(uri: Uri)
 
 
     suspend fun getPost(@ApplicationContext context: Context,dist: Float):List<Post>

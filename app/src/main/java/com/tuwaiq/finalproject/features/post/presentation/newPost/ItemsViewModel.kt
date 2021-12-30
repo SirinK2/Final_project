@@ -2,6 +2,7 @@ package com.tuwaiq.finalproject.features.post.presentation.newPost
 
 
 import android.content.Context
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tuwaiq.finalproject.core.data.remote.dto.PostDto
@@ -29,6 +30,6 @@ class ItemsViewModel @Inject constructor(
         viewModelScope.launch (Dispatchers.IO){ addPostUseCase(context,category, title, description, price) }
 
 
-    fun uploadImg() = viewModelScope.launch(Dispatchers.IO) { uploadImgUseCase() }
+    fun uploadImg(uri: Uri) = viewModelScope.launch(Dispatchers.IO) { uploadImgUseCase(uri) }
 
 }

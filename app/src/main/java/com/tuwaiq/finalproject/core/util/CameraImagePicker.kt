@@ -13,43 +13,49 @@ import androidx.core.content.FileProvider.getUriForFile
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.databinding.CameraBinding
+import com.tuwaiq.finalproject.features.post.presentation.newPost.ItemsFragment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+
 import java.io.File
 import java.util.*
 
-private const val REQUEST_CODE = 0
 
 class CameraImagePicker: BottomSheetDialogFragment() {
+    interface CallBack{
+        suspend fun uri(a:List<Uri> = listOf())
+    }
     private lateinit var binding : CameraBinding
     private lateinit var photoFile: File
     private lateinit var photoUri: Uri
     private val fileName
         get() = "IMG_${UUID.randomUUID()}.jpg"
-    private val fileDir by lazy {   context?.applicationContext?.filesDir }
-
-
-
-
-
-
+    private val fileDir by lazy { context?.applicationContext?.filesDir }
 
 
     private val getCameraLauncher =
-        registerForActivityResult(ActivityResultContracts.TakePicture()){
-
-
-
+        registerForActivityResult(
+            ActivityResultContracts
+                .TakePicture()){
         }
 
-    private val getImageLauncher = registerForActivityResult(ActivityResultContracts.OpenMultipleDocuments() ){
+    private val getImageLauncher =
+        registerForActivityResult(
+            ActivityResultContracts
+                .OpenMultipleDocuments() ){
 
-        it.forEach { uri ->
-            binding.ImgIv.setImageURI(uri)
-        }
+           GlobalScope.launch {
+               (ItemsFragment() as CallBack).uri(it)
+           }
+
 
     }
 
     private val getPermissionRequest =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()){
+        registerForActivityResult(
+            ActivityResultContracts
+                .RequestPermission()){
 
         }
 
@@ -58,11 +64,8 @@ class CameraImagePicker: BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         binding = CameraBinding.inflate(layoutInflater)
-
-
-
-
         return binding.root
     }
 
@@ -70,11 +73,20 @@ class CameraImagePicker: BottomSheetDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme)
+
+        setStyle(
+            STYLE_NORMAL,
+            R.style.AppBottomSheetDialogTheme)
 
 
-        photoFile = File(fileDir, fileName)
-        photoUri = getUriForFile(requireContext(),"com.tuwaiq.finalproject.fileProvider",photoFile)
+        photoFile =
+            File(fileDir,
+                fileName)
+
+        photoUri =
+            getUriForFile(requireContext()
+            ,"com.tuwaiq.finalproject.fileProvider"
+            ,photoFile)
 
     }
 
@@ -88,7 +100,10 @@ class CameraImagePicker: BottomSheetDialogFragment() {
 
             when(PackageManager.PERMISSION_GRANTED){
                 context?.let {
-                    ContextCompat.checkSelfPermission(it, Manifest.permission.CAMERA)
+                    ContextCompat
+                        .checkSelfPermission(
+                            it,
+                        Manifest.permission.CAMERA)
                 } -> getCameraLauncher.launch(photoUri)
                 else -> getPermissionRequest.launch(Manifest.permission.CAMERA)
             }
