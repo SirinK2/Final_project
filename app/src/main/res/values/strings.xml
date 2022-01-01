@@ -23,6 +23,8 @@
     <string name="clothes">Clothes</string>
     <string name="real_estate">real estate</string>
     <string name="log_out">Log out</string>
+    <string name="update_name">Name</string>
+    <string name="bio">Bio</string>
 
     <string-array name="categories">
         <item> Electronic</item>
