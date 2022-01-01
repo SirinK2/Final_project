@@ -10,6 +10,7 @@ import android.util.Log
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
 import com.tuwaiq.finalproject.core.data.remote.dto.CurrentLocation
 import com.tuwaiq.finalproject.core.domain.model.Post
@@ -69,11 +70,16 @@ class PostRepoImpl : PostRepo {
     }
 
 
-    override suspend fun uploadImage(uri: Uri) {
+    override suspend fun uploadImage(uri: Uri): UploadTask.TaskSnapshot{
         val fileName = "${UUID.randomUUID()}.jpg"
         val imgRef = Firebase.storage.reference.child("images/$fileName")
 
-         imgRef.putFile(uri).await()
+          return imgRef.putFile(uri).await()
+
+
+
+
+
 //        val upload =
 //        if (upload.task.isSuccessful){
 //            val uri = upload.storage.downloadUrl.await()

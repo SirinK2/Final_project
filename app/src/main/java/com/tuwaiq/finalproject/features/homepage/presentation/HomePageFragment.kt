@@ -166,8 +166,10 @@ class HomePageFragment : Fragment() {
 
 
             this.post = post
-           binding.viewModel?.post = post
-            binding.executePendingBindings()
+//            binding.viewModel?.post = post
+            binding.homeTitleTv.text = post.title
+            binding.homePriceTv.text = post.price
+//            binding.executePendingBindings()
 
 
         }
@@ -240,13 +242,14 @@ class HomePageFragment : Fragment() {
 
 
                 if (constraint == null || constraint.isEmpty()) {
-                  //  filteredList.addAll(allPost)
+                    filteredList.addAll(allPost)
                 } else {
                     val filterPattern = constraint.toString().lowercase(Locale.getDefault()).trim()
                     for (item in allPost) {
-                        Log.e(TAG, "performFiltering: ${item.categoryName}")
+
                         if (item.categoryName.lowercase(Locale.getDefault()) == filterPattern) {
-                            Log.e(TAG, "performFiltering: hi")
+                            Log.e(TAG, "performFiltering: ${item.categoryName}   $filterPattern  ${item.title}")
+
                             filteredList.add(item)
                         }
                     }
@@ -254,6 +257,8 @@ class HomePageFragment : Fragment() {
 
                 val results = FilterResults()
                 results.values = filteredList
+
+            //    Log.e(TAG, "performFiltering: $results", )
 
                 return results
             }

@@ -15,14 +15,20 @@ private const val TAG = "HomePageViewModel"
 @HiltViewModel
 class HomePageViewModel @Inject constructor(private val getPostUseCase: GetPostUseCase) : ViewModel() {
 
+
+
     fun getPost(context: Context, dist: Float): LiveData<List<Post>> = liveData(Dispatchers.IO) {
           emit(getPostUseCase(context, dist))
     }
 
+
+
     var post: Post? = null
         set(post) {
             field = post
+
         }
+
 
     val title: String?
          get() = post?.title
@@ -33,12 +39,16 @@ class HomePageViewModel @Inject constructor(private val getPostUseCase: GetPostU
 
     fun carsBtn(){
         mAdapter.filter.filter("cars")
+
     }
     fun electronicBtn(){
         mAdapter.filter.filter("electronic")
+
+
     }
     fun furnitureBtn(){
         mAdapter.filter.filter("furniture")
+
     }
     fun clothesBtn(){
         mAdapter.filter.filter("clothes")
@@ -46,9 +56,6 @@ class HomePageViewModel @Inject constructor(private val getPostUseCase: GetPostU
     fun realEstateBtn(){
         mAdapter.filter.filter("real estate")
     }
-
-
-
 
 
 

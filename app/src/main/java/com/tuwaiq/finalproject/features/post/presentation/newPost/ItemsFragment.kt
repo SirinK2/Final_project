@@ -2,17 +2,16 @@ package com.tuwaiq.finalproject.features.post.presentation.newPost
 
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.tuwaiq.finalproject.R
-import com.tuwaiq.finalproject.core.util.CameraImagePicker
 import com.tuwaiq.finalproject.databinding.ItemsFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -25,7 +24,7 @@ private const val TAG = "ItemsFragment"
 
 
 @AndroidEntryPoint
-class ItemsFragment : Fragment(), CameraImagePicker.CallBack {
+class ItemsFragment : Fragment(){
 
 
 
@@ -34,7 +33,10 @@ class ItemsFragment : Fragment(), CameraImagePicker.CallBack {
     private lateinit var binding: ItemsFragmentBinding
 
 
-    var b = mutableListOf<Uri>()
+    lateinit var uris: Uri
+
+    lateinit var photoUrl: String
+
 
 
 
@@ -46,11 +48,14 @@ class ItemsFragment : Fragment(), CameraImagePicker.CallBack {
 
 
 
+
+
         binding = ItemsFragmentBinding.inflate(layoutInflater)
 
         val categories = resources.getStringArray(R.array.categories)
         val arrayAdapter = ArrayAdapter(requireContext(),R.layout.dorpdown_items,categories)
         binding.autoCompleteTextView2.setAdapter(arrayAdapter)
+
 
 
 
@@ -61,25 +66,26 @@ class ItemsFragment : Fragment(), CameraImagePicker.CallBack {
             val price = binding.itemsPriceEt.text.toString()
             val category = binding.autoCompleteTextView2.text.toString()
 
-            CoroutineScope(Dispatchers.IO).launch {
-                uri()
-            }
+            val x = viewModel.uploadImg(uris)
 
 
+
+
+
+
+//            CoroutineScope(Dispatchers.IO).launch {
+//                val fileName = "${UUID.randomUUID()}.jpg"
+//                val imgRef = Firebase.storage.reference.child("images/$fileName")
+//
+//                imgRef.putFile(uris).await()
+//            }
             viewModel.addPost(requireContext(),category,title, description, price)
 
         }
 
         binding.cameraBtn.setOnClickListener {
-            val args = Bundle()
 
-            val bottomSheet = CameraImagePicker()
-            bottomSheet.arguments = args
-
-            bottomSheet.show(parentFragmentManager, bottomSheet.tag)
-
-
-
+            getImageLauncher.launch(arrayOf("image/*"))
 
         }
 
@@ -89,20 +95,19 @@ class ItemsFragment : Fragment(), CameraImagePicker.CallBack {
 
 
     }
-    override suspend fun uri(a: List<Uri>) {
+
+    private val getImageLauncher =
+        registerForActivityResult(
+            ActivityResultContracts
+                .OpenMultipleDocuments() ){
+            it.forEach { uri ->
+
+                uris =  uri
+            }
+
+        }
 
 
-       a.forEach {
-
-           val fileName = "${UUID.randomUUID()}.jpg"
-           val imgRef = Firebase.storage.reference.child("images/$fileName")
-
-           imgRef.putFile(it).await()
-           Log.d(TAG, "uri: $it")
-       }
-
-
-    }
 
 
 }

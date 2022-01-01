@@ -1,6 +1,7 @@
 package com.tuwaiq.finalproject.features.auth.presentation.singIn
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.tuwaiq.finalproject.databinding.SingInFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+private const val TAG = "SingInFragment"
 @AndroidEntryPoint
 class SingInFragment : Fragment() {
 
@@ -42,9 +44,15 @@ class SingInFragment : Fragment() {
                 email.isEmpty() -> Toast.makeText(context, "you should enter email",Toast.LENGTH_LONG).show()
                 password.isEmpty() -> Toast.makeText(context, "you should enter email",Toast.LENGTH_LONG).show()
                 else -> {
-                    viewModel.singIn(email, password)
+                    viewModel.singIn(email, password).addOnCompleteListener {
+                        if (it.isSuccessful){
+                            navControl.navigate(SingInFragmentDirections.actionSingInFragmentToHomePageFragment())
 
-                    navControl.navigate(SingInFragmentDirections.actionSingInFragmentToHomePageFragment())
+                        }
+                    }.addOnFailureListener {
+                        Toast.makeText(requireContext(),it.localizedMessage,Toast.LENGTH_LONG).show()
+                    }
+
                 }
             }
 

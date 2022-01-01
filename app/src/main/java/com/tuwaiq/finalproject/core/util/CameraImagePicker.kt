@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,18 +15,19 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.databinding.CameraBinding
 import com.tuwaiq.finalproject.features.post.presentation.newPost.ItemsFragment
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-
 import java.io.File
 import java.util.*
 
 
+private const val TAG = "CameraImagePicker"
+
 class CameraImagePicker: BottomSheetDialogFragment() {
-    interface CallBack{
-        suspend fun uri(a:List<Uri> = listOf())
-    }
+
+
+
+    
     private lateinit var binding : CameraBinding
     private lateinit var photoFile: File
     private lateinit var photoUri: Uri
@@ -44,13 +46,13 @@ class CameraImagePicker: BottomSheetDialogFragment() {
         registerForActivityResult(
             ActivityResultContracts
                 .OpenMultipleDocuments() ){
+            it.forEach { uri ->
 
-           GlobalScope.launch {
-               targetFragment?.let {   f ->
-                   (f as CallBack).uri(it)
-               }
+            }
 
-           }
+           
+            
+           
 
 
     }
@@ -124,6 +126,10 @@ class CameraImagePicker: BottomSheetDialogFragment() {
     }
 
 
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop: HIIIII")
+    }
 
 
 

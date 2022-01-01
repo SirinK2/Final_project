@@ -47,8 +47,9 @@ class PreviewFragment : Fragment() {
 
         postCollectionRef.document(args.id).get().addOnSuccessListener {
             binding.viewModel?.post = it.toObject(Post::class.java)
+            binding.prevTitle.text = it.getString("title")
+
         }
-        //binding.prevTitle.text = post.title
 
     }
 
