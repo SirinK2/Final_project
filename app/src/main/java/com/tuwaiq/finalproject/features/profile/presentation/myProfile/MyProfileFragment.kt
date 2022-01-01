@@ -6,6 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.core.data.remote.dto.UserDto
 import com.tuwaiq.finalproject.core.data.remote.dto.Rating
 import com.tuwaiq.finalproject.databinding.MyProfileFragmentBinding
@@ -25,6 +29,7 @@ class MyProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = MyProfileFragmentBinding.inflate(layoutInflater)
+        binding.myProfNameTv.text = Firebase.auth.currentUser?.displayName
 
 //        binding.myProfButton.setOnClickListener {
 //            val name = binding.myProfNameTv.text.toString()
@@ -40,10 +45,19 @@ class MyProfileFragment : Fragment() {
 //
 //                viewModel.saveUser(user)
 //
-
+//
 //        }
 
+
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        binding.settingBtn.setOnClickListener {
+            findNavController().navigate(R.id.settingFragment)
+        }
     }
 
 

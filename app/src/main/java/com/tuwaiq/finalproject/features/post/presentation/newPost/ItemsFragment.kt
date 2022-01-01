@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.tuwaiq.finalproject.R
@@ -19,6 +21,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.util.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.tuwaiq.finalproject.databinding.ImageItemsBinding
+
 
 private const val TAG = "ItemsFragment"
 
@@ -33,11 +38,18 @@ class ItemsFragment : Fragment(){
     private lateinit var binding: ItemsFragmentBinding
 
 
-    lateinit var uris: Uri
+    lateinit var photosUri: List<Uri>
 
     lateinit var photoUrl: String
 
+    private val getImageLauncher =
+        registerForActivityResult(
+            ActivityResultContracts
+                .OpenMultipleDocuments() ){
+            binding.photoRv.adapter = PhotoAdapter(it)
+            photosUri = it
 
+        }
 
 
 
@@ -46,10 +58,6 @@ class ItemsFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View {
 
-
-
-
-
         binding = ItemsFragmentBinding.inflate(layoutInflater)
 
         val categories = resources.getStringArray(R.array.categories)
@@ -57,8 +65,19 @@ class ItemsFragment : Fragment(){
         binding.autoCompleteTextView2.setAdapter(arrayAdapter)
 
 
+        binding.photoRv.layoutManager =
+            LinearLayoutManager(context,
+            LinearLayoutManager.HORIZONTAL,
+            false)
+
+        return binding.root
+
+    }
 
 
+
+    override fun onStart() {
+        super.onStart()
         binding.itemDoneBtn.setOnClickListener {
 
             val title = binding.itemsTitleEt.text.toString()
@@ -66,19 +85,12 @@ class ItemsFragment : Fragment(){
             val price = binding.itemsPriceEt.text.toString()
             val category = binding.autoCompleteTextView2.text.toString()
 
-            val x = viewModel.uploadImg(uris)
+
+            photosUri.forEach {
+                viewModel.uploadImg(it)
+            }
 
 
-
-
-
-
-//            CoroutineScope(Dispatchers.IO).launch {
-//                val fileName = "${UUID.randomUUID()}.jpg"
-//                val imgRef = Firebase.storage.reference.child("images/$fileName")
-//
-//                imgRef.putFile(uris).await()
-//            }
             viewModel.addPost(requireContext(),category,title, description, price)
 
         }
@@ -89,23 +101,32 @@ class ItemsFragment : Fragment(){
 
         }
 
-
-        return binding.root
-
-
-
     }
 
-    private val getImageLauncher =
-        registerForActivityResult(
-            ActivityResultContracts
-                .OpenMultipleDocuments() ){
-            it.forEach { uri ->
 
-                uris =  uri
-            }
 
+
+    private inner class PhotosHolder(val binding: ImageItemsBinding):RecyclerView.ViewHolder(binding.root){
+        fun bind(uri: Uri){
+            binding.imageView7.setImageURI(uri)
         }
+    }
+
+    private inner class PhotoAdapter(val photos: List<Uri>):RecyclerView.Adapter<PhotosHolder>(){
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotosHolder {
+
+            val binding = ImageItemsBinding.inflate(layoutInflater, parent, false)
+            return PhotosHolder(binding)
+        }
+
+        override fun onBindViewHolder(holder: PhotosHolder, position: Int) {
+            val photo = photos[position]
+            holder.bind(photo)
+        }
+
+        override fun getItemCount(): Int = photos.size
+
+    }
 
 
 

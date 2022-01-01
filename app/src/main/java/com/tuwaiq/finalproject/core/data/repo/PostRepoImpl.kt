@@ -9,6 +9,8 @@ import android.net.Uri
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.LocationServices
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
@@ -43,6 +45,7 @@ class PostRepoImpl : PostRepo {
         price: String
     ) {
 
+        val owner = Firebase.auth.currentUser?.uid.toString()
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
 
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -63,7 +66,7 @@ class PostRepoImpl : PostRepo {
         Log.d(TAG, " from location ${location?.longitude}  ${location?.latitude} ")
 
 
-        val items = Post(category, title, description, price, myLocation)
+        val items = Post(owner,category, title, description, price, myLocation)
 
         addPost(items)
 

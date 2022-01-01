@@ -5,6 +5,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.tuwaiq.finalproject.core.domain.repo.UserRepo
 import com.tuwaiq.finalproject.core.data.remote.dto.UserDto
+import com.tuwaiq.finalproject.core.domain.model.User
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
 
@@ -14,7 +15,7 @@ class UserRepoImpl: UserRepo {
 
     private val userCollectionRef = Firebase.firestore.collection("users")
 
-    override suspend fun saveUser(user: UserDto) {
+    override suspend fun saveUser(user: User) {
         try {
             userCollectionRef.add(user).await()
             Log.d(TAG," it's added to firestore")
