@@ -23,6 +23,8 @@ interface PostRepo {
 
     suspend fun getPost(@ApplicationContext context: Context,dist: Float):List<Post>
 
+    suspend fun getMyPost():List<Post>
+
 
 
 

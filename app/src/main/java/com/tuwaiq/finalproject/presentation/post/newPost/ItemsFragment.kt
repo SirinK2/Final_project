@@ -9,13 +9,12 @@ import android.widget.ArrayAdapter
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tuwaiq.finalproject.R
+import com.tuwaiq.finalproject.databinding.ImageItemsBinding
 import com.tuwaiq.finalproject.databinding.ItemsFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.tuwaiq.finalproject.databinding.ImageItemsBinding
 
 
 private const val TAG = "ItemsFragment"
@@ -79,12 +78,9 @@ class ItemsFragment : Fragment(){
             val category = binding.autoCompleteTextView2.text.toString()
 
 
-            photosUri.forEach {
-                viewModel.uploadImg(it)
-            }
-
-
             viewModel.addPost(requireContext(),category,title, description, price)
+
+
 
         }
 
@@ -92,6 +88,13 @@ class ItemsFragment : Fragment(){
 
             getImageLauncher.launch(arrayOf("image/*"))
 
+        }
+
+        binding.upBtn.setOnClickListener {
+            photosUri.forEach {
+                viewModel.uploadImg(it)
+
+            }
         }
 
     }

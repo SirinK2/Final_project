@@ -55,7 +55,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip6"
+            android:id="@+id/purchases"
             android:layout_width="153dp"
             android:layout_height="50sp"
             android:layout_marginTop="168dp"
@@ -71,7 +71,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip5"
+            android:id="@+id/sales"
             android:layout_width="153dp"
             android:layout_height="50sp"
             android:layout_marginStart="40dp"
@@ -83,11 +83,12 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:chipBackgroundColor="@color/primary_color"
-            app:layout_constraintEnd_toStartOf="@+id/chip6"
+            app:layout_constraintEnd_toStartOf="@+id/purchases"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/my_post_rv"
             android:layout_width="409dp"
             android:layout_height="497dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -102,6 +103,8 @@
             android:layout_marginEnd="24dp"
             android:background="@drawable/circle"
             android:elevation="10sp"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_settings" />

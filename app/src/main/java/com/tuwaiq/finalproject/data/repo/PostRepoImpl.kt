@@ -133,5 +133,21 @@ class PostRepoImpl : PostRepo {
 
     }
 
+    override suspend fun getMyPost():List<Post>{
+        val listPost: MutableList<Post> = mutableListOf()
+        val owner = Firebase.auth.currentUser?.uid.toString()
+        val x =  postCollectionRef.whereEqualTo("owner", owner ).get().await().documents
+        x.forEach {
+           val post =  it.toObject(Post::class.java)
+            post?.let { post->
+                listPost += post
+            }
+
+        }
+        return listPost
+    }
+
+
+
 
 }
