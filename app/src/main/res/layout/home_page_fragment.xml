@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.tuwaiq.finalproject.features.homepage.presentation.HomePageViewModel" />
+            type="com.tuwaiq.finalproject.presentation.homepage.HomePageViewModel" />
 
     </data>
 
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context=".features.homepage.presentation.HomePageFragment"
+        tools:context=".presentation.homepage.HomePageFragment"
         tools:layout_editor_absoluteX="-15dp"
         tools:layout_editor_absoluteY="107dp">
 

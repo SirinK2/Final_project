@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".features.profile.presentation.usersProfile.UsersProfileFragment">
+        tools:context=".presentation.profile.usersProfile.UsersProfileFragment">
 
         <ImageView
             android:id="@+id/users_prof_iv"

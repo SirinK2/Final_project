@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".features.post.presentation.newPost.ItemsFragment">
+        tools:context=".presentation.post.newPost.ItemsFragment">
 
         <EditText
             android:id="@+id/items_title_et"

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homePageFragment"
-        android:name="com.tuwaiq.finalproject.features.homepage.presentation.HomePageFragment"
+        android:name="com.tuwaiq.finalproject.presentation.homepage.HomePageFragment"
         android:label="home_page_fragment"
         tools:layout="@layout/home_page_fragment" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/myProfileFragment"
-        android:name="com.tuwaiq.finalproject.features.profile.presentation.myProfile.MyProfileFragment"
+        android:name="com.tuwaiq.finalproject.presentation.profile.myProfile.MyProfileFragment"
         android:label="my_profile_fragment"
         tools:layout="@layout/my_profile_fragment" >
         <action
@@ -37,17 +37,17 @@
     </fragment>
     <fragment
         android:id="@+id/usersProfileFragment"
-        android:name="com.tuwaiq.finalproject.features.profile.presentation.usersProfile.UsersProfileFragment"
+        android:name="com.tuwaiq.finalproject.presentation.profile.usersProfile.UsersProfileFragment"
         android:label="users_profile_fragment"
         tools:layout="@layout/users_profile_fragment" />
     <fragment
         android:id="@+id/itemsFragment"
-        android:name="com.tuwaiq.finalproject.features.post.presentation.newPost.ItemsFragment"
+        android:name="com.tuwaiq.finalproject.presentation.post.newPost.ItemsFragment"
         android:label="items_fragment"
         tools:layout="@layout/items_fragment" />
     <fragment
         android:id="@+id/directMessageFragment"
-        android:name="com.tuwaiq.finalproject.features.messages.presentation.directMessage.DirectMessageFragment"
+        android:name="com.tuwaiq.finalproject.presentation.messages.directMessage.DirectMessageFragment"
         android:label="direct_message_fragment"
         tools:layout="@layout/direct_message_fragment" >
         <action
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/previewFragment"
-        android:name="com.tuwaiq.finalproject.features.post.presentation.preview.PreviewFragment"
+        android:name="com.tuwaiq.finalproject.presentation.post.preview.PreviewFragment"
         android:label="preview_fragment"
         tools:layout="@layout/preview_fragment" >
         <action
@@ -68,17 +68,17 @@
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
-        android:name="com.tuwaiq.finalproject.features.messages.presentation.chatting.ChatFragment"
+        android:name="com.tuwaiq.finalproject.presentation.messages.chatting.ChatFragment"
         android:label="chat_fragment"
         tools:layout="@layout/chat_fragment" />
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.tuwaiq.finalproject.features.profile.presentation.setting.SettingFragment"
+        android:name="com.tuwaiq.finalproject.presentation.profile.setting.SettingFragment"
         android:label="setting_fragment"
         tools:layout="@layout/setting_fragment" />
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.tuwaiq.finalproject.features.auth.presentation.register.RegisterFragment"
+        android:name="com.tuwaiq.finalproject.presentation.auth.register.RegisterFragment"
         android:label="RegisterFragment" >
         <action
             android:id="@+id/action_registerFragment_to_singInFragment"
@@ -89,7 +89,7 @@
     </fragment>
     <fragment
         android:id="@+id/singInFragment"
-        android:name="com.tuwaiq.finalproject.features.auth.presentation.singIn.SingInFragment"
+        android:name="com.tuwaiq.finalproject.presentation.auth.singIn.SingInFragment"
         android:label="SingInFragment" >
         <action
             android:id="@+id/action_singInFragment_to_homePageFragment"

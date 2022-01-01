@@ -11,19 +11,19 @@ import dagger.hilt.android.AndroidEntryPoint
 private const val TAG = "MainActivity"
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val user = Firebase.auth.currentUser
         if (user != null) {
-            // User is signed in
             Log.d(TAG, "onCreate: User is signed in")
             findNavController(R.id.fragmentContainerView).navigate(R.id.homePageFragment)
 
         } else {
            findNavController(R.id.fragmentContainerView).navigate(R.id.singInFragment)
-            Log.d(TAG, "onCreate: User is  not sign in")
+            Log.d(TAG, "onCreate: No user is signed in")
         }
 
 

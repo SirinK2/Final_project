@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.tuwaiq.finalproject.features.homepage.presentation.HomePageViewModel" />
+            type="com.tuwaiq.finalproject.presentation.homepage.HomePageViewModel" />
 
 
     </data>

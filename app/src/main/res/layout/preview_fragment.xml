@@ -6,14 +6,14 @@
     <data>
         <variable
             name="viewModel"
-            type="com.tuwaiq.finalproject.features.post.presentation.preview.PreviewViewModel" />
+            type="com.tuwaiq.finalproject.presentation.post.preview.PreviewViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".features.post.presentation.preview.PreviewFragment">
+        tools:context=".presentation.post.preview.PreviewFragment">
 
         <ImageView
             android:id="@+id/imageView"

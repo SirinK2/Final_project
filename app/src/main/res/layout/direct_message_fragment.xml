@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".features.messages.presentation.directMessage.DirectMessageFragment">
+        tools:context=".presentation.messages.directMessage.DirectMessageFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/dm_rv"
