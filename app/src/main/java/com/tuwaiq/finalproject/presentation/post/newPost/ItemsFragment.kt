@@ -32,7 +32,7 @@ class ItemsFragment : Fragment(){
 
     lateinit var photosUri: List<Uri>
 
-    lateinit var photoUrl: String
+    lateinit var photoUrl: List<String>
 
     private val getImageLauncher =
         registerForActivityResult(
@@ -78,9 +78,14 @@ class ItemsFragment : Fragment(){
             val category = binding.autoCompleteTextView2.text.toString()
 
 
-            viewModel.addPost(requireContext(),category,title, description, price)
+                viewModel.uploadImg(photosUri).observe(
+                    viewLifecycleOwner,{ url ->
 
+                        photoUrl = url
+                        viewModel.addPost(requireContext(),category,title, description, price,photoUrl)
 
+                    }
+                )
 
         }
 
@@ -90,12 +95,7 @@ class ItemsFragment : Fragment(){
 
         }
 
-        binding.upBtn.setOnClickListener {
-            photosUri.forEach {
-                viewModel.uploadImg(it)
 
-            }
-        }
 
     }
 

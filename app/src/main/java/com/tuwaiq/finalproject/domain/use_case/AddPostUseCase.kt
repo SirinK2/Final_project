@@ -10,8 +10,8 @@ class AddPostUseCase @Inject constructor(val repo: PostRepo) {
                                 category: String,
                                 title: String,
                                 description: String,
-                                price: String)
-    = repo.savePost(context, category, title, description, price)
+                                price: String,photoUrl: List<String>)
+    = repo.savePost(context, category, title, description, price,photoUrl)
 
 
 

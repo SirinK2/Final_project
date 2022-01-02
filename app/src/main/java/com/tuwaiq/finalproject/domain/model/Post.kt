@@ -11,7 +11,7 @@ data class Post (
     var description: String = "",
     var price: String = "",
     var location: CurrentLocation = CurrentLocation(0.0,0.0),
-    var photoUrl: String = "",
+    var photoUrl: List<String> = listOf(),
     var id: String = ""
         )
 

@@ -39,7 +39,11 @@
         android:id="@+id/usersProfileFragment"
         android:name="com.tuwaiq.finalproject.presentation.profile.usersProfile.UsersProfileFragment"
         android:label="users_profile_fragment"
-        tools:layout="@layout/users_profile_fragment" />
+        tools:layout="@layout/users_profile_fragment" >
+        <argument
+            android:name="owner"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/itemsFragment"
         android:name="com.tuwaiq.finalproject.presentation.post.newPost.ItemsFragment"

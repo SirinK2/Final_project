@@ -8,6 +8,9 @@ import android.location.Location
 import android.net.Uri
 import android.util.Log
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -40,7 +43,8 @@ class PostRepoImpl : PostRepo {
         category: String,
         title: String,
         description: String,
-        price: String
+        price: String,
+        photoUrl:List<String>
     ) {
 
         val owner = Firebase.auth.currentUser?.uid.toString()
@@ -64,31 +68,38 @@ class PostRepoImpl : PostRepo {
         Log.d(TAG, " from location ${location?.longitude}  ${location?.latitude} ")
 
 
-        val items = Post(owner,category, title, description, price, myLocation)
+        val items = Post(owner,category, title, description, price, myLocation,photoUrl)
 
         addPost(items)
 
     }
 
 
-    override suspend fun uploadImage(uri: Uri): UploadTask.TaskSnapshot{
+    override suspend fun uploadImage(uri: List<Uri>): List<String>{
         val fileName = "${UUID.randomUUID()}.jpg"
-        val imgRef = Firebase.storage.reference.child("images/$fileName")
-
-          return imgRef.putFile(uri).await()
+        val imgRef = Firebase.storage.reference.child("images/").child(fileName)
 
 
+            val uriList: MutableList<String> = mutableListOf()
+            uri.forEach {
+                val uriTask= imgRef.putFile(it).continueWithTask { task ->
+                    if (!task.isSuccessful){
+                        task.exception?.let { e ->
+                            throw e
+                        }
+                    }
+                     imgRef.downloadUrl
 
 
 
-//        val upload =
-//        if (upload.task.isSuccessful){
-//            val uri = upload.storage.downloadUrl.await()
-//
-//        }
+                }.await()
+                uriList += uriTask.toString()
 
 
 
+        }
+
+        return uriList
 
 
     }
