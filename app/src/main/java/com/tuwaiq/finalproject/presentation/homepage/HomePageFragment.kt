@@ -190,6 +190,10 @@ class HomePageFragment : Fragment() {
             navCon.navigate(action)
         }
 
+        binding.settingBtn.setOnClickListener {
+            findNavController().navigate(R.id.settingFragment)
+        }
+
 
         binding.cars.setOnClickListener {
             mAdapter.filter.filter("cars")

@@ -1,6 +1,5 @@
 package com.tuwaiq.finalproject.domain.use_case
 
-import android.util.Log
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.tuwaiq.finalproject.domain.model.User

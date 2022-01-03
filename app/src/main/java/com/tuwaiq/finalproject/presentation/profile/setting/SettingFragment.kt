@@ -33,7 +33,18 @@ class SettingFragment : Fragment() {
             findNavController().navigate(R.id.singInFragment)
         }
 
+
         return binding.root
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        binding.updateBtn.setOnClickListener {
+
+
+        }
+
     }
 
 

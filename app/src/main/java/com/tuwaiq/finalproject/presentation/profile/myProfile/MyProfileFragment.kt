@@ -2,23 +2,19 @@ package com.tuwaiq.finalproject.presentation.profile.myProfile
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.databinding.HomePageItemsBinding
 import com.tuwaiq.finalproject.databinding.MyProfileFragmentBinding
 import com.tuwaiq.finalproject.domain.model.Post
-import com.tuwaiq.finalproject.util.Constant.postCollectionRef
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.tasks.await
 
 private const val TAG = "MyProfileFragment"
 @AndroidEntryPoint

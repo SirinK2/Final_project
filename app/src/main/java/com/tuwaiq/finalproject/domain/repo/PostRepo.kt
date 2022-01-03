@@ -17,11 +17,6 @@ interface PostRepo {
 
     suspend fun getPost():List<PostDto>
 
-//    suspend fun getMyPost():List<PostDto>
-
-//    suspend fun getPostById(id: String): PostDto?
-
-
 
 
 
