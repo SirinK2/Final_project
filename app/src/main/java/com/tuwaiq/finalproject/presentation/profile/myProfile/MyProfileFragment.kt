@@ -10,10 +10,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.databinding.HomePageItemsBinding
 import com.tuwaiq.finalproject.databinding.MyProfileFragmentBinding
 import com.tuwaiq.finalproject.domain.model.Post
+import com.tuwaiq.finalproject.domain.model.User
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "MyProfileFragment"
@@ -26,6 +28,8 @@ class MyProfileFragment : Fragment() {
 
     lateinit var binding: MyProfileFragmentBinding
 
+    private var user = User()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,7 +38,7 @@ class MyProfileFragment : Fragment() {
 
         binding.myPostRv.layoutManager = LinearLayoutManager(context)
 
-
+        binding.myProfIv.load(R.drawable.ic_person)
 
         return binding.root
     }
@@ -52,7 +56,9 @@ class MyProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getUser().observe(
             viewLifecycleOwner,{
+                user = it
                 binding.myProfNameTv.text = it.name
+                binding.myProfBioTv.text = it.bio
                 Log.e(TAG, "onViewCreated: $it", )
             }
         )
@@ -71,7 +77,8 @@ class MyProfileFragment : Fragment() {
 
 
         binding.settingBtn.setOnClickListener {
-            findNavController().navigate(R.id.settingFragment)
+            val action = MyProfileFragmentDirections.actionMyProfileFragmentToEditProfileFragment(user.id)
+            findNavController().navigate(action)
         }
     }
 

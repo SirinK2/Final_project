@@ -8,4 +8,6 @@ interface UserRepo {
 
     suspend fun getUser():List<User>
 
+    fun updateUser(id:String, name: String, bio: String)
+
 }

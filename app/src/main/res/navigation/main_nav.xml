@@ -29,11 +29,11 @@
         android:label="my_profile_fragment"
         tools:layout="@layout/my_profile_fragment" >
         <action
-            android:id="@+id/action_myProfileFragment_to_settingFragment"
-            app:destination="@id/settingFragment" />
-        <action
             android:id="@+id/action_myProfileFragment_to_previewFragment"
             app:destination="@id/previewFragment" />
+        <action
+            android:id="@+id/action_myProfileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/usersProfileFragment"
@@ -101,5 +101,13 @@
         <action
             android:id="@+id/action_singInFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.tuwaiq.finalproject.presentation.profile.myProfile.EditProfileFragment"
+        android:label="EditProfileFragment" >
+        <argument
+            android:name="id"
+            app:argType="string" />
     </fragment>
 </navigation>

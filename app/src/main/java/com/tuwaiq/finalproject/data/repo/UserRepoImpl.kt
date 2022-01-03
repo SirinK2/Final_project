@@ -15,10 +15,19 @@ class UserRepoImpl: UserRepo {
 
     private val userCollectionRef = Firebase.firestore.collection("users")
 
-    override fun saveUser(user: User) { userCollectionRef.add(user) }
+    override fun saveUser(user: User) {
+        val ref = userCollectionRef.document()
+        user.id = ref.id
+        ref.set(user)
+    }
 
     override suspend fun getUser():List<User> {
        return userCollectionRef.get().await().toObjects(User::class.java)
+    }
+
+    override fun updateUser(id: String,name: String, bio: String) {
+        userCollectionRef.document(id).update("name",name,"bio", bio)
+
     }
 
 

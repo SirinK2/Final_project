@@ -6,6 +6,7 @@ data class User (
     var authId: String = "",
     var name: String = "",
     var bio: String = "",
-    var ratings: List<Rating> = listOf()
+    var ratings: List<Rating> = listOf(),
+    var id: String = ""
 
     )
