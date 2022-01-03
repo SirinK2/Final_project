@@ -27,6 +27,8 @@ interface PostRepo {
 
     suspend fun getMyPost():List<Post>
 
+    suspend fun getPostById(id: String): Post
+
 
 
 

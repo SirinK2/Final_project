@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.domain.model.Post
 import com.tuwaiq.finalproject.util.Constant.mAdapter
@@ -166,10 +167,12 @@ class HomePageFragment : Fragment() {
 
 
             this.post = post
-//            binding.viewModel?.post = post
+
             binding.homeTitleTv.text = post.title
             binding.homePriceTv.text = post.price
-//            binding.executePendingBindings()
+            post.photoUrl.forEach {
+                binding.homeItemIv.load(it)
+            }
 
 
         }

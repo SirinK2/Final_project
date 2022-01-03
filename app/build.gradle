@@ -91,9 +91,9 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
 
 
-    // image picker
+    // image loader
+    implementation("io.coil-kt:coil:1.4.0")
 
-    implementation  'io.ak1.pix:piximagepicker:1.6.2'
 
     // shimmer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'

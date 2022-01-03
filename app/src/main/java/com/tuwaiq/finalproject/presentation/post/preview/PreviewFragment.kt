@@ -1,15 +1,16 @@
 package com.tuwaiq.finalproject.presentation.post.preview
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.tuwaiq.finalproject.domain.model.Post
-import com.tuwaiq.finalproject.util.Constant.postCollectionRef
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.tuwaiq.finalproject.databinding.ImageItemsBinding
 import com.tuwaiq.finalproject.databinding.PreviewFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,8 +23,7 @@ class PreviewFragment : Fragment() {
 
 
     private val args:PreviewFragmentArgs by navArgs()
-    lateinit var id : String
-    var post = Post()
+
 
     lateinit var binding: PreviewFragmentBinding
     override fun onCreateView(
@@ -34,7 +34,10 @@ class PreviewFragment : Fragment() {
 
 
 
-
+        binding.imageRv.layoutManager =
+            LinearLayoutManager(context,
+                LinearLayoutManager.HORIZONTAL,
+                false)
 
 
 
@@ -44,30 +47,57 @@ class PreviewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.viewModel = previewViewModel
 
+        previewViewModel.getUserById(args.id).observe(
+            viewLifecycleOwner,{ post ->
+
+                binding.prevTitle.text = post.title
+                binding.prevDescrip.text = post.description
+                binding.prevPrice.text = post.price
+                binding.imageRv.adapter = PhotoAdapter(post.photoUrl)
+
+
+            }
+        )
 
 
     }
 
     override fun onStart() {
         super.onStart()
-        postCollectionRef.document(args.id).get().addOnSuccessListener {
-            binding.viewModel?.post = it.toObject(Post::class.java)
-            binding.prevTitle.text = it.getString("title")
-            binding.prevDescrip.text = it.getString("description")
-            binding.prevPrice.text = it.getString("price")
 
 
+//        binding.userProf.setOnClickListener {
+//            val action = PreviewFragmentDirections.actionPreviewFragmentToUsersProfileFragment(post.owner)
+//            findNavController().navigate(action)
+//        }
+
+
+
+
+    }
+
+
+
+    private inner class PhotosHolder(val binding: ImageItemsBinding): RecyclerView.ViewHolder(binding.root){
+        fun bind(photo: String){
+            binding.imageView7.load(photo)
+        }
+    }
+
+    private inner class PhotoAdapter(val photos: List<String>): RecyclerView.Adapter<PhotosHolder>(){
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotosHolder {
+
+            val binding = ImageItemsBinding.inflate(layoutInflater, parent, false)
+            return PhotosHolder(binding)
         }
 
-        binding.userProf.setOnClickListener {
-            val action = PreviewFragmentDirections.actionPreviewFragmentToUsersProfileFragment(post.owner)
-            findNavController().navigate(action)
+        override fun onBindViewHolder(holder: PhotosHolder, position: Int) {
+            val photo = photos[position]
+            holder.bind(photo)
         }
 
-
-
+        override fun getItemCount(): Int = photos.size
 
     }
 

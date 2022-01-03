@@ -12,10 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tuwaiq.finalproject.databinding.HomePageItemsBinding
 import com.tuwaiq.finalproject.databinding.UsersProfileFragmentBinding
 import com.tuwaiq.finalproject.domain.model.Post
-import com.tuwaiq.finalproject.util.Constant
-import com.tuwaiq.finalproject.util.Constant.postCollectionRef
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.tasks.await
 
 @AndroidEntryPoint
 class UsersProfileFragment : Fragment() {

@@ -8,13 +8,9 @@ import android.location.Location
 import android.net.Uri
 import android.util.Log
 import androidx.core.app.ActivityCompat
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
 import com.tuwaiq.finalproject.data.remote.dto.CurrentLocation
 import com.tuwaiq.finalproject.domain.model.Post
@@ -76,12 +72,11 @@ class PostRepoImpl : PostRepo {
 
 
     override suspend fun uploadImage(uri: List<Uri>): List<String>{
-        val fileName = "${UUID.randomUUID()}.jpg"
-        val imgRef = Firebase.storage.reference.child("images/").child(fileName)
-
-
             val uriList: MutableList<String> = mutableListOf()
             uri.forEach {
+                val fileName = "${UUID.randomUUID()}.jpg"
+                val imgRef = Firebase.storage.reference.child("images/$fileName")
+
                 val uriTask= imgRef.putFile(it).continueWithTask { task ->
                     if (!task.isSuccessful){
                         task.exception?.let { e ->
@@ -90,18 +85,11 @@ class PostRepoImpl : PostRepo {
                     }
                      imgRef.downloadUrl
 
-
-
                 }.await()
                 uriList += uriTask.toString()
 
-
-
         }
-
         return uriList
-
-
     }
 
     
@@ -158,7 +146,10 @@ class PostRepoImpl : PostRepo {
         return listPost
     }
 
-
+    override suspend fun getPostById(id: String): Post {
+        val x = postCollectionRef.document(id).get().await()
+        return x.toObject(Post::class.java)!!
+    }
 
 
 }

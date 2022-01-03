@@ -1,27 +1,17 @@
 package com.tuwaiq.finalproject.presentation.post.preview
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import com.tuwaiq.finalproject.domain.model.Post
-import com.tuwaiq.finalproject.domain.use_case.GetPostUseCase
+import com.tuwaiq.finalproject.domain.use_case.GetPostByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class PreviewViewModel @Inject constructor(private val getPostUseCase: GetPostUseCase) : ViewModel() {
+class PreviewViewModel @Inject constructor(private val getPostByIdUseCase: GetPostByIdUseCase) : ViewModel() {
 
 
-    var post: Post? = null
-        set(post) {
-            field = post
-        }
-
-    val title: String?
-        get() = post?.title
-
-    val description: String?
-        get() = post?.description
-
-    val price: String?
-        get() = post?.price
+     fun getUserById(id: String): LiveData<Post> = liveData { emit(getPostByIdUseCase(id)) }
 
 }
