@@ -5,7 +5,6 @@ import com.tuwaiq.finalproject.data.remote.dto.CurrentLocation
 data class Post (
 
     var owner: String = "",
-
     var categoryName: String = "",
     var title: String = "",
     var description: String = "",

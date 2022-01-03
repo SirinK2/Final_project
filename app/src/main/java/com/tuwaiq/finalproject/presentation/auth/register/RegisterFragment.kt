@@ -9,7 +9,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.tuwaiq.finalproject.databinding.RegisterFragmentBinding
+import com.tuwaiq.finalproject.domain.model.User
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "RegisterFragment"
@@ -47,8 +50,10 @@ class RegisterFragment : Fragment() {
                 password.isEmpty() -> showToast("please enter password")
                 password != confirmPass -> showToast("passwords must be matched")
                 else -> {
-                    viewModel.register(userName,email,password).addOnCompleteListener {
+                    viewModel.register(email,password).addOnCompleteListener {
                         if (it.isSuccessful) {
+                            val c = Firebase.auth.currentUser?.uid.toString()
+                            viewModel.saveUser(User(c,userName))
                             navControl.navigate(RegisterFragmentDirections.actionRegisterFragmentToHomePageFragment())
                         }
 

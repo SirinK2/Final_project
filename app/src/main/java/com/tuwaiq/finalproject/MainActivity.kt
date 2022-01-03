@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.navigation.findNavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.tuwaiq.finalproject.presentation.homepage.HomePageFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "MainActivity"
@@ -24,7 +25,9 @@ class MainActivity : AppCompatActivity() {
         } else {
            findNavController(R.id.fragmentContainerView).navigate(R.id.singInFragment)
             Log.d(TAG, "onCreate: No user is signed in")
+
         }
+
 
 
     }

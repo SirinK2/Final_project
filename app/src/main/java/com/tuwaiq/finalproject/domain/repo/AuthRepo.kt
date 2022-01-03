@@ -6,7 +6,7 @@ import com.google.firebase.auth.AuthResult
 interface AuthRepo {
 
 
-    fun register(username:String,email:String, password: String): Task<AuthResult>
+    fun register(email:String, password: String): Task<AuthResult>
 
     fun singIn(email: String,password: String):Task<AuthResult>
 

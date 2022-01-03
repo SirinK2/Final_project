@@ -10,7 +10,7 @@ class RegisterUseCase @Inject constructor (
     private val repo: AuthRepo
 ) {
 
-    operator fun invoke(username:String,email: String, password: String): Task<AuthResult> = repo.register(username,email,password)
+    operator fun invoke(email: String, password: String): Task<AuthResult> = repo.register(email,password)
 
 
 

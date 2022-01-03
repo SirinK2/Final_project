@@ -1,6 +1,7 @@
 package com.tuwaiq.finalproject.presentation.profile.myProfile
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,7 @@ import com.tuwaiq.finalproject.util.Constant.postCollectionRef
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.tasks.await
 
+private const val TAG = "MyProfileFragment"
 @AndroidEntryPoint
 class MyProfileFragment : Fragment() {
 
@@ -36,7 +38,6 @@ class MyProfileFragment : Fragment() {
 
         binding.myPostRv.layoutManager = LinearLayoutManager(context)
 
-        binding.myProfNameTv.text = Firebase.auth.currentUser?.displayName
 
 
         return binding.root
@@ -53,6 +54,13 @@ class MyProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.getUser().observe(
+            viewLifecycleOwner,{
+                binding.myProfNameTv.text = it.name
+                Log.e(TAG, "onViewCreated: $it", )
+            }
+        )
+
 
         observe()
         binding.sales.setOnClickListener {
@@ -64,6 +72,7 @@ class MyProfileFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
 
         binding.settingBtn.setOnClickListener {
             findNavController().navigate(R.id.settingFragment)

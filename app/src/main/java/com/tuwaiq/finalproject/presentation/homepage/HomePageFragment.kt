@@ -16,10 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.tuwaiq.finalproject.R
-import com.tuwaiq.finalproject.domain.model.Post
-import com.tuwaiq.finalproject.util.Constant.mAdapter
 import com.tuwaiq.finalproject.databinding.HomePageFragmentBinding
 import com.tuwaiq.finalproject.databinding.HomePageItemsBinding
+import com.tuwaiq.finalproject.domain.model.Post
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -27,7 +26,7 @@ private const val TAG = "HomePageFragment"
 @AndroidEntryPoint
 class HomePageFragment : Fragment() {
 
-
+    lateinit var mAdapter: HomePageFragment.HomeAdapter
 
     private val homePageViewModel: HomePageViewModel by viewModels()
 
@@ -42,8 +41,51 @@ class HomePageFragment : Fragment() {
 
 
     private fun onAddButtonClicked(){
+        visibility(clicked)
         setAnimation(clicked)
+        clickable(clicked)
         clicked = !clicked
+    }
+
+
+    private fun clickable(clicked: Boolean){
+        if (!clicked){
+            binding.floatingActionButton2.isClickable = true
+            binding.cars.isCheckable = true
+            binding.furniture.isCheckable = true
+            binding.electronic.isCheckable = true
+            binding.clothes.isCheckable =true
+            binding.realestate.isCheckable = true
+
+        }else{
+            binding.floatingActionButton2.isClickable = false
+            binding.cars.isCheckable = false
+            binding.furniture.isCheckable = false
+            binding.electronic.isCheckable = false
+            binding.clothes.isCheckable =false
+            binding.realestate.isCheckable = false
+
+        }
+    }
+
+    private fun visibility(clicked: Boolean){
+        if (!clicked){
+
+            binding.cars.visibility = View.VISIBLE
+            binding.furniture.visibility = View.VISIBLE
+            binding.electronic.visibility = View.VISIBLE
+            binding.clothes.visibility = View.VISIBLE
+            binding.realestate.visibility = View.VISIBLE
+
+        }else{
+            binding.cars.visibility = View.INVISIBLE
+            binding.furniture.visibility = View.INVISIBLE
+            binding.electronic.visibility = View.INVISIBLE
+            binding.clothes.visibility = View.INVISIBLE
+            binding.realestate.visibility = View.INVISIBLE
+
+
+        }
     }
 
     private fun setAnimation(clicked: Boolean) {
@@ -147,7 +189,33 @@ class HomePageFragment : Fragment() {
             val action = HomePageFragmentDirections.actionHomePageFragmentToDirectMessageFragment()
             navCon.navigate(action)
         }
+
+
+        binding.cars.setOnClickListener {
+            mAdapter.filter.filter("cars")
+        }
+
+       binding.electronic.setOnClickListener {
+           mAdapter.filter.filter("electronic")
+       }
+
+
+
+        binding.furniture.setOnClickListener {
+            mAdapter.filter.filter("furniture")
+
+        }
+
+        binding.clothes.setOnClickListener {
+            mAdapter.filter.filter("clothes")
+        }
+
+        binding.realestate.setOnClickListener {
+            mAdapter.filter.filter("real estate")
+        }
+
     }
+
 
 
 

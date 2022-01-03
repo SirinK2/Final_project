@@ -1,6 +1,7 @@
 package com.tuwaiq.finalproject.data.repo
 
 import android.util.Log
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.tuwaiq.finalproject.domain.repo.UserRepo
@@ -14,16 +15,11 @@ class UserRepoImpl: UserRepo {
 
     private val userCollectionRef = Firebase.firestore.collection("users")
 
-    override suspend fun saveUser(user: User) {
-        try {
-            userCollectionRef.add(user).await()
-            Log.d(TAG," it's added to firestore")
+    override fun saveUser(user: User) { userCollectionRef.add(user) }
 
-        } catch (e: Exception){
-            Log.d(TAG,"HIIiiiiiiii" , e)
-        }
+    override suspend fun getUser():List<User> {
+       return userCollectionRef.get().await().toObjects(User::class.java)
     }
-
 
 
 }

@@ -4,6 +4,8 @@ import com.tuwaiq.finalproject.domain.model.User
 
 interface UserRepo {
 
-    suspend fun saveUser(user: User)
+    fun saveUser(user: User)
+
+    suspend fun getUser():List<User>
 
 }

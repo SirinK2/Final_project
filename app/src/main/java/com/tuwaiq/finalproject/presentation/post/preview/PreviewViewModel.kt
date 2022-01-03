@@ -12,6 +12,6 @@ import javax.inject.Inject
 class PreviewViewModel @Inject constructor(private val getPostByIdUseCase: GetPostByIdUseCase) : ViewModel() {
 
 
-     fun getUserById(id: String): LiveData<Post> = liveData { emit(getPostByIdUseCase(id)) }
+     fun getUserById(id: String): LiveData<Post?> = liveData { emit(getPostByIdUseCase(id)) }
 
 }

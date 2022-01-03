@@ -6,6 +6,6 @@ import javax.inject.Inject
 
 class SaveUserUseCase @Inject constructor(private val userRepo: UserRepo) {
 
-    suspend operator fun invoke(user: User) = userRepo.saveUser(user)
+     operator fun invoke(user: User) = userRepo.saveUser(user)
 
 }

@@ -51,10 +51,10 @@ class PreviewFragment : Fragment() {
         previewViewModel.getUserById(args.id).observe(
             viewLifecycleOwner,{ post ->
 
-                binding.prevTitle.text = post.title
-                binding.prevDescrip.text = post.description
-                binding.prevPrice.text = post.price
-                binding.imageRv.adapter = PhotoAdapter(post.photoUrl)
+                binding.prevTitle.text = post?.title
+                binding.prevDescrip.text = post?.description
+                binding.prevPrice.text = post?.price
+                binding.imageRv.adapter = post?.let { PhotoAdapter(it.photoUrl) }
 
 
             }

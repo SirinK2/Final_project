@@ -159,15 +159,15 @@
             android:elevation="10sp"
             android:shadowRadius="10"
             android:gravity="center"
-
+            android:clickable="true"
             android:rotation="90"
+            android:focusable="true"
+
             android:text="@string/cars"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-                android:onClick="@{()->viewModel.carsBtn()}"
-
-        android:visibility="invisible"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/floatingActionButton2" />
 
@@ -180,11 +180,12 @@
             android:layout_marginTop="40dp"
             android:elevation="10sp"
             android:shadowRadius="10"
+            android:clickable="true"
             android:backgroundTint="@color/green"
             android:rotation="90"
+            android:focusable="true"
             android:text="@string/electronic"
             android:textAlignment="center"
-            android:onClick="@{()->viewModel.electronicBtn()}"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:visibility="invisible"
@@ -200,16 +201,15 @@
             android:layout_marginStart="-6dp"
             android:layout_marginTop="40dp"
             android:backgroundTint="@color/green"
-
             android:rotation="90"
+            android:clickable="true"
+            android:focusable="true"
             android:text="@string/furniture"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:visibility="invisible"
-                android:onClick="@{()->viewModel.furnitureBtn()}"
-
-        app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/electronic" />
 
         <com.google.android.material.chip.Chip
@@ -221,8 +221,9 @@
             android:layout_marginStart="-6dp"
             android:layout_marginTop="40dp"
             android:backgroundTint="@color/green"
-            android:onClick="@{()->viewModel.clothesBtn()}"
             android:rotation="90"
+            android:clickable="true"
+            android:focusable="true"
             android:text="@string/clothes"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
@@ -239,9 +240,10 @@
             android:layout_marginTop="40dp"
             android:backgroundTint="@color/green"
             android:elevation="10sp"
+            android:clickable="true"
+            android:focusable="true"
             android:fontFamily="sans-serif-black"
             android:rotation="90"
-            android:onClick="@{()->viewModel.realEstateBtn()}"
             android:shadowRadius="10"
             android:text="@string/real_estate"
             android:textAlignment="center"

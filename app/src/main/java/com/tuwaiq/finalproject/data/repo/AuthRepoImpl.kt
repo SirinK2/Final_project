@@ -12,9 +12,8 @@ class AuthRepoImpl: AuthRepo {
     private val auth = FirebaseAuth.getInstance()
 
 
-    override fun register(username:String, email: String, password: String): Task<AuthResult> =
+    override fun register( email: String, password: String): Task<AuthResult> =
          auth.createUserWithEmailAndPassword(email, password)
-
 
 
 

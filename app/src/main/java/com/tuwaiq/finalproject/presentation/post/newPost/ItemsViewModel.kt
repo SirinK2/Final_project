@@ -29,9 +29,6 @@ class ItemsViewModel @Inject constructor(
 
 
 
-//     fun savePost(post: Post) = viewModelScope.launch(Dispatchers.IO) { savePostUseCase(post) }
-
-
     fun addPost(context: Context, category: String, title: String, description: String, price: String,photoUrl: List<String>) =
         viewModelScope.launch (Dispatchers.IO){ addPostUseCase(context,category, title, description, price,photoUrl) }
 
