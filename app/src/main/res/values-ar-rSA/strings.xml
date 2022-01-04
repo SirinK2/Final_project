@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Final project</string>
+    <string name="item_title">العنوان</string>
+    <string name="item_description">التفاصيل</string>
+    <string name="item_price">السعر</string>
+    <string name="item_done_btn">ارسال</string>
+    <string name="setting_language">اللغة</string>
+    <string name="setting_edit_profile">تعديل الصفحة الشخصية</string>
+    <string name="register">تسجيل</string>
+    <string name="sign_in">تسجيل الدخول</string>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="password">الرقم السري</string>
+    <string name="forgot_password">نسيت كلمة المرور؟</string>
+    <string name="categories">التصنيفات</string>
+    <string name="choose_category">اختر تصنيف…</string>
+    <string name="account">ليس لديك حساب؟</string>
+    <string name="_100m">100m</string>
+    <string name="_3km">3km</string>
+    <string name="_5km">5km</string>
+    <string name="cars">مركبات</string>
+    <string name="electronic">الكترونيات</string>
+    <string name="furniture">اثاث</string>
+    <string name="clothes">ملابس</string>
+    <string name="real_estate">عقارات</string>
+    <string name="log_out">تسجيل الخروج</string>
+    <string name="update_name">الاسم</string>
+    <string name="bio">Bio</string>
+
+    <string-array name="categories">
+        <item>الكترونيات</item>
+        <item>اثاث</item>
+        <item>مركبات</item>
+        <item>ملابس</item>
+        <item>عقارات</item>
+    </string-array>
+
+
+
+
+
+</resources>

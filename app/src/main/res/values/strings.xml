@@ -7,7 +7,7 @@
     <string name="setting_language">Language</string>
     <string name="setting_edit_profile">Edit profile</string>
     <string name="register">Register</string>
-    <string name="sing_in">Sing In</string>
+    <string name="sign_in">Sign In</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="forgot_password">Forgot password?</string>

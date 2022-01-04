@@ -59,6 +59,7 @@ class MyProfileFragment : Fragment() {
                 user = it
                 binding.myProfNameTv.text = it.name
                 binding.myProfBioTv.text = it.bio
+                binding.myProfIv.load(it.photoUrl)
                 Log.e(TAG, "onViewCreated: $it", )
             }
         )

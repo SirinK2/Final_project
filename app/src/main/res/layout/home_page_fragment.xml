@@ -11,9 +11,11 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
+        app:layoutDescription="@xml/home_page_fragment_xml_constraintlayout_scene"
         tools:context=".presentation.homepage.HomePageFragment"
         tools:layout_editor_absoluteX="-15dp"
         tools:layout_editor_absoluteY="107dp">
@@ -79,15 +81,13 @@
             android:id="@+id/home_dm_btn"
             android:layout_width="40sp"
             android:layout_height="40sp"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="20dp"
             android:background="@drawable/circle"
             android:backgroundTint="#FFFFFF"
             android:elevation="10sp"
             android:src="@drawable/message"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/home_profile_btn"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck"
+            tools:layout_editor_absoluteX="19dp"
+            tools:layout_editor_absoluteY="76dp" />
 
         <ImageButton
             android:id="@+id/home_profile_btn"
@@ -174,14 +174,13 @@
             android:elevation="10sp"
             android:focusable="true"
             android:gravity="center"
-
             android:rotation="90"
             android:shadowRadius="10"
             android:text="@string/cars"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/floatingActionButton2" />
 
@@ -202,7 +201,7 @@
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cars" />
 
@@ -222,7 +221,7 @@
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/electronic" />
 
@@ -242,7 +241,7 @@
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/furniture" />
 
@@ -263,7 +262,7 @@
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/clothes" />
 

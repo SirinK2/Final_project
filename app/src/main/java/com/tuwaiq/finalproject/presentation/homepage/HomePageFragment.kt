@@ -13,7 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SnapHelper
 import coil.load
 import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.databinding.HomePageFragmentBinding
@@ -21,6 +23,7 @@ import com.tuwaiq.finalproject.databinding.HomePageItemsBinding
 import com.tuwaiq.finalproject.domain.model.Post
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+
 
 private const val TAG = "HomePageFragment"
 @AndroidEntryPoint
@@ -31,26 +34,29 @@ class HomePageFragment : Fragment() {
     private val homePageViewModel: HomePageViewModel by viewModels()
 
     private lateinit var binding : HomePageFragmentBinding
-
-
+    var snapHelper: SnapHelper = LinearSnapHelper()
     private val fromBottom: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.from_bottom_anim) }
     private val toBottom: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.to_bottom_anim) }
     private var clicked = false
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
 
 
 
     private fun onAddButtonClicked(){
         visibility(clicked)
-        setAnimation(clicked)
         clickable(clicked)
+        setAnimation(clicked)
         clicked = !clicked
     }
 
 
     private fun clickable(clicked: Boolean){
         if (!clicked){
-            binding.floatingActionButton2.isClickable = true
+            //binding.floatingActionButton2.isClickable = true
             binding.cars.isCheckable = true
             binding.furniture.isCheckable = true
             binding.electronic.isCheckable = true
@@ -58,7 +64,7 @@ class HomePageFragment : Fragment() {
             binding.realestate.isCheckable = true
 
         }else{
-            binding.floatingActionButton2.isClickable = false
+            //binding.floatingActionButton2.isClickable = false
             binding.cars.isCheckable = false
             binding.furniture.isCheckable = false
             binding.electronic.isCheckable = false
@@ -78,11 +84,11 @@ class HomePageFragment : Fragment() {
             binding.realestate.visibility = View.VISIBLE
 
         }else{
-            binding.cars.visibility = View.INVISIBLE
-            binding.furniture.visibility = View.INVISIBLE
-            binding.electronic.visibility = View.INVISIBLE
-            binding.clothes.visibility = View.INVISIBLE
-            binding.realestate.visibility = View.INVISIBLE
+            binding.cars.visibility = View.GONE
+            binding.furniture.visibility = View.GONE
+            binding.electronic.visibility = View.GONE
+            binding.clothes.visibility = View.GONE
+            binding.realestate.visibility = View.GONE
 
 
         }
@@ -97,11 +103,13 @@ class HomePageFragment : Fragment() {
            binding.realestate.startAnimation(fromBottom)
 
        }else{
+
            binding.cars.startAnimation(toBottom)
            binding.electronic.startAnimation(toBottom)
            binding.furniture.startAnimation(toBottom)
            binding.clothes.startAnimation(toBottom)
            binding.realestate.startAnimation(toBottom)
+
        }
     }
 
@@ -118,6 +126,7 @@ class HomePageFragment : Fragment() {
 
         binding.homeRv.layoutManager = LinearLayoutManager(context)
 
+        snapHelper.attachToRecyclerView(binding.homeRv)
 
 
 

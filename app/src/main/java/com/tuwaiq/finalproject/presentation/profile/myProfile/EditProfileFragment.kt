@@ -1,10 +1,12 @@
 package com.tuwaiq.finalproject.presentation.profile.myProfile
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import coil.load
@@ -21,8 +23,22 @@ class EditProfileFragment : Fragment() {
     val user = User()
 
     private val viewModel by viewModels<EditProfileViewModel>()
-    lateinit var binding: EditProfileFragmentBinding
-    val args: EditProfileFragmentArgs by navArgs()
+    private lateinit var binding: EditProfileFragmentBinding
+    private val args: EditProfileFragmentArgs by navArgs()
+    private lateinit var photoUri: Uri
+    private lateinit var photoUrl:String
+
+
+    private val getImageLauncher =
+        registerForActivityResult(
+            ActivityResultContracts
+                .OpenDocument()){
+            if (it != null) {
+                photoUri = it
+                binding.editPhotoIv.load(it)
+
+            }
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,14 +50,28 @@ class EditProfileFragment : Fragment() {
     }
 
 
+
     override fun onStart() {
         super.onStart()
+
+        binding.editPhotoIv.setOnClickListener {
+            getImageLauncher.launch(arrayOf("image/*"))
+        }
 
         binding.updateProfileBtn.setOnClickListener {
             val name = binding.updateNameEt.text.toString()
             val bio = binding.updateBioEt.text.toString()
 
-            viewModel.updateUser(args.id,name, bio)
+            viewModel.uploadImg(photoUri).observe(
+                viewLifecycleOwner,{
+                    photoUrl = it
+
+                    viewModel.updateUser(args.id,name, bio, photoUrl)
+
+                }
+
+            )
+
         }
 
     }

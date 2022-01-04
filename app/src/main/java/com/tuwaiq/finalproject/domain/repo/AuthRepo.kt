@@ -8,7 +8,7 @@ interface AuthRepo {
 
     fun register(email:String, password: String): Task<AuthResult>
 
-    fun singIn(email: String,password: String):Task<AuthResult>
+    fun signIn(email: String, password: String):Task<AuthResult>
 
 
 }

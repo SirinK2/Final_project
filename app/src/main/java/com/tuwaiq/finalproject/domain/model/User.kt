@@ -6,6 +6,7 @@ data class User (
     var authId: String = "",
     var name: String = "",
     var bio: String = "",
+    val photoUrl: String = "",
     var ratings: List<Rating> = listOf(),
     var id: String = ""
 

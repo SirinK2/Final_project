@@ -1,4 +1,4 @@
-package com.tuwaiq.finalproject.presentation.auth.singIn
+package com.tuwaiq.finalproject.presentation.auth.signIn
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,23 +8,24 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.tuwaiq.finalproject.databinding.SingInFragmentBinding
+import com.tuwaiq.finalproject.R
+import com.tuwaiq.finalproject.databinding.SignInFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "SingInFragment"
 @AndroidEntryPoint
-class SingInFragment : Fragment() {
+class SignInFragment : Fragment() {
 
 
 
-    private lateinit var binding: SingInFragmentBinding
-    private val viewModel: SingInViewModel by viewModels()
+    private lateinit var binding: SignInFragmentBinding
+    private val viewModel: SignInViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = SingInFragmentBinding.inflate(layoutInflater)
+        binding = SignInFragmentBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -41,10 +42,9 @@ class SingInFragment : Fragment() {
                 email.isEmpty() -> Toast.makeText(context, "you should enter email",Toast.LENGTH_LONG).show()
                 password.isEmpty() -> Toast.makeText(context, "you should enter email",Toast.LENGTH_LONG).show()
                 else -> {
-                    viewModel.singIn(email, password).addOnCompleteListener {
+                    viewModel.signIn(email, password).addOnCompleteListener {
                         if (it.isSuccessful){
-                            navControl.navigate(SingInFragmentDirections.actionSingInFragmentToHomePageFragment())
-
+                            navControl.popBackStack(R.id.homePageFragment,false)
                         }
                     }.addOnFailureListener {
                         Toast.makeText(requireContext(),it.localizedMessage,Toast.LENGTH_LONG).show()
@@ -56,7 +56,7 @@ class SingInFragment : Fragment() {
         }
 
         binding.toRegisterTv.setOnClickListener {
-            navControl.navigate(SingInFragmentDirections.actionSingInFragmentToRegisterFragment())
+            navControl.navigate(SignInFragmentDirections.actionSingInFragmentToRegisterFragment())
         }
 
     }

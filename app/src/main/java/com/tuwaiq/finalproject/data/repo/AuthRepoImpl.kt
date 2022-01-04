@@ -19,7 +19,7 @@ class AuthRepoImpl: AuthRepo {
 
 
 
-    override fun singIn(email: String, password: String):Task<AuthResult> =
+    override fun signIn(email: String, password: String):Task<AuthResult> =
         auth.signInWithEmailAndPassword(email, password)
 
 
