@@ -1,22 +1,29 @@
 package com.tuwaiq.finalproject.presentation.post.preview
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.databinding.PreviewFragmentBinding
 import com.tuwaiq.finalproject.databinding.PreviewImageItemBinding
 import com.tuwaiq.finalproject.domain.model.User
+import com.tuwaiq.finalproject.presentation.buyItem.PaymentBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
 
+private const val TAG = "PreviewFragment"
 @AndroidEntryPoint
 class PreviewFragment : Fragment() {
 
@@ -28,7 +35,12 @@ class PreviewFragment : Fragment() {
 
     private val args:PreviewFragmentArgs by navArgs()
 
-    private lateinit var user: User
+    private lateinit var paymentBottomSheet: PaymentBottomSheet
+
+    private lateinit var users: User
+
+    val auth = Firebase.auth.currentUser?.uid
+
 
 
 
@@ -40,7 +52,7 @@ class PreviewFragment : Fragment() {
     ): View {
         binding = PreviewFragmentBinding.inflate(layoutInflater)
 
-        user = User()
+        users = User()
         binding.apply {
 
             imageRv.layoutManager =
@@ -65,29 +77,35 @@ class PreviewFragment : Fragment() {
         previewViewModel.getPostById(args.id).observe(
             viewLifecycleOwner,{
                 it?.let { post ->
-                    user.authId = post.owner
+
+                    users.authId = post.owner
+//                    Log.e(TAG, "onViewCreated: post owner ${post.owner}", )
+                    Log.e(TAG, "onViewCreated: ${users.authId}", )
                     binding.apply {
                         prevTitle.text = post.title
                         prevDescrip.text = post.description
                         prevPrice.text = post.price
                         imageRv.adapter = PhotoAdapter(post.photoUrl)
                     }
+                    previewViewModel.getUser(users.authId).observe(
+                        viewLifecycleOwner,{ user ->
+                            Log.e(TAG, "onViewCreated: $user", )
+
+                            binding.apply {
+                                Log.e(TAG, "onViewCreated: post owner ${users.authId}", )
+
+                                prevUsername.text = user.name
+                                Glide.with(requireContext()).load(user.photoUrl).into(prevUserIv)
+
+                            }
+                        }
+                    )
                 }
             }
         )
 
-        previewViewModel.getUser().observe(
-            viewLifecycleOwner,{ user ->
-                binding.apply {
-                    prevUsername.text = user.name
-                    Glide.with(requireContext()).load(user.photoUrl).into(prevUserIv)
-                     user.ratings.forEach{
 
-                         ratingBar.rating = it.rating
-                     }
-                }
-            }
-        )
+
 
 
 
@@ -98,16 +116,39 @@ class PreviewFragment : Fragment() {
         super.onStart()
 
 
+        binding.paymentBtn.setOnClickListener {
+            paymentBottomSheet = PaymentBottomSheet()
+            paymentBottomSheet.show(parentFragmentManager,paymentBottomSheet.tag)
+        }
 
-//        binding.userProf.setOnClickListener {
-//            val action = PreviewFragmentDirections.actionPreviewFragmentToUsersProfileFragment(post.owner)
-//            findNavController().navigate(action)
-//        }
+
+        binding.prevUserIv.setOnClickListener {
+            navToUserProfile()
+        }
+
+        binding.prevUsername.setOnClickListener {
+            navToUserProfile()
+        }
+
+
 
 
 
 
     }
+
+    private fun navToUserProfile(){
+        if (auth == users.authId){
+            findNavController().navigate(R.id.myProfileFragment)
+            Log.e(TAG, "onStart: from my profile ${users.authId}")
+        }else{
+            val action = PreviewFragmentDirections.actionPreviewFragmentToUsersProfileFragment(users.authId)
+            findNavController().navigate(action)
+            Log.e(TAG, "onStart: from user profile ${users.authId}")
+        }
+
+    }
+
 
 
 

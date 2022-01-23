@@ -13,15 +13,7 @@
         android:background="@color/white"
         tools:context=".presentation.profile.myProfile.MyProfileFragment">
 
-<!--        <ImageView-->
-<!--            android:id="@+id/my_prof_iv"-->
-<!--            android:layout_width="118dp"-->
-<!--            android:layout_height="122dp"-->
-<!--            android:layout_marginStart="24dp"-->
-<!--            android:layout_marginTop="28dp"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            tools:src="@tools:sample/avatars" />-->
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

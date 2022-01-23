@@ -1,6 +1,7 @@
 package com.tuwaiq.finalproject.presentation.profile.usersProfile
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,11 +10,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.tuwaiq.finalproject.databinding.HomePageItemsBinding
 import com.tuwaiq.finalproject.databinding.UsersProfileFragmentBinding
 import com.tuwaiq.finalproject.domain.model.Post
 import dagger.hilt.android.AndroidEntryPoint
 
+private const val TAG = "UsersProfileFragment"
 @AndroidEntryPoint
 class UsersProfileFragment : Fragment() {
 
@@ -43,9 +46,25 @@ class UsersProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        usersProfileViewModel.myPost(args.owner).observe(
+        Log.e(TAG, "onViewCreated: ${args.owner}", )
+        usersProfileViewModel.userPost(args.owner).observe(
             viewLifecycleOwner, {
+
+
                 binding.usersProfRv.adapter = ProfileAdapter(it)
+                Log.e(TAG, "onViewCreated: $it", )
+
+            }
+        )
+
+        usersProfileViewModel.getUser().observe(
+            viewLifecycleOwner,{
+                it.authId = args.owner
+                binding.apply {
+                    Glide.with(requireContext()).load(it.photoUrl).into(usersProfIv)
+                    usersProfNameTv.text = it.name
+                    usersProfBioTv.text = it.bio
+                }
 
             }
         )
@@ -54,8 +73,13 @@ class UsersProfileFragment : Fragment() {
 
     private inner class ProfileHolder(val binding: HomePageItemsBinding):RecyclerView.ViewHolder(binding.root){
         fun bind(post: Post){
-            binding.homeTitleTv.text = post.title
-            binding.homePriceTv.text = post.price
+            binding.apply {
+
+                Glide.with(requireContext()).load(post.photoUrl).into(homeItemIv)
+                homeTitleTv.text = post.title
+                homePriceTv.text = post.price
+            }
+
         }
     }
 
