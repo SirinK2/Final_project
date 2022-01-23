@@ -1,27 +1,30 @@
 package com.tuwaiq.finalproject.presentation.auth.register
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.tuwaiq.finalproject.domain.model.User
 import com.tuwaiq.finalproject.domain.use_case.RegisterUseCase
-import com.tuwaiq.finalproject.domain.use_case.SaveUserUseCase
+import com.tuwaiq.finalproject.domain.use_case.AddUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor (
+class RegisterViewModel @Inject constructor(
         private val registerUseCase: RegisterUseCase,
-        private val saveUserUseCase: SaveUserUseCase
+        private val addUserUseCase: AddUserUseCase
         ) : ViewModel() {
 
 
-        fun register(email: String, password: String): Task<AuthResult> = registerUseCase(email, password)
+        fun register(
+                email: String,
+                password: String
+        ): Task<AuthResult> =
+                registerUseCase(email, password)
 
-        fun saveUser(user: User) =  saveUserUseCase(user)
+
+
+        fun addUser(user: User) =  addUserUseCase(user)
 
 
 

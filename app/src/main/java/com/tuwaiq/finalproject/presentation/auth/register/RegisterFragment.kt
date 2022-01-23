@@ -23,6 +23,8 @@ class RegisterFragment : Fragment() {
 
     private val viewModel : RegisterViewModel by viewModels()
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,7 +37,7 @@ class RegisterFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        val navControl = findNavController()
+         val navControl = findNavController()
 
         binding.registerBtn.setOnClickListener {
 
@@ -44,27 +46,9 @@ class RegisterFragment : Fragment() {
             val password:String = binding.registerPasswordEt.text.toString()
             val confirmPass: String = binding.registerComPassEt.text.toString()
 
-            when{
-                userName.isEmpty() -> showToast("enter username")
-                email.isEmpty() -> showToast("please enter email")
-                password.isEmpty() -> showToast("please enter password")
-                password != confirmPass -> showToast("passwords must be matched")
-                else -> {
-                    viewModel.register(email,password).addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            val c = Firebase.auth.currentUser?.uid.toString()
-                            viewModel.saveUser(User(c,userName))
-                            navControl.navigate(RegisterFragmentDirections.actionRegisterFragmentToHomePageFragment())
-                        }
+            validateRegistration(userName,email, password, confirmPass)
 
-                    }.addOnFailureListener {
-                        Toast.makeText(requireContext(),it.localizedMessage, Toast.LENGTH_LONG).show()
-                        Log.e(TAG, "onStart: $it", )
 
-                    }
-                }
-
-            }
 
 
         }
@@ -75,8 +59,33 @@ class RegisterFragment : Fragment() {
 
     }
 
-    private fun showToast(msg:String){
-        Toast.makeText(requireContext(),msg, Toast.LENGTH_LONG).show()
+
+    private fun validateRegistration(userName: String, email:String, password: String, confirmPass:String){
+
+        when{
+            userName.isEmpty() -> binding.registerUsernameEt.error = "enter username"
+            email.isEmpty() -> binding.registerEmailEt.error = "please enter email"
+            password.isEmpty() -> binding.registerPasswordEt.error = "please enter password"
+            password != confirmPass -> binding.apply {
+                registerPasswordEt.error = "passwords must be matched"
+                registerComPassEt.error = "passwords must be matched"
+            }
+            else -> {
+                viewModel.register(email,password).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        val c = Firebase.auth.currentUser?.uid.toString()
+                        viewModel.addUser(User(c,userName))
+                        findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToHomePageFragment())
+                    }
+
+                }.addOnFailureListener {
+//                    Toast.makeText(requireContext(),it.localizedMessage, Toast.LENGTH_LONG).show()
+                    Log.e(TAG, "onStart: $it", )
+
+                }
+            }
+
+        }
     }
 
 

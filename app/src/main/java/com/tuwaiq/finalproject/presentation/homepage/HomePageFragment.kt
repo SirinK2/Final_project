@@ -1,14 +1,17 @@
 package com.tuwaiq.finalproject.presentation.homepage
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Filter
 import android.widget.Filterable
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -21,6 +24,7 @@ import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.databinding.HomePageFragmentBinding
 import com.tuwaiq.finalproject.databinding.HomePageItemsBinding
 import com.tuwaiq.finalproject.domain.model.Post
+import com.tuwaiq.finalproject.util.Constant.mAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -29,20 +33,13 @@ private const val TAG = "HomePageFragment"
 @AndroidEntryPoint
 class HomePageFragment : Fragment() {
 
-    lateinit var mAdapter: HomePageFragment.HomeAdapter
 
     private val homePageViewModel: HomePageViewModel by viewModels()
-
     private lateinit var binding : HomePageFragmentBinding
-    var snapHelper: SnapHelper = LinearSnapHelper()
+    private var snapHelper: SnapHelper = LinearSnapHelper()
     private val fromBottom: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.from_bottom_anim) }
     private val toBottom: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.to_bottom_anim) }
     private var clicked = false
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
 
 
@@ -64,7 +61,6 @@ class HomePageFragment : Fragment() {
             binding.realestate.isCheckable = true
 
         }else{
-            //binding.floatingActionButton2.isClickable = false
             binding.cars.isCheckable = false
             binding.furniture.isCheckable = false
             binding.electronic.isCheckable = false
@@ -113,6 +109,19 @@ class HomePageFragment : Fragment() {
        }
     }
 
+    @RequiresApi(Build.VERSION_CODES.R)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        activity?.let {
+            it.window.decorView.windowInsetsController
+            ?.setSystemBarsAppearance(
+                APPEARANCE_LIGHT_STATUS_BARS,
+                APPEARANCE_LIGHT_STATUS_BARS)
+        }
+
+
+    }
 
 
     override fun onCreateView(
@@ -122,13 +131,12 @@ class HomePageFragment : Fragment() {
 
         binding = HomePageFragmentBinding.inflate(layoutInflater)
 
-        binding.viewModel = homePageViewModel
-
-        binding.homeRv.layoutManager = LinearLayoutManager(context)
-
-        snapHelper.attachToRecyclerView(binding.homeRv)
-
-
+        observe(100.0f)
+        binding.apply {
+            viewModel = homePageViewModel
+            homeRv.layoutManager = LinearLayoutManager(context)
+            snapHelper.attachToRecyclerView(homeRv)
+        }
 
 
 
@@ -155,17 +163,16 @@ class HomePageFragment : Fragment() {
 
 
 
-
         observe(100.0f)
 
 
         binding.threeKm.setOnClickListener {
-           observe(3000.0f)
+            observe(3000.0f)
         }
 
 
         binding.fiveKm.setOnClickListener {
-           observe(5000.0f)
+            observe(5000.0f)
 
         }
 
@@ -204,29 +211,6 @@ class HomePageFragment : Fragment() {
         }
 
 
-        binding.cars.setOnClickListener {
-            mAdapter.filter.filter("cars")
-        }
-
-       binding.electronic.setOnClickListener {
-           mAdapter.filter.filter("electronic")
-       }
-
-
-
-        binding.furniture.setOnClickListener {
-            mAdapter.filter.filter("furniture")
-
-        }
-
-        binding.clothes.setOnClickListener {
-            mAdapter.filter.filter("clothes")
-        }
-
-        binding.realestate.setOnClickListener {
-            mAdapter.filter.filter("real estate")
-        }
-
     }
 
 
@@ -238,9 +222,6 @@ class HomePageFragment : Fragment() {
 
         var post = Post()
         init {
-
-            binding.viewModel = homePageViewModel
-
             itemView.setOnClickListener(this)
         }
 
@@ -249,11 +230,16 @@ class HomePageFragment : Fragment() {
 
             this.post = post
 
-            binding.homeTitleTv.text = post.title
-            binding.homePriceTv.text = post.price
-            post.photoUrl.forEach {
-                binding.homeItemIv.load(it)
+            binding.apply {
+                homeTitleTv.text = post.title
+                homePriceTv.text = post.price
+                post.photoUrl.forEach {
+                    homeItemIv.load(it){
+                        placeholder(R.drawable.ic_image)
+                    }
+                }
             }
+
 
 
         }
@@ -268,7 +254,6 @@ class HomePageFragment : Fragment() {
 
             if (v == itemView){
                 val navCon1 =  findNavController()
-                
                 val action = HomePageFragmentDirections
                     .actionHomePageFragmentToPreviewFragment(post.id)
 

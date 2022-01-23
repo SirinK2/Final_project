@@ -16,7 +16,7 @@ class UserRepoImpl: UserRepo {
 
     private val userCollectionRef = Firebase.firestore.collection("users")
 
-    override fun saveUser(user: User) {
+    override fun addUser(user: User) {
         val ref = userCollectionRef.document()
         user.id = ref.id
         ref.set(user)
@@ -26,8 +26,8 @@ class UserRepoImpl: UserRepo {
        return userCollectionRef.get().await().toObjects(User::class.java)
     }
 
-    override fun updateUser(id: String, name: String, bio: String, photoUrl: String) {
-        userCollectionRef.document(id).update("name",name,"bio", bio, "photoUrl", photoUrl)
+    override suspend fun updateUser(id: String, name: String, bio: String, photoUrl: String) {
+        userCollectionRef.document(id).update("name",name,"bio", bio, "photoUrl", photoUrl).await()
 
     }
 

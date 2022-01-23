@@ -5,6 +5,17 @@ import javax.inject.Inject
 
 class UserUpdateUseCase @Inject constructor(private val repo: UserRepo) {
 
-    operator fun invoke(id:String,name: String, bio: String,photoUrl: String) = repo.updateUser(id,name, bio, photoUrl)
+    suspend operator fun invoke(
+        id:String,
+        name: String,
+        bio: String,
+        photoUrl: String
+    ) = repo
+        .updateUser(
+        id,
+        name,
+        bio,
+        photoUrl
+    )
 
 }

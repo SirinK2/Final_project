@@ -11,66 +11,83 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="200sp"
+            android:background="@drawable/profile_header"
+            android:elevation="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/edit_photo_iv"
+                android:layout_width="118dp"
+                android:layout_height="122dp"
+                android:layout_marginStart="146dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="147dp"
+                app:civ_border_color="@color/light_green"
+                app:civ_border_width="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_person" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         <EditText
             android:id="@+id/update_name_et"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
+            android:layout_width="261dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="56dp"
             android:ems="10"
+            android:hint="@string/name"
             android:inputType="textPersonName"
             android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_photo_iv" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <EditText
             android:id="@+id/update_bio_et"
-            android:layout_width="wrap_content"
+            android:layout_width="253dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/bio"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="textMultiLine"
+            android:lines="4"
+            android:maxLines="4"
             android:minHeight="48dp"
+            android:singleLine="false"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/update_name_et" />
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/edit_photo_iv"
-            android:layout_width="118dp"
-            android:layout_height="122dp"
-            android:layout_marginTop="100dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:civ_border_width="2dp"
-            app:civ_border_color="@color/light_green"
-            tools:src="@drawable/ic_person"/>
-
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView2"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="100dp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.498"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            tools:src="@tools:sample/avatars" />-->
+            app:layout_constraintTop_toBottomOf="@+id/update_name_et"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <Button
             android:id="@+id/update_profile_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="143dp"
             android:layout_marginTop="100dp"
-            android:layout_marginEnd="174dp"
-            android:text="Button"
+            android:text="@string/save_btn"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/update_bio_et" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/update_name_et" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import com.bumptech.glide.Glide
 import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.databinding.HomePageItemsBinding
 import com.tuwaiq.finalproject.databinding.MyProfileFragmentBinding
@@ -36,9 +36,9 @@ class MyProfileFragment : Fragment() {
     ): View {
         binding = MyProfileFragmentBinding.inflate(layoutInflater)
 
-        binding.myPostRv.layoutManager = LinearLayoutManager(context)
+        binding.myPostRv.layoutManager = GridLayoutManager(context, 2)
 
-        binding.myProfIv.load(R.drawable.ic_person)
+//        binding.myProfIv.load(R.drawable.ic_person)
 
         return binding.root
     }
@@ -59,7 +59,15 @@ class MyProfileFragment : Fragment() {
                 user = it
                 binding.myProfNameTv.text = it.name
                 binding.myProfBioTv.text = it.bio
-                binding.myProfIv.load(it.photoUrl)
+                Glide.with(requireContext())
+
+                    .load(it.photoUrl)
+                    .placeholder(R.drawable.ic_person)
+                    .into(binding.myProfIv)
+
+//                binding.myProfIv.load(it.photoUrl){
+//                    placeholder(R.drawable.ic_person)
+//                }
                 Log.e(TAG, "onViewCreated: $it", )
             }
         )
@@ -86,8 +94,17 @@ class MyProfileFragment : Fragment() {
 
     private inner class MyListHolder(val binding: HomePageItemsBinding):RecyclerView.ViewHolder(binding.root){
         fun bind(post: Post){
-            binding.homeTitleTv.text = post.title
-            binding.homePriceTv.text = post.price
+
+            binding.apply {
+                homeTitleTv.text = post.title
+                homePriceTv.text = post.price
+                post.photoUrl.forEach {
+                    Glide.with(requireContext())
+                        .load(it)
+                        .into(binding.homeItemIv)
+                }
+            }
+
         }
     }
 

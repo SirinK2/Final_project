@@ -9,10 +9,10 @@ import android.widget.ArrayAdapter
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tuwaiq.finalproject.R
-import com.tuwaiq.finalproject.databinding.ImageItemsBinding
+import com.tuwaiq.finalproject.databinding.ImagePostItemsBinding
 import com.tuwaiq.finalproject.databinding.ItemsFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,6 +29,7 @@ class ItemsFragment : Fragment(){
 
     private lateinit var binding: ItemsFragmentBinding
 
+    private lateinit var rv: RecyclerView
 
     lateinit var photosUri: List<Uri>
 
@@ -38,6 +39,7 @@ class ItemsFragment : Fragment(){
         registerForActivityResult(
             ActivityResultContracts
                 .OpenMultipleDocuments() ){
+
             binding.photoRv.adapter = PhotoAdapter(it)
             photosUri = it
 
@@ -56,16 +58,20 @@ class ItemsFragment : Fragment(){
         val arrayAdapter = ArrayAdapter(requireContext(),R.layout.dorpdown_items,categories)
         binding.autoCompleteTextView2.setAdapter(arrayAdapter)
 
+        rv = binding.photoRv
 
         binding.photoRv.layoutManager =
-            LinearLayoutManager(context,
-            LinearLayoutManager.HORIZONTAL,
+            GridLayoutManager(
+                context,
+                2,
+                GridLayoutManager.HORIZONTAL,
             false)
+
+        binding.photoRv.isHorizontalScrollBarEnabled = false
 
         return binding.root
 
     }
-
 
 
     override fun onStart() {
@@ -102,27 +108,50 @@ class ItemsFragment : Fragment(){
 
 
 
-    private inner class PhotosHolder(val binding: ImageItemsBinding):RecyclerView.ViewHolder(binding.root){
-        fun bind(uri: Uri){
-            binding.imageView7.setImageURI(uri)
-        }
-    }
 
-    private inner class PhotoAdapter(val photos: List<Uri>):RecyclerView.Adapter<PhotosHolder>(){
+
+    private inner class PhotoAdapter(val photos: List<Uri>):RecyclerView.Adapter<PhotoAdapter.PhotosHolder>(){
+
+
+        val mPhotos : MutableList<Uri> = photos as MutableList<Uri>
+
+
+        private inner class PhotosHolder(val binding: ImagePostItemsBinding):RecyclerView.ViewHolder(binding.root){
+            fun bind(uri: Uri, position: Int){
+
+                binding.apply {
+
+                    itemPhotoIv.setImageURI(uri)
+                    itemCancelBtn.setOnClickListener { deleteItem(position) }
+                }
+
+
+            }
+
+
+        }
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotosHolder {
 
-            val binding = ImageItemsBinding.inflate(layoutInflater, parent, false)
+            val binding = ImagePostItemsBinding.inflate(layoutInflater, parent, false)
             return PhotosHolder(binding)
         }
 
         override fun onBindViewHolder(holder: PhotosHolder, position: Int) {
             val photo = photos[position]
-            holder.bind(photo)
+            holder.bind(photo,position)
         }
 
         override fun getItemCount(): Int = photos.size
 
+
+        fun deleteItem(index: Int){
+            mPhotos.removeAt(index)
+            notifyDataSetChanged()
+        }
     }
+
+
 
 
 

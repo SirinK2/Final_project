@@ -20,6 +20,7 @@ class AddPostUseCase @Inject constructor(val repo: PostRepo) {
                          title: String,
                          description: String,
                          price: String, photoUrl: List<String>){
+
          val owner = Firebase.auth.currentUser?.uid.toString()
          val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
 
@@ -27,12 +28,12 @@ class AddPostUseCase @Inject constructor(val repo: PostRepo) {
              val myLocation = CurrentLocation(location.latitude, location.longitude)
 
              Log.d(TAG, " from location ${location.longitude}  ${location.latitude} ")
+
              val items = Post(owner,category, title, description, price, myLocation,photoUrl)
+
              repo.addPost(items)
 
          }
      }
-
-
 
 }

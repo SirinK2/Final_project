@@ -24,7 +24,18 @@
     <string name="real_estate">real estate</string>
     <string name="log_out">Log out</string>
     <string name="update_name">Name</string>
+    <string name="eng">Eng</string>
+    <string name="ar">Ar</string>
+    <string name="notification">notification</string>
+    <string name="notification_channel_name">weekly notification</string>
+    <string name="new_notification">New notification</string>
+    <string name="off">Off</string>
+    <string name="on">On</string>
+    <string name="yes_tv">Yes</string>
+    <string name="no_tv">No</string>
+    <string name="save_btn">Save</string>
     <string name="bio">Bio</string>
+    <string name="name">Name</string>
 
     <string-array name="categories">
         <item> Electronic</item>

@@ -23,12 +23,13 @@
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmer_layout"
-            android:layout_width="318sp"
-            android:layout_height="700sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -67,12 +68,13 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/home_rv"
-            android:layout_width="318sp"
-            android:layout_height="700sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -81,13 +83,15 @@
             android:id="@+id/home_dm_btn"
             android:layout_width="40sp"
             android:layout_height="40sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/circle"
             android:backgroundTint="#FFFFFF"
             android:elevation="10sp"
             android:src="@drawable/message"
-            tools:ignore="SpeakableTextPresentCheck"
-            tools:layout_editor_absoluteX="19dp"
-            tools:layout_editor_absoluteY="76dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_profile_btn"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton
             android:id="@+id/home_profile_btn"
@@ -176,6 +180,7 @@
             android:gravity="center"
             android:rotation="90"
             android:shadowRadius="10"
+            android:onClick="@{()->viewModel.carsBtn()}"
             android:text="@string/cars"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
@@ -199,6 +204,7 @@
             android:shadowRadius="10"
             android:text="@string/electronic"
             android:textAlignment="center"
+            android:onClick="@{()->viewModel.electronicBtn()}"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:visibility="gone"
@@ -217,6 +223,7 @@
             android:focusable="true"
             android:rotation="90"
             android:shadowRadius="10"
+            android:onClick="@{()->viewModel.furnitureBtn()}"
             android:text="@string/furniture"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
@@ -238,6 +245,7 @@
             android:rotation="90"
             android:shadowRadius="10"
             android:text="@string/clothes"
+            android:onClick="@{()->viewModel.clothesBtn()}"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
@@ -259,6 +267,7 @@
             android:rotation="90"
             android:shadowRadius="10"
             android:text="@string/real_estate"
+            android:onClick="@{()->viewModel.realEstateBtn()}"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textStyle="bold"

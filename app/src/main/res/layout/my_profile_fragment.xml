@@ -23,107 +23,122 @@
 <!--            app:layout_constraintTop_toTopOf="parent"-->
 <!--            tools:src="@tools:sample/avatars" />-->
 
-        <TextView
-            android:id="@+id/my_prof_name_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="40dp"
-            android:text="Name"
-            app:layout_constraintStart_toEndOf="@+id/my_prof_iv"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/my_prof_bio_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Bio"
-            app:layout_constraintEnd_toEndOf="@+id/my_prof_name_tv"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/my_prof_name_tv"
-            app:layout_constraintTop_toBottomOf="@+id/my_prof_name_tv" />
-
-        <RatingBar
-            android:id="@+id/my_prof_rating"
-            style="@style/Widget.AppCompat.RatingBar.Small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="120dp"
-            app:layout_constraintStart_toEndOf="@+id/my_prof_iv"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/purchases"
-            android:layout_width="153dp"
-            android:layout_height="50sp"
-            android:layout_marginTop="168dp"
-            android:layout_marginEnd="36dp"
-            android:elevation="10sp"
-            android:text="Purchases"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:chipBackgroundColor="@color/primary_color"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="230sp"
+            android:background="@drawable/profile_header"
+            android:elevation="40sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/sales"
-            android:layout_width="153dp"
-            android:layout_height="50sp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="168dp"
-            android:layout_marginEnd="15dp"
-            android:elevation="10sp"
-            android:text="Sales"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:chipBackgroundColor="@color/primary_color"
-            app:layout_constraintEnd_toStartOf="@+id/purchases"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/my_prof_bio_tv"
+                android:layout_width="210dp"
+                android:layout_height="135dp"
+                android:layout_marginTop="4dp"
+                android:text="Bio"
+                app:layout_constraintEnd_toEndOf="@+id/my_prof_name_tv"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/my_prof_name_tv"
+                app:layout_constraintTop_toBottomOf="@+id/my_prof_name_tv" />
+
+            <RatingBar
+                android:id="@+id/my_prof_rating"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="140dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/purchases"
+                android:layout_width="153dp"
+                android:layout_height="50sp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginBottom="4dp"
+                android:elevation="10sp"
+                android:text="Purchases"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:chipBackgroundColor="@color/primary_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/sales" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/sales"
+                android:layout_width="153dp"
+                android:layout_height="50sp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="4dp"
+                android:elevation="10sp"
+                android:text="Sales"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:chipBackgroundColor="@color/primary_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/purchases"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/my_prof_name_tv"
+                android:layout_width="150sp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:text="Name"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/my_prof_iv"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/my_prof_iv"
+                android:layout_width="118dp"
+                android:layout_height="122dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:civ_border_color="@color/light_green"
+                app:civ_border_width="2dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_person">
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+            <ImageButton
+                android:id="@+id/settingBtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/circle"
+                android:elevation="10sp"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_edit"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/my_post_rv"
-            android:layout_width="409dp"
-            android:layout_height="497dp"
+            android:layout_width="match_parent"
+            android:layout_height="545dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
-
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/my_prof_iv"
-            android:layout_width="118dp"
-            android:layout_height="122dp"
-            android:layout_marginStart="24dp"
-            app:civ_border_width="2dp"
-            app:civ_border_color="@color/light_green"
-            android:layout_marginTop="28dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_person">
-
-        </de.hdodenhof.circleimageview.CircleImageView>
-
-        <ImageButton
-            android:id="@+id/settingBtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/circle"
-            android:elevation="10sp"
-            android:minWidth="48dp"
-            android:minHeight="48dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_edit"
-            tools:ignore="SpeakableTextPresentCheck" />
 
         <!--    <com.google.android.material.tabs.TabLayout-->
         <!--        android:layout_width="match_parent"-->

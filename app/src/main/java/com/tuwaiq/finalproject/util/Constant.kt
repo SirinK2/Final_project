@@ -8,7 +8,7 @@ import com.tuwaiq.finalproject.presentation.homepage.HomePageFragment
 
 object Constant {
 
-
+     lateinit var mAdapter: HomePageFragment.HomeAdapter
      val postCollectionRef = Firebase.firestore.collection("post")
 
 
