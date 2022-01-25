@@ -2,6 +2,7 @@ package com.tuwaiq.finalproject.presentation.messages.chatting
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.text.format.DateFormat
 import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
@@ -22,6 +23,8 @@ import com.tuwaiq.finalproject.domain.model.Chat
 import com.tuwaiq.finalproject.util.Constant.uid
 import com.tuwaiq.finalproject.util.FirebaseCallback
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.Format
+import java.util.*
 import kotlin.math.log
 
 private const val TAG = "ChatFragment"
@@ -53,7 +56,7 @@ class ChatFragment : Fragment() {
         viewModel.getUser(args.receiverId).observe(
             viewLifecycleOwner,{
                 binding.usernameTv.text = it.name
-                Glide.with(requireContext()).load(it.photoUrl).into(binding.userIv)
+                Glide.with(requireContext()).load(it.photoUrl).placeholder(R.drawable.ic_person).into(binding.userIv)
             }
         )
 
@@ -62,8 +65,8 @@ class ChatFragment : Fragment() {
            override fun onCallback(callback: List<Chat>) {
                val messageList = mutableListOf<Chat>()
                callback.forEach { 
-                   if (it.senderId == uid || it.senderId == args.receiverId
-                       && it.receiverID == uid || it.receiverID == args.receiverId){
+                   if (it.senderId == uid && it.receiverID == args.receiverId
+                       || it.senderId == args.receiverId && it.receiverID == uid){
                    messageList += it
                }
                }
@@ -72,7 +75,6 @@ class ChatFragment : Fragment() {
            }
 
        })
-        //Log.e(TAG, "onViewCreated: $b", )
 
     }
 
@@ -90,93 +92,31 @@ class ChatFragment : Fragment() {
 
     }
 
-
+    val format = "hh:mm aa"
     private inner class ChatHolder(val binding: MessageItemBinding):RecyclerView.ViewHolder(binding.root) {
         fun bind(chat: Chat) {
 
             binding.messageBubble.apply {
                 if (chat.senderId == uid) {
-                    setBackgroundResource(R.drawable.message_item)
-                    val params = FrameLayout.LayoutParams(
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.END
-                    )
-                    this.layoutParams = params
-                    binding.chatMessageTv.text = chat.message
-                }else {
-                    setBackgroundResource(R.drawable.message_item_receiver)
-                    val params = FrameLayout.LayoutParams(
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.START
-                    )
-                    this.layoutParams = params
-                    binding.chatMessageTv.text = chat.message
+                    message(R.drawable.message_item,Gravity.END,chat)
+                }else{
+                    message(R.drawable.message_item_receiver,Gravity.START,chat)
                 }
-//                when (chat.type) {
-//                    "1" -> {
-//                        setBackgroundResource(R.drawable.message_item)
-//                        val params = FrameLayout.LayoutParams(
-//                            ViewGroup.LayoutParams.WRAP_CONTENT,
-//                            ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.END
-//                        )
-//                        this.layoutParams = params
-//                        binding.chatMessageTv.text = chat.message
-//                    }
-//                    else -> {
-//                        setBackgroundResource(R.drawable.message_item)
-//                        val params = FrameLayout.LayoutParams(
-//                            ViewGroup.LayoutParams.WRAP_CONTENT,
-//                            ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.START
-//                        )
-//                        this.layoutParams = params
-//                        binding.chatMessageTv.text = chat.message
-//
-//                    }
-              //  }
             }
 
+        }
 
-//            if (chat.receiverID == args.receiverId) {
-//                Log.d(TAG, "bind: ${chat.receiverID} -- ${args.receiverId}")
-//
-//                binding.messageBubble.apply {
-//                    setBackgroundResource(R.drawable.message_item_receiver)
-//                    val params = FrameLayout.LayoutParams(
-//                        ViewGroup.LayoutParams.WRAP_CONTENT,
-//                        ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.START
-//                    )
-//                    this.layoutParams = params
-//
-//                }
-//            }
-//
-//            if (chat.senderId == uid){
-//                Log.d(TAG, "bind: ${chat.senderId} -- $uid")
-//                binding.chatMessageTv.text = chat.message
-
-//                binding.messageBubble.apply {
-//                    if (chat.receiverID == args.receiverId) {
-//                    setBackgroundResource(R.drawable.message_item)
-//                    val params = FrameLayout.LayoutParams(
-//                        ViewGroup.LayoutParams.WRAP_CONTENT,
-//                        ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.START
-//                    )
-//                    this.layoutParams = params
-//                        binding.chatMessageTv.text = chat.message
-//                }else {
-//                        setBackgroundResource(R.drawable.message_item)
-//                        val params = FrameLayout.LayoutParams(
-//                            ViewGroup.LayoutParams.WRAP_CONTENT,
-//                            ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.END
-//                        )
-//                        this.layoutParams = params
-//                        binding.chatMessageTv.text = chat.message
-//                    }
-//            }
-//            if (chat.senderId == uid) {
-//
-//            }
-
+        fun message(drawable:Int, gravity:Int, chat: Chat) {
+            binding.messageBubble.apply {
+                setBackgroundResource(drawable)
+                val params = FrameLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT, gravity
+                )
+                this.layoutParams = params
+                binding.chatMessageTv.text = chat.message
+                binding.chatTimeTv.text = DateFormat.format(format, chat.date)
+            }
         }
     }
 
