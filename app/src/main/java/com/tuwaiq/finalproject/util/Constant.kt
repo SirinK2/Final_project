@@ -12,6 +12,7 @@ object Constant {
      private const val POST_COLLECTION = "post"
      private const val USER_COLLECTION = "users"
      private const val RATING_COLLECTION = "Ratings"
+     private const val CHAT = "chat"
 
      lateinit var mAdapter: HomePageFragment.HomeAdapter
 
@@ -20,6 +21,8 @@ object Constant {
      val paymentCollectionRef = Firebase.firestore.collection(PAYMENT_COLLECTION)
      val userCollectionRef = Firebase.firestore.collection(USER_COLLECTION)
      val ratingCollectionRef = Firebase.firestore.collection(RATING_COLLECTION)
+     val chatCollectionRef = Firebase.firestore.collection(CHAT)
+
 
 
 

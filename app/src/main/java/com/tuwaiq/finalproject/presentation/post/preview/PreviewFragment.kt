@@ -126,7 +126,8 @@ class PreviewFragment : Fragment() {
 //            paymentBottomSheet = PaymentBottomSheet()
 //            paymentBottomSheet.arguments = args
 //            paymentBottomSheet.show(parentFragmentManager,paymentBottomSheet.tag)
-            findNavController().navigate(R.id.chatFragment)
+
+            findNavController().navigate(PreviewFragmentDirections.actionPreviewFragmentToChatFragment(users.authId))
         }
 
 

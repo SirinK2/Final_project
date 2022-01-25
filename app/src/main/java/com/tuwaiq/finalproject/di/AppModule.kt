@@ -1,11 +1,13 @@
 package com.tuwaiq.finalproject.di
 
 import com.tuwaiq.finalproject.data.repo.AuthRepoImpl
+import com.tuwaiq.finalproject.data.repo.ChatRepoImpl
 import com.tuwaiq.finalproject.data.repo.PostRepoImpl
 import com.tuwaiq.finalproject.data.repo.UserRepoImpl
 import com.tuwaiq.finalproject.domain.repo.PostRepo
 import com.tuwaiq.finalproject.domain.repo.UserRepo
 import com.tuwaiq.finalproject.domain.repo.AuthRepo
+import com.tuwaiq.finalproject.domain.repo.ChatRepo
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,6 +33,10 @@ object AppModule {
     @Singleton
     @Provides
     fun provideUserRepo(): UserRepo = UserRepoImpl()
+
+    @Singleton
+    @Provides
+    fun provideChatRepo(): ChatRepo = ChatRepoImpl()
 
 
 
