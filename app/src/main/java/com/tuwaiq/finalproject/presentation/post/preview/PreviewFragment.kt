@@ -14,15 +14,16 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import com.bumptech.glide.Glide
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.databinding.PreviewFragmentBinding
 import com.tuwaiq.finalproject.databinding.PreviewImageItemBinding
+import com.tuwaiq.finalproject.domain.model.Post
 import com.tuwaiq.finalproject.domain.model.User
 import com.tuwaiq.finalproject.presentation.buyItem.PaymentBottomSheet
+import com.tuwaiq.finalproject.util.Constant.uid
 import dagger.hilt.android.AndroidEntryPoint
-
+const val ARGS_OWNER_KEY = "args kay"
+const val ARGS_ITEM_DOC_KEY = "item doc id"
 private const val TAG = "PreviewFragment"
 @AndroidEntryPoint
 class PreviewFragment : Fragment() {
@@ -39,7 +40,7 @@ class PreviewFragment : Fragment() {
 
     private lateinit var users: User
 
-    val auth = Firebase.auth.currentUser?.uid
+    private lateinit var post: Post
 
 
 
@@ -77,6 +78,8 @@ class PreviewFragment : Fragment() {
         previewViewModel.getPostById(args.id).observe(
             viewLifecycleOwner,{
                 it?.let { post ->
+
+                    this.post = post
 
                     users.authId = post.owner
 //                    Log.e(TAG, "onViewCreated: post owner ${post.owner}", )
@@ -117,8 +120,13 @@ class PreviewFragment : Fragment() {
 
 
         binding.paymentBtn.setOnClickListener {
-            paymentBottomSheet = PaymentBottomSheet()
-            paymentBottomSheet.show(parentFragmentManager,paymentBottomSheet.tag)
+//            val args = Bundle()
+//            args.putSerializable(ARGS_OWNER_KEY, post.owner)
+//            args.putSerializable(ARGS_ITEM_DOC_KEY,post.id)
+//            paymentBottomSheet = PaymentBottomSheet()
+//            paymentBottomSheet.arguments = args
+//            paymentBottomSheet.show(parentFragmentManager,paymentBottomSheet.tag)
+            findNavController().navigate(R.id.chatFragment)
         }
 
 
@@ -138,7 +146,7 @@ class PreviewFragment : Fragment() {
     }
 
     private fun navToUserProfile(){
-        if (auth == users.authId){
+        if (uid == users.authId){
             findNavController().navigate(R.id.myProfileFragment)
             Log.e(TAG, "onStart: from my profile ${users.authId}")
         }else{

@@ -54,20 +54,22 @@ class UsersProfileFragment : Fragment() {
                 binding.usersProfRv.adapter = ProfileAdapter(it)
                 Log.e(TAG, "onViewCreated: $it", )
 
+                usersProfileViewModel.getUser(args.owner).observe(
+                    viewLifecycleOwner,{ user ->
+                        binding.apply {
+                            Glide.with(requireContext()).load(user.photoUrl).into(usersProfIv)
+                            usersProfNameTv.text = user.name
+                            Log.d(TAG, "onViewCreated: ${user.name}// ${user.authId}")
+                            usersProfBioTv.text = user.bio
+                        }
+
+                    }
+                )
+
             }
         )
 
-        usersProfileViewModel.getUser().observe(
-            viewLifecycleOwner,{
-                it.authId = args.owner
-                binding.apply {
-                    Glide.with(requireContext()).load(it.photoUrl).into(usersProfIv)
-                    usersProfNameTv.text = it.name
-                    usersProfBioTv.text = it.bio
-                }
 
-            }
-        )
     }
 
 

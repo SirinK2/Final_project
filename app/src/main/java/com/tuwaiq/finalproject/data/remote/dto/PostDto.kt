@@ -1,6 +1,7 @@
 package com.tuwaiq.finalproject.data.remote.dto
 
 import com.tuwaiq.finalproject.domain.model.Post
+import java.util.*
 
 
 data class PostDto (
@@ -11,6 +12,7 @@ data class PostDto (
     var price: String = "",
     var location: CurrentLocation = CurrentLocation(0.0,0.0),
     var photoUrl: List<String> = listOf(),
+    val postDate:Date = Date(),
     var id: String = ""
 
 )
@@ -23,6 +25,7 @@ fun PostDto.toPost():Post{
         price = price,
         location = location,
         photoUrl= photoUrl,
+        postDate = postDate,
         id= id
     )
 }

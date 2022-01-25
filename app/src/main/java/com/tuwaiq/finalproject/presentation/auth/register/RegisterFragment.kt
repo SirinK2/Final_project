@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.databinding.RegisterFragmentBinding
 import com.tuwaiq.finalproject.domain.model.User
 import dagger.hilt.android.AndroidEntryPoint
@@ -75,11 +76,11 @@ class RegisterFragment : Fragment() {
                     if (it.isSuccessful) {
                         val c = Firebase.auth.currentUser?.uid.toString()
                         viewModel.addUser(User(c,userName))
-                        findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToHomePageFragment())
+                        findNavController().navigate(R.id.action_registerFragment_to_homePageFragment)
                     }
 
                 }.addOnFailureListener {
-//                    Toast.makeText(requireContext(),it.localizedMessage, Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(),it.localizedMessage, Toast.LENGTH_LONG).show()
                     Log.e(TAG, "onStart: $it", )
 
                 }

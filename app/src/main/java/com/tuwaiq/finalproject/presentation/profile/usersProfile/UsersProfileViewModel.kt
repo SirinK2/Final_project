@@ -5,10 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.tuwaiq.finalproject.domain.model.Post
 import com.tuwaiq.finalproject.domain.model.User
-import com.tuwaiq.finalproject.domain.use_case.GetPostByIdUseCase
-import com.tuwaiq.finalproject.domain.use_case.GetUserUseCase
-import com.tuwaiq.finalproject.domain.use_case.GetUsersPostUseCase
-import com.tuwaiq.finalproject.domain.use_case.MyPostUseCase
+import com.tuwaiq.finalproject.domain.use_case.*
 import com.tuwaiq.finalproject.util.Constant.postCollectionRef
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.tasks.await
@@ -17,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class UsersProfileViewModel @Inject constructor(
     private val getUsersPostUseCase: GetUsersPostUseCase,
-    private val getUserUseCase: GetUserUseCase
+    private val getUserByIdUseCase: GetUserByIdUseCase
     ): ViewModel() {
 
 
@@ -26,8 +23,8 @@ class UsersProfileViewModel @Inject constructor(
 
     }
 
-    fun getUser():LiveData<User> = liveData{
-        emit(getUserUseCase())
+    fun getUser(id:String):LiveData<User> = liveData{
+        emit(getUserByIdUseCase(id))
     }
 
 

@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tuwaiq.finalproject.R
@@ -69,6 +70,8 @@ class ItemsFragment : Fragment(){
 
         binding.photoRv.isHorizontalScrollBarEnabled = false
 
+        binding.progressBar2.visibility = View.GONE
+
         return binding.root
 
     }
@@ -83,15 +86,12 @@ class ItemsFragment : Fragment(){
             val price = binding.itemsPriceEt.text.toString()
             val category = binding.autoCompleteTextView2.text.toString()
 
+            addPost(category, title, description, price).also {
+                binding.progressBar2.visibility = View.VISIBLE
+            }
 
-                viewModel.uploadImg(photosUri).observe(
-                    viewLifecycleOwner,{ url ->
 
-                        photoUrl = url
-                        viewModel.addPost(requireContext(),category,title, description, price,photoUrl)
 
-                    }
-                )
 
         }
 
@@ -100,6 +100,22 @@ class ItemsFragment : Fragment(){
             getImageLauncher.launch(arrayOf("image/*"))
 
         }
+
+
+
+    }
+
+    private fun addPost(category:String, title:String, description:String, price:String){
+        viewModel.uploadImg(photosUri).observe(
+            viewLifecycleOwner,{ url ->
+
+                photoUrl = url
+                viewModel.addPost(requireContext(),category,title, description, price,photoUrl)
+                findNavController().navigate(R.id.homePageFragment)
+            }
+
+        )
+
 
 
 

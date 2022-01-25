@@ -36,6 +36,7 @@
     <string name="save_btn">Save</string>
     <string name="bio">Bio</string>
     <string name="name">Name</string>
+    <string name="buy_btn">buy</string>
 
     <string-array name="categories">
         <item> Electronic</item>

@@ -83,43 +83,44 @@
             android:id="@+id/home_dm_btn"
             android:layout_width="40sp"
             android:layout_height="40sp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/circle"
             android:backgroundTint="#FFFFFF"
             android:elevation="10sp"
             android:src="@drawable/message"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/home_profile_btn"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <ImageButton
             android:id="@+id/home_profile_btn"
             android:layout_width="40sp"
             android:layout_height="40sp"
             android:layout_marginStart="19dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/circle"
             android:backgroundTint="#FFFFFF"
             android:elevation="10sp"
             android:src="@drawable/ic_baseline_perm_identity_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <ImageButton
             android:id="@+id/settingBtn"
             android:layout_width="40sp"
             android:layout_height="40sp"
             android:layout_marginStart="19dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/circle"
             android:elevation="10sp"
             android:minWidth="48dp"
             android:minHeight="48dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/home_dm_btn"
-            app:srcCompat="@drawable/ic_settings" />
+            app:srcCompat="@drawable/ic_settings"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"
@@ -135,10 +136,11 @@
 
         <TextView
             android:id="@+id/three_km"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30sp"
+            android:layout_height="20sp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:background="@drawable/circle"
             android:text="@string/_3km"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -157,10 +159,10 @@
             android:id="@+id/floatingActionButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:clickable="true"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/settingBtn"
+            app:layout_constraintStart_toStartOf="@+id/settingBtn"
             app:layout_constraintTop_toBottomOf="@+id/settingBtn"
             app:srcCompat="@drawable/ic_filter_list"
             tools:ignore="SpeakableTextPresentCheck">

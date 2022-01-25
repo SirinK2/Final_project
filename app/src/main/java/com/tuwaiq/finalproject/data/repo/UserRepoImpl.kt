@@ -8,6 +8,8 @@ import com.google.firebase.storage.ktx.storage
 import com.tuwaiq.finalproject.data.remote.dto.Rating
 import com.tuwaiq.finalproject.domain.repo.UserRepo
 import com.tuwaiq.finalproject.domain.model.User
+import com.tuwaiq.finalproject.util.Constant.ratingCollectionRef
+import com.tuwaiq.finalproject.util.Constant.userCollectionRef
 import kotlinx.coroutines.tasks.await
 import java.util.*
 
@@ -15,8 +17,7 @@ private const val TAG = "UserRepoImpl"
 
 class UserRepoImpl: UserRepo {
 
-    private val userCollectionRef = Firebase.firestore.collection("users")
-    private val ratingCollectionRef = Firebase.firestore.collection("Ratings")
+
 
     override fun addUser(user: User) {
         val ref = userCollectionRef.document()

@@ -50,7 +50,6 @@ class SignInFragment : Fragment() {
 
         binding.toRegisterTv.setOnClickListener {
             findNavController().navigate(R.id.registerFragment)
-//            navControl.navigate(SignInFragmentDirections.actionSingInFragmentToRegisterFragment())
         }
 
 
@@ -66,11 +65,12 @@ class SignInFragment : Fragment() {
             else -> {
                 viewModel.signIn(email, password).addOnCompleteListener {
                     if (it.isSuccessful){
-                        findNavController().popBackStack(R.id.homePageFragment,false)
+//                        findNavController().popBackStack(R.id.homePageFragment,true)
+                        findNavController().navigate(R.id.action_singInFragment_to_homePageFragment)
                     }
                 }.addOnFailureListener {
 
-//                    Toast.makeText(requireContext(),it.localizedMessage,Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(),it.localizedMessage,Toast.LENGTH_LONG).show()
                 }
             }
         }

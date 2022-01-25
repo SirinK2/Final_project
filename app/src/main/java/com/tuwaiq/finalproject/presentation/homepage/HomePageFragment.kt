@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import coil.load
+import com.bumptech.glide.Glide
 import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.databinding.HomePageFragmentBinding
 import com.tuwaiq.finalproject.databinding.HomePageItemsBinding
@@ -120,6 +121,7 @@ class HomePageFragment : Fragment() {
                 APPEARANCE_LIGHT_STATUS_BARS)
         }
 
+        Log.e(TAG, "onCreate: from on create", )
 
     }
 
@@ -145,17 +147,6 @@ class HomePageFragment : Fragment() {
     }
 
 
-    private fun observe(dis: Float){
-        homePageViewModel.getPost(requireContext(), dis).observe(
-            viewLifecycleOwner, {
-                binding.shimmerLayout.visibility = View.GONE
-                mAdapter = HomeAdapter(it as ArrayList<Post>)
-
-                binding.homeRv.adapter = mAdapter
-                Log.d(TAG, "onViewCreated: $dis")
-            }
-        )
-    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -214,6 +205,22 @@ class HomePageFragment : Fragment() {
     }
 
 
+    private fun observe(dis: Float){
+        homePageViewModel.getPost(requireContext(), dis).observe(
+            viewLifecycleOwner, {
+                binding.shimmerLayout.visibility = View.GONE
+                mAdapter = HomeAdapter(it as ArrayList<Post>)
+
+                binding.homeRv.adapter = mAdapter
+                Log.d(TAG, "onViewCreated: $dis")
+            }
+        )
+    }
+
+
+
+
+
 
 
 
@@ -233,10 +240,11 @@ class HomePageFragment : Fragment() {
             binding.apply {
                 homeTitleTv.text = post.title
                 homePriceTv.text = post.price
+
                 post.photoUrl.forEach {
-                    homeItemIv.load(it){
-                        placeholder(R.drawable.ic_image)
-                    }
+                    Glide.with(requireContext())
+                        .load(it)
+                        .into(homeItemIv)
                 }
             }
 

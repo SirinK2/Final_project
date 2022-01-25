@@ -1,6 +1,7 @@
 package com.tuwaiq.finalproject.presentation.profile.setting
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
@@ -41,8 +42,7 @@ class SettingFragment : Fragment() {
        binding = SettingFragmentBinding.inflate(layoutInflater)
 
         binding.logOutBtn.setOnClickListener{
-            Firebase.auth.signOut()
-            findNavController().navigate(R.id.singInFragment)
+            logOutDialog()
         }
 
 
@@ -139,6 +139,21 @@ class SettingFragment : Fragment() {
         super.onStop()
 
 
+    }
+
+
+    private fun logOutDialog(){
+        AlertDialog.Builder(requireContext()).apply {
+            setTitle("Log out")
+            setIcon(R.drawable.logout)
+            setMessage("Are you sure?")
+            setPositiveButton("Yes"){ dialog, which ->
+                Firebase.auth.signOut()
+                findNavController().navigate(R.id.action_settingFragment_to_singInFragment)
+            }
+            setNegativeButton("No",null)
+            show()
+        }
     }
 
 

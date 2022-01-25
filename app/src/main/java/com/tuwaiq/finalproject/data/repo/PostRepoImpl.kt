@@ -3,9 +3,12 @@ package com.tuwaiq.finalproject.data.repo
 import android.net.Uri
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import com.tuwaiq.finalproject.data.remote.dto.PaymentDto
 import com.tuwaiq.finalproject.data.remote.dto.PostDto
+import com.tuwaiq.finalproject.domain.model.Payment
 import com.tuwaiq.finalproject.domain.model.Post
 import com.tuwaiq.finalproject.domain.repo.PostRepo
+import com.tuwaiq.finalproject.util.Constant.paymentCollectionRef
 import com.tuwaiq.finalproject.util.Constant.postCollectionRef
 import kotlinx.coroutines.tasks.await
 import java.util.*
@@ -23,10 +26,17 @@ class PostRepoImpl : PostRepo {
 
     
     override suspend fun getPost(): List<PostDto> =
-        postCollectionRef.get().await().toObjects(PostDto::class.java)
+        postCollectionRef.get().await().toObjects(PostDto::class.java).sortedBy {
+            it.postDate
+        }.asReversed()
 
 
 
+    override fun addPayment(payment: Payment) {
+        val ref = paymentCollectionRef.document()
+        payment.paymentID = ref.id
+        ref.set(payment)
+    }
 
 
     override suspend fun uploadImage(uri: List<Uri>): List<String>{

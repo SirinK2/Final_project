@@ -79,7 +79,13 @@
         android:id="@+id/settingFragment"
         android:name="com.tuwaiq.finalproject.presentation.profile.setting.SettingFragment"
         android:label="setting_fragment"
-        tools:layout="@layout/setting_fragment" />
+        tools:layout="@layout/setting_fragment" >
+        <action
+            android:id="@+id/action_settingFragment_to_singInFragment"
+            app:destination="@id/singInFragment"
+            app:popUpTo="@id/main_nav"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.tuwaiq.finalproject.presentation.auth.register.RegisterFragment"
@@ -89,7 +95,9 @@
             app:destination="@id/singInFragment" />
         <action
             android:id="@+id/action_registerFragment_to_homePageFragment"
-            app:destination="@id/homePageFragment" />
+            app:destination="@id/homePageFragment"
+            app:popUpTo="@id/main_nav"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/singInFragment"
@@ -97,7 +105,9 @@
         android:label="SingInFragment" >
         <action
             android:id="@+id/action_singInFragment_to_homePageFragment"
-            app:destination="@id/homePageFragment" />
+            app:destination="@id/homePageFragment"
+            app:popUpTo="@id/main_nav"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_singInFragment_to_registerFragment"
             app:destination="@id/registerFragment" />

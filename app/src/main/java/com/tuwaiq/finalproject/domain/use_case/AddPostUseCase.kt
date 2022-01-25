@@ -9,13 +9,14 @@ import com.google.firebase.ktx.Firebase
 import com.tuwaiq.finalproject.data.remote.dto.CurrentLocation
 import com.tuwaiq.finalproject.domain.model.Post
 import com.tuwaiq.finalproject.domain.repo.PostRepo
+import kotlinx.coroutines.coroutineScope
 import javax.inject.Inject
 
 private const val TAG = "AddPostUseCase"
 class AddPostUseCase @Inject constructor(val repo: PostRepo) {
 
      @SuppressLint("MissingPermission")
-     operator fun invoke(context: Context,
+      operator fun invoke(context: Context,
                          category: String,
                          title: String,
                          description: String,
@@ -24,16 +25,24 @@ class AddPostUseCase @Inject constructor(val repo: PostRepo) {
          val owner = Firebase.auth.currentUser?.uid.toString()
          val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
 
-         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-             val myLocation = CurrentLocation(location.latitude, location.longitude)
 
-             Log.d(TAG, " from location ${location.longitude}  ${location.latitude} ")
+             fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                 val myLocation = CurrentLocation(location.latitude, location.longitude)
 
-             val items = Post(owner,category, title, description, price, myLocation,photoUrl)
+                 Log.d(TAG, " from location ${location.longitude}  ${location.latitude} ")
 
-             repo.addPost(items)
+                 val items = Post(owner,category, title, description, price, myLocation,photoUrl)
 
-         }
+                 Log.e(TAG, "invoke: $items", )
+
+                 repo.addPost(items)
+             }
+
+
+
+
+
+
      }
 
 }
