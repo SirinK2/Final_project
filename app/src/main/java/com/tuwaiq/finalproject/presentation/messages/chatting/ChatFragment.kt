@@ -20,6 +20,7 @@ import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.databinding.ChatFragmentBinding
 import com.tuwaiq.finalproject.databinding.MessageItemBinding
 import com.tuwaiq.finalproject.domain.model.Chat
+import com.tuwaiq.finalproject.util.Constant.format
 import com.tuwaiq.finalproject.util.Constant.uid
 import com.tuwaiq.finalproject.util.FirebaseCallback
 import dagger.hilt.android.AndroidEntryPoint
@@ -92,7 +93,7 @@ class ChatFragment : Fragment() {
 
     }
 
-    val format = "hh:mm aa"
+
     private inner class ChatHolder(val binding: MessageItemBinding):RecyclerView.ViewHolder(binding.root) {
         fun bind(chat: Chat) {
 

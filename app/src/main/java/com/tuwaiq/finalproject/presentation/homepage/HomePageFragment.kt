@@ -244,6 +244,7 @@ class HomePageFragment : Fragment() {
                 post.photoUrl.forEach {
                     Glide.with(requireContext())
                         .load(it)
+                        .placeholder(R.drawable.ic_person)
                         .into(homeItemIv)
                 }
             }

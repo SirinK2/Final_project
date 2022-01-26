@@ -15,6 +15,7 @@ object Constant {
      private const val CHAT = "chat"
 
      lateinit var mAdapter: HomePageFragment.HomeAdapter
+     val format = "hh:mm aa"
 
      val uid = Firebase.auth.currentUser?.uid.toString()
      val postCollectionRef = Firebase.firestore.collection(POST_COLLECTION)

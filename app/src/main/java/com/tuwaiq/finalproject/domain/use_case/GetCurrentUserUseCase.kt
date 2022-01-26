@@ -7,7 +7,7 @@ import com.tuwaiq.finalproject.domain.repo.UserRepo
 import javax.inject.Inject
 
 private const val TAG = "GetUserUseCase"
-class GetUserUseCase @Inject constructor(val repo: UserRepo) {
+class GetCurrentUserUseCase @Inject constructor(val repo: UserRepo) {
 
     suspend operator fun invoke(): User {
         var user = User()
