@@ -8,85 +8,114 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        >
+
+        <LinearLayout
             android:id="@+id/constraintLayout4"
             android:layout_width="match_parent"
             android:layout_height="60sp"
             android:background="@drawable/profile_header"
             android:elevation="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/user_iv"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                app:civ_border_color="@color/light_green"
-                app:civ_border_width="2dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_person">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-            </de.hdodenhof.circleimageview.CircleImageView>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/user_iv"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    app:civ_border_color="@color/light_green"
+                    app:civ_border_width="2dp">
 
-            <TextView
-                android:id="@+id/username_tv"
-                android:layout_width="300sp"
+                </de.hdodenhof.circleimageview.CircleImageView>
+
+                <TextView
+                    android:id="@+id/username_tv"
+                    android:layout_width="300sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="16dp"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="662dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/chat_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="8sp">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="16dp"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/user_iv"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <EditText
+                    android:id="@+id/message_et"
+                    android:layout_width="330sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/custom_edit_text"
+                    android:ems="10"
+                    android:inputType="textMultiLine"
+                    android:maxHeight="100sp"
+                    android:maxLines="4"
+                    android:minHeight="48dp"
+                    android:paddingStart="10sp"
+                    android:paddingEnd="10sp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/send_message_btn"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="1dp"
+                    android:background="@drawable/circle"
+                    android:backgroundTint="@color/green"
+                    android:elevation="2sp"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"
+                    android:src="@drawable/send"
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <EditText
-            android:id="@+id/message_et"
-            android:layout_width="325dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/send_message_btn"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-        <ImageButton
-            android:id="@+id/send_message_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/circle"
-            android:backgroundTint="#EFEDED"
-            android:elevation="2sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/send"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/chat_rv"
-            android:layout_width="match_parent"
-            android:layout_height="571dp"
-
-            android:layout_marginHorizontal="8sp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/message_et"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>

@@ -1,6 +1,8 @@
 package com.tuwaiq.finalproject.presentation.post.preview
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.format.DateFormat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +22,7 @@ import com.tuwaiq.finalproject.databinding.PreviewImageItemBinding
 import com.tuwaiq.finalproject.domain.model.Post
 import com.tuwaiq.finalproject.domain.model.User
 import com.tuwaiq.finalproject.presentation.buyItem.PaymentBottomSheet
+import com.tuwaiq.finalproject.util.Constant.dateFormat
 import com.tuwaiq.finalproject.util.Constant.uid
 import dagger.hilt.android.AndroidEntryPoint
 const val ARGS_OWNER_KEY = "args kay"
@@ -72,6 +75,7 @@ class PreviewFragment : Fragment() {
     }
 
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -86,8 +90,9 @@ class PreviewFragment : Fragment() {
                     Log.e(TAG, "onViewCreated: ${users.authId}", )
                     binding.apply {
                         prevTitle.text = post.title
+                        prevDate.text = DateFormat.format(dateFormat,post.postDate)
                         prevDescrip.text = post.description
-                        prevPrice.text = post.price
+                        prevPrice.text = "${post.price} SAR"
                         imageRv.adapter = PhotoAdapter(post.photoUrl)
                     }
                     previewViewModel.getUser(users.authId).observe(
@@ -98,7 +103,10 @@ class PreviewFragment : Fragment() {
                                 Log.e(TAG, "onViewCreated: post owner ${users.authId}", )
 
                                 prevUsername.text = user.name
-                                Glide.with(requireContext()).load(user.photoUrl).into(prevUserIv)
+                                Glide.with(requireContext())
+                                    .load(user.photoUrl)
+                                    .placeholder(R.drawable.ic_person)
+                                    .into(prevUserIv)
 
                             }
                         }
@@ -120,14 +128,20 @@ class PreviewFragment : Fragment() {
 
 
         binding.paymentBtn.setOnClickListener {
-//            val args = Bundle()
-//            args.putSerializable(ARGS_OWNER_KEY, post.owner)
-//            args.putSerializable(ARGS_ITEM_DOC_KEY,post.id)
-//            paymentBottomSheet = PaymentBottomSheet()
-//            paymentBottomSheet.arguments = args
-//            paymentBottomSheet.show(parentFragmentManager,paymentBottomSheet.tag)
+            val args = Bundle()
+            args.putSerializable(ARGS_OWNER_KEY, post.owner)
+            args.putSerializable(ARGS_ITEM_DOC_KEY,post.id)
+            paymentBottomSheet = PaymentBottomSheet()
+            paymentBottomSheet.arguments = args
+            paymentBottomSheet.show(parentFragmentManager,paymentBottomSheet.tag)
 
-            findNavController().navigate(PreviewFragmentDirections.actionPreviewFragmentToChatFragment(users.authId))
+        }
+
+        binding.messageBtn.setOnClickListener {
+            findNavController()
+                .navigate(PreviewFragmentDirections
+                .actionPreviewFragmentToChatFragment(users.authId))
+
         }
 
 

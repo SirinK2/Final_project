@@ -97,7 +97,7 @@ class MyProfileFragment : Fragment() {
 
             binding.apply {
                 homeTitleTv.text = post.title
-                homePriceTv.text = post.price
+                homeDescriptionTv.text = post.price
                 post.photoUrl.forEach {
                     Glide.with(requireContext())
                         .load(it)

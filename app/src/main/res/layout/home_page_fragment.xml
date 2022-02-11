@@ -136,23 +136,22 @@
 
         <TextView
             android:id="@+id/three_km"
-            android:layout_width="30sp"
-            android:layout_height="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/circle"
             android:text="@string/_3km"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/five_km"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/five_km"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="40dp"
             android:text="@string/_5km"
-            app:layout_constraintEnd_toStartOf="@+id/three_km"
+            app:layout_constraintStart_toEndOf="@+id/home_profile_btn"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

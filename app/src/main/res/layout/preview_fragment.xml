@@ -60,16 +60,30 @@
                 app:layout_constraintStart_toEndOf="@+id/prev_user_iv"
                 app:layout_constraintTop_toBottomOf="@+id/prev_username" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/payment_btn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/circle"
+                android:elevation="10sp"
+                android:src="@drawable/ic_money"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="SpeakableTextPresentCheck" />
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/message_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/circle"
+                android:elevation="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/payment_btn"
+                app:layout_constraintTop_toBottomOf="@+id/payment_btn"
+                app:srcCompat="@drawable/ic_email" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -99,6 +113,14 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/prev_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_marginStart="24dp"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
                     android:id="@+id/prev_descrip"
                     android:layout_width="350sp"
                     android:layout_height="wrap_content"
@@ -122,6 +144,7 @@
                     android:layout_marginTop="68dp"
                     android:overScrollMode="never"
                     android:scrollbars="none" />
+
             </LinearLayout>
         </ScrollView>
 

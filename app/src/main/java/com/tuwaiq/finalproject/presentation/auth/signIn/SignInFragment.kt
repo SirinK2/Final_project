@@ -35,7 +35,7 @@ class SignInFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-         val navControl = findNavController()
+
         binding.singinBtn.setOnClickListener {
 
             val email = binding.singinEmailEt.text.toString()
@@ -50,6 +50,12 @@ class SignInFragment : Fragment() {
 
         binding.toRegisterTv.setOnClickListener {
             findNavController().navigate(R.id.registerFragment)
+        }
+
+        binding.resendPasswordTv.setOnClickListener {
+
+
+
         }
 
 

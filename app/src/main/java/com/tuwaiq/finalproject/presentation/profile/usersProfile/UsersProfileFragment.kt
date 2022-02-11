@@ -79,7 +79,7 @@ class UsersProfileFragment : Fragment() {
 
                 Glide.with(requireContext()).load(post.photoUrl).into(homeItemIv)
                 homeTitleTv.text = post.title
-                homePriceTv.text = post.price
+                homeDescriptionTv.text = post.price
             }
 
         }

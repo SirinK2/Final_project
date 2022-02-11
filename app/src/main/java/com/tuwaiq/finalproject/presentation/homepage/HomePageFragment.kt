@@ -1,7 +1,14 @@
 package com.tuwaiq.finalproject.presentation.homepage
 
+import android.Manifest
+import android.app.AlertDialog
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
+import android.text.format.DateFormat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +18,9 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Filter
 import android.widget.Filterable
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -19,12 +28,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
-import coil.load
 import com.bumptech.glide.Glide
 import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.databinding.HomePageFragmentBinding
 import com.tuwaiq.finalproject.databinding.HomePageItemsBinding
 import com.tuwaiq.finalproject.domain.model.Post
+import com.tuwaiq.finalproject.util.Constant.dateFormat
 import com.tuwaiq.finalproject.util.Constant.mAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -134,6 +143,8 @@ class HomePageFragment : Fragment() {
         binding = HomePageFragmentBinding.inflate(layoutInflater)
 
         observe(100.0f)
+
+
         binding.apply {
             viewModel = homePageViewModel
             homeRv.layoutManager = LinearLayoutManager(context)
@@ -193,28 +204,77 @@ class HomePageFragment : Fragment() {
         }
 
         binding.homeDmBtn.setOnClickListener {
-            val action = HomePageFragmentDirections.actionHomePageFragmentToDirectMessageFragment()
-            navCon.navigate(action)
+            navCon.navigate(R.id.directMessageFragment)
         }
 
         binding.settingBtn.setOnClickListener {
-            findNavController().navigate(R.id.settingFragment)
+            navCon.navigate(R.id.settingFragment)
         }
 
 
     }
 
 
-    private fun observe(dis: Float){
-        homePageViewModel.getPost(requireContext(), dis).observe(
-            viewLifecycleOwner, {
-                binding.shimmerLayout.visibility = View.GONE
-                mAdapter = HomeAdapter(it as ArrayList<Post>)
+    private val launcher = registerForActivityResult(ActivityResultContracts.RequestPermission()){}
 
-                binding.homeRv.adapter = mAdapter
-                Log.d(TAG, "onViewCreated: $dis")
+
+
+    private fun observe(dis: Float){
+        when (PackageManager.PERMISSION_GRANTED) {
+            this.let {
+                ActivityCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                )
+                ActivityCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+            } -> {
+                launcher.launch(
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                )
+                homePageViewModel.getPost(requireContext(), dis).observe(
+                    viewLifecycleOwner, {
+                        binding.shimmerLayout.visibility = View.GONE
+                        mAdapter = HomeAdapter(it as ArrayList<Post>)
+
+                        binding.homeRv.adapter = mAdapter
+                        Log.d(TAG, "onViewCreated: $dis")
+                    }
+                )
             }
-        )
+
+            else -> locationDialog()
+
+        }
+
+    }
+
+
+
+    private fun locationDialog(){
+        AlertDialog.Builder(requireContext()).apply {
+            setTitle("Allow location")
+            setIcon(R.drawable.ic_location)
+            setMessage("You should allow location from setting")
+            setNegativeButton("Cancel") { _, _ ->
+                activity?.finish()
+
+            }
+            setPositiveButton("Go to setting"){ _, _ ->
+
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                intent.data = Uri.parse("package:" + context.packageName)
+                startActivity(intent)
+                activity?.finish()
+
+
+            }
+
+
+            show()
+        }
     }
 
 
@@ -239,7 +299,7 @@ class HomePageFragment : Fragment() {
 
             binding.apply {
                 homeTitleTv.text = post.title
-                homePriceTv.text = post.price
+                homeDescriptionTv.text = post.description
 
                 post.photoUrl.forEach {
                     Glide.with(requireContext())
@@ -247,6 +307,7 @@ class HomePageFragment : Fragment() {
                         .placeholder(R.drawable.ic_person)
                         .into(homeItemIv)
                 }
+                dateTv.text = DateFormat.format(dateFormat,post.postDate)
             }
 
 
@@ -336,7 +397,7 @@ class HomePageFragment : Fragment() {
                 val results = FilterResults()
                 results.values = filteredList
 
-            //    Log.e(TAG, "performFiltering: $results", )
+
 
                 return results
             }

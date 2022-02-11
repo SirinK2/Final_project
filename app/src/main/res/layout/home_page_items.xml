@@ -24,30 +24,48 @@
                 android:scaleType="fitCenter"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/home_title_tv"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginBottom="11dp"
+                android:layout_height="20sp"
+                android:layout_marginStart="16dp"
+                android:lines="1"
                 android:text="title"
+                android:textColor="#000000"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/home_price_tv"
+                app:layout_constraintBottom_toTopOf="@+id/date_tv"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/home_price_tv"
+                android:id="@+id/home_description_tv"
+                android:layout_width="350sp"
+                android:layout_height="50sp"
+                android:layout_marginBottom="28dp"
+                android:text="description"
+                android:textColor="#4C4A4A"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.491"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/date_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginBottom="16dp"
-                android:text="description"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:text="TextView"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/home_description_tv"
+                app:layout_constraintEnd_toEndOf="@+id/home_title_tv"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/home_title_tv" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

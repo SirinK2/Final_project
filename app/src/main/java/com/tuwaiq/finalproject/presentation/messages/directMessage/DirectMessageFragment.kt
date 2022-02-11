@@ -1,14 +1,13 @@
 package com.tuwaiq.finalproject.presentation.messages.directMessage
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.text.format.DateFormat
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -16,13 +15,11 @@ import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.databinding.DirectMessageFragmentBinding
 import com.tuwaiq.finalproject.databinding.DirectMessageItemListBinding
 import com.tuwaiq.finalproject.domain.model.Chat
-import com.tuwaiq.finalproject.domain.model.ChatList
 import com.tuwaiq.finalproject.domain.model.User
+import com.tuwaiq.finalproject.generated.callback.OnClickListener
 import com.tuwaiq.finalproject.util.Constant.format
 import com.tuwaiq.finalproject.util.Constant.uid
-import com.tuwaiq.finalproject.util.FirebaseCallback
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.log
 
 private const val TAG = "DirectMessageFragment"
 @AndroidEntryPoint
@@ -30,8 +27,8 @@ class DirectMessageFragment : Fragment() {
 
 
     private val viewModel by viewModels<DirectMessageViewModel>()
-    private lateinit var users: MutableList<User>
-    lateinit var chat:MutableList<Chat>
+    private lateinit var users: MutableList<String>
+    lateinit var chat: List<Chat>
 
     private lateinit var binding: DirectMessageFragmentBinding
     override fun onCreateView(
@@ -51,98 +48,136 @@ class DirectMessageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        chat = mutableListOf()
+        chat = listOf()
         users = mutableListOf()
         var receiverId = ""
         var senderId = ""
 
-        viewModel.getMessages(object : FirebaseCallback{
 
-            override fun onCallback(callback: List<Chat>) {
-                callback.forEach {
-                   receiverId =  it.receiverID
-                    senderId = it.senderId
-                    if (it.senderId == uid){
-                        chat += it
+
+
+//        viewModel.lastMessage(object : ChatCallback {
+//
+//            override fun onCallback(callback: List<Chat>) {
+//                callback.forEach {
+//                    chat += it
+//                    users += it.receiverID
+//                    users.toSet().toList()
+//                    Log.e(TAG, "onViewCreated: users  ${users.toSet().toList()}", )
+//                    viewModel.getUser(users).observe(
+//                        viewLifecycleOwner,{
+//
+//                            binding.dmRv.adapter = MessageAdapter(it)
+//
+//                            Log.d(TAG, "onCallback: us $it")
+//
+//
+//                        }
+//                    )
+
+//                    receiverId = it.receiverID
+//                    senderId = it.senderId
+//                    if (it.senderId == uid) {
+//
+//                        chat += it
+//
+//
+//                    }
+
+//                       val x =  chat
+//                    Log.d(TAG, "onCallback: $x")
+
+
+
+//                }
+////                if(receiverId != uid && senderId == uid){
+////                    users += receiverId
+////                    users.toSet().toList()
+////                    Log.e(TAG, "onViewCreated: users  ${users.toSet().toList()}", )
+////                }
+//
+//
+//
+//
+//            }
+//
+//
+//        }
+//
+//        )
+
+        viewModel.lastMessage().observe(
+            viewLifecycleOwner,{ chat ->
+                    this.chat = chat.sortedBy { it.date }
+                Log.e(TAG, "onViewCreated: $chat", )
+                chat.forEach {
+                    users += it.receiverID
+                    users.toSet().toList()
+                    Log.e(TAG, "onViewCreated: users  ${users.toSet().toList()}", )
+                }
+                viewModel.getUser(users).observe(
+                    viewLifecycleOwner,{
+
+                        binding.dmRv.adapter = MessageAdapter(it)
+
+                        Log.d(TAG, "onCallback: us $it")
 
 
                     }
-
-                }
-
-
-            }
-
-
-
-
-        }
-
-        )
-
-
-
-        viewModel.getUser().observe(
-            viewLifecycleOwner,{
-                it.forEach { user ->
-                    if (user.authId != receiverId){
-                        users += user
-
-
-                    }
-
-
-                }
-
-                val chatList = listOf(ChatList(chat,users))
-
-                Log.d(TAG, "onViewCreated: $chatList ")
-                binding.dmRv.adapter = MessageAdapter(chatList)
-
+                )
             }
         )
-
-
-
-
-
-
 
 
 
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.e(TAG, "onDestroy: Hii", )
+    }
 
-    private inner class MessageHolder(val binding: DirectMessageItemListBinding
-    ):RecyclerView.ViewHolder(binding.root){
 
+    private inner class MessageHolder(
+        val binding: DirectMessageItemListBinding
+    ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+        var user = User()
+        init {
+            itemView.setOnClickListener(this)
+        }
 
-        fun bind(chatList: ChatList){
-
+        fun bind(user: User) {
+            this.user = user
             binding.apply {
-                chatList.user.forEach {
-                    Glide.with(requireContext()).load(it.photoUrl).placeholder(R.drawable.ic_person).into(dmIv)
-                    dmNameTv.text = it.name
+
+                    Glide.with(requireContext()).load(user.photoUrl)
+                        .placeholder(R.drawable.ic_person)
+                        .into(dmIv)
+                    dmNameTv.text = user.name
+
+                chat.forEach {
+                    if (user.authId == it.receiverID) {
+                        dmMessageTv.text = it.message
+//
+                        dmDateTv.text = android.text.format.DateFormat.format(format, it.date)
+                    }
                 }
-
-                chatList.chat.forEach {
-                    dmMessageTv.text = it.message
-                    dmDateTv.text = DateFormat.format(format,it.date)
-
-
-                }
-
-
-
+//
 
             }
+        }
 
-
+        override fun onClick(v: View?) {
+            if (v == itemView){
+                Log.d(TAG, "onClick: nnlnlnlb")
+                findNavController().navigate(DirectMessageFragmentDirections.actionDirectMessageFragmentToChatFragment(user.authId))
+            }
         }
     }
 
 
-    private inner class MessageAdapter(val chatList: List<ChatList>):RecyclerView.Adapter<MessageHolder>(){
+    private inner class MessageAdapter(val chatList: List<User>) :
+        RecyclerView.Adapter<MessageHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageHolder {
             val binding = DirectMessageItemListBinding.inflate(
                 layoutInflater,
@@ -154,21 +189,14 @@ class DirectMessageFragment : Fragment() {
 
         override fun onBindViewHolder(holder: MessageHolder, position: Int) {
             val chat = chatList[position]
+
             holder.bind(chat)
 
         }
 
-        override fun getItemCount(): Int = chatList.size
-
-
+        override fun getItemCount(): Int {
+//            Log.d(TAG, "size: ${chatList.user.size}")
+            return chatList.size
+        }
     }
-
-
-
-
-
-
-
-
-
 }

@@ -57,6 +57,9 @@
         <action
             android:id="@+id/action_directMessageFragment_to_chatFragment"
             app:destination="@id/chatFragment" />
+        <argument
+            android:name="id"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/previewFragment"

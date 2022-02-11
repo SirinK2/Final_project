@@ -8,4 +8,5 @@ interface ChatRepo {
 
     fun sendMessage(chat: Chat)
     suspend fun getMessages(callback: FirebaseCallback)
+    suspend fun getUsersMessage():List<Chat>
 }

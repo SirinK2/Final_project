@@ -4,7 +4,9 @@ import android.util.Log
 import com.tuwaiq.finalproject.domain.model.Chat
 import com.tuwaiq.finalproject.domain.repo.ChatRepo
 import com.tuwaiq.finalproject.util.Constant.chatCollectionRef
+import com.tuwaiq.finalproject.util.Constant.uid
 import com.tuwaiq.finalproject.util.FirebaseCallback
+import kotlinx.coroutines.tasks.await
 
 private const val TAG = "ChatRepoImpl"
 class ChatRepoImpl:ChatRepo {
@@ -33,4 +35,12 @@ class ChatRepoImpl:ChatRepo {
 
 
     }
+
+    override suspend fun getUsersMessage(): List<Chat> {
+       return chatCollectionRef.whereEqualTo("senderId", uid).get().await().toObjects(Chat::class.java)
+
+    }
+
+
+
 }

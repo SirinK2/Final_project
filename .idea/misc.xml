@@ -19,24 +19,26 @@
         <entry key="app/src/main/res/drawable/message_item.xml" value="0.2984375" />
         <entry key="app/src/main/res/drawable/message_item_sender.xml" value="0.2984375" />
         <entry key="app/src/main/res/drawable/profile_header.xml" value="0.2984375" />
+        <entry key="app/src/main/res/drawable/send.xml" value="0.2984375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/buy_item_fragment.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/camera.xml" value="0.3128251310141457" />
-        <entry key="app/src/main/res/layout/chat_fragment.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/chat_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/direct_message_fragment.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/direct_message_item_list.xml" value="0.2922083090899667" />
         <entry key="app/src/main/res/layout/dorpdown_items.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/edit_profile_fragment.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/home_page_fragment.xml" value="0.33715312300818745" />
-        <entry key="app/src/main/res/layout/home_page_items.xml" value="0.23289759243367242" />
+        <entry key="app/src/main/res/layout/home_page_items.xml" value="0.335" />
         <entry key="app/src/main/res/layout/home_page_shimmer_items.xml" value="0.265625" />
         <entry key="app/src/main/res/layout/image_items.xml" value="0.4463161133860127" />
+        <entry key="app/src/main/res/layout/image_post_items.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/items_fragment.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/message_item.xml" value="0.5342237061769616" />
         <entry key="app/src/main/res/layout/my_profile_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/payment_bottom_sheet.xml" value="0.28229166666666666" />
-        <entry key="app/src/main/res/layout/preview_fragment.xml" value="0.46300875724155255" />
-        <entry key="app/src/main/res/layout/preview_image_item.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/preview_fragment.xml" value="0.4542372881355932" />
+        <entry key="app/src/main/res/layout/preview_image_item.xml" value="0.165" />
         <entry key="app/src/main/res/layout/register_fragment.xml" value="0.25645253857786876" />
         <entry key="app/src/main/res/layout/setting_fragment.xml" value="0.16873516158485186" />
         <entry key="app/src/main/res/layout/sign_in_fragment.xml" value="0.28229166666666666" />
