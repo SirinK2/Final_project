@@ -65,8 +65,8 @@ class SignInFragment : Fragment() {
 
     private fun validateSignIn(email:String, password:String){
         when{
-            email.isEmpty() -> binding.singinEmailEt.error = "enter email"
-            password.isEmpty() -> binding.singinPasswordEt.error = "you should enter password"
+            email.isEmpty() -> binding.signinEmailTil.error = getString(R.string.enter_email)
+            password.isEmpty() -> binding.signinPasswordTil.error = getString(R.string.enter_password)
 
             else -> {
                 viewModel.signIn(email, password).addOnCompleteListener {
@@ -76,7 +76,7 @@ class SignInFragment : Fragment() {
                     }
                 }.addOnFailureListener {
 
-                    Toast.makeText(requireContext(),it.localizedMessage,Toast.LENGTH_LONG).show()
+                    Snackbar.make(binding.root,it.localizedMessage,Snackbar.LENGTH_LONG).show()
                 }
             }
         }

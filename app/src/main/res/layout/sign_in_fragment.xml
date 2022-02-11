@@ -25,44 +25,68 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/singin_email_et"
-            android:layout_width="300sp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/signin_email_til"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/custom_edit_text"
-            android:drawableStart="@drawable/ic_email"
-            android:drawablePadding="12sp"
-            android:ems="10"
-            android:hint="@string/email"
-            android:inputType="textEmailSubject"
-            android:minHeight="48dp"
-            android:paddingStart="12sp"
-            android:paddingEnd="12sp"
-            app:layout_constraintBottom_toTopOf="@+id/singin_password_et"
+            app:layout_constraintBottom_toTopOf="@+id/signin_password_til"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.558"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.897" />
+            app:layout_constraintVertical_bias="0.897"
+            app:errorEnabled="true">
 
-        <EditText
-            android:id="@+id/singin_password_et"
-            android:layout_width="300sp"
+            <EditText
+                android:id="@+id/singin_email_et"
+                android:layout_width="300sp"
+                android:layout_height="match_parent"
+                android:background="@drawable/custom_edit_text"
+                android:drawableStart="@drawable/ic_email"
+                android:drawablePadding="12sp"
+                android:ems="10"
+                android:hint="@string/email"
+                android:inputType="textEmailSubject"
+                android:minHeight="48dp"
+                android:paddingStart="12sp"
+                android:paddingEnd="12sp"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/signin_password_til"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="392dp"
-            android:background="@drawable/custom_edit_text"
-            android:drawableStart="@drawable/ic_lock"
-            android:drawablePadding="12sp"
-            android:ems="10"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:minHeight="48dp"
-            android:paddingStart="12sp"
-            android:paddingEnd="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.557"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:errorEnabled="true">
+
+            <EditText
+                android:id="@+id/singin_password_et"
+                android:layout_width="300sp"
+                android:layout_height="match_parent"
+                android:background="@drawable/custom_edit_text"
+                android:drawableStart="@drawable/ic_lock"
+                android:drawablePadding="12sp"
+                android:ems="10"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
+                android:paddingStart="12sp"
+                android:paddingEnd="12sp"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
 
         <TextView
             android:id="@+id/resend_password_tv"
@@ -71,21 +95,21 @@
             android:layout_marginTop="16dp"
             android:text="@string/forgot_password"
             android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@+id/singin_password_et"
-            app:layout_constraintTop_toBottomOf="@+id/singin_password_et" />
+            app:layout_constraintStart_toStartOf="@+id/signin_password_til"
+            app:layout_constraintTop_toBottomOf="@+id/signin_password_til" />
 
         <Button
             android:id="@+id/singin_btn"
             android:layout_width="300sp"
             android:layout_height="48dp"
-            android:layout_marginBottom="256dp"
+            android:layout_marginBottom="192dp"
             android:background="@drawable/custom_button"
             android:elevation="10sp"
             android:text="@string/sign_in"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView

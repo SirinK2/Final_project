@@ -13,13 +13,15 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 interface PostRepo {
 
 
-     fun addPost(post: Post)
+    fun addPost(post: Post)
 
     suspend fun uploadImage(uri: List<Uri>): List<String>
 
     suspend fun getPost():List<PostDto>
 
     fun addPayment(payment: Payment)
+
+    fun deletePost(id:String)
 
 
 

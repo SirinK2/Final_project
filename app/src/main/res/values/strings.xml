@@ -37,6 +37,18 @@
     <string name="bio">Bio</string>
     <string name="name">Name</string>
     <string name="buy_btn">buy</string>
+    <string name="add_item_title">Can\'t add post without title</string>
+    <string name="add_description">Can\'t add post without description</string>
+    <string name="add_post_price">can\'t add post without price</string>
+    <string name="add_post_category">Can\'t add post without choose category</string>
+    <string name="add_post_photos">Can\'t add post without photo</string>
+    <string name="enter_username">enter username</string>
+    <string name="enter_email">please enter email</string>
+    <string name="enter_password">please enter password</string>
+    <string name="passwor_mismatch">passwords must be matched</string>
+    <string name="username">Username</string>
+    <string name="confirm_password">Confirm password</string>
+
 
     <string-array name="categories">
         <item> Electronic</item>

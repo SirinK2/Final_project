@@ -15,14 +15,14 @@
             android:layout_width="match_parent"
             android:layout_height="180sp"
             android:background="@drawable/profile_header"
-            android:elevation="40sp"
+            android:elevation="10sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/users_prof_bio_tv"
-                android:layout_width="210dp"
+                android:layout_width="260dp"
                 android:layout_height="135dp"
                 android:layout_marginTop="4dp"
                 android:text="Bio"
@@ -36,10 +36,10 @@
                 style="@style/Widget.AppCompat.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="140dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="@+id/users_prof_iv"
+                app:layout_constraintStart_toStartOf="@+id/users_prof_iv"
+                app:layout_constraintTop_toBottomOf="@+id/users_prof_iv" />
 
 
 
@@ -69,27 +69,13 @@
 
             </de.hdodenhof.circleimageview.CircleImageView>
 
-            <ImageButton
-                android:id="@+id/user_dm_btn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/circle"
-                android:elevation="10sp"
-                android:minWidth="48dp"
-                android:minHeight="48dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/message"
-                tools:ignore="SpeakableTextPresentCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/users_prof_rv"
-            android:layout_width="413dp"
-            android:layout_height="573dp"
+            android:layout_width="match_parent"
+            android:layout_height="580dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

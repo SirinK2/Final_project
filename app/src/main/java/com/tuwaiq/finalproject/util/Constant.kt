@@ -18,6 +18,8 @@ object Constant {
      const val format = "hh:mm aa"
      const val dateFormat = "dd MMM yy"
 
+
+
      val uid = Firebase.auth.currentUser?.uid.toString()
      val postCollectionRef = Firebase.firestore.collection(POST_COLLECTION)
      val paymentCollectionRef = Firebase.firestore.collection(PAYMENT_COLLECTION)

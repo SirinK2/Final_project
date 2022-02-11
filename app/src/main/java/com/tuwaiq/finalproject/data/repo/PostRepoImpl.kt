@@ -24,6 +24,8 @@ class PostRepoImpl : PostRepo {
         ref.set(post)
     }
 
+
+
     
     override suspend fun getPost(): List<PostDto> =
         postCollectionRef.get().await().toObjects(PostDto::class.java).sortedBy {
@@ -36,6 +38,10 @@ class PostRepoImpl : PostRepo {
         val ref = paymentCollectionRef.document()
         payment.paymentID = ref.id
         ref.set(payment)
+    }
+
+    override fun deletePost(id: String) {
+        postCollectionRef.document(id).delete()
     }
 
 

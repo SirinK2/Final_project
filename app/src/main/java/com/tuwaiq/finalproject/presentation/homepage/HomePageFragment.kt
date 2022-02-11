@@ -51,6 +51,9 @@ class HomePageFragment : Fragment() {
     private val toBottom: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.to_bottom_anim) }
     private var clicked = false
 
+    private val launcher = registerForActivityResult(ActivityResultContracts.RequestPermission()){}
+
+
 
 
     private fun onAddButtonClicked(){
@@ -194,13 +197,11 @@ class HomePageFragment : Fragment() {
 
         val navCon = findNavController()
         binding.homeProfileBtn.setOnClickListener {
-            val action = HomePageFragmentDirections.actionHomePageFragmentToMyProfileFragment()
-            navCon.navigate(action)
+            navCon.navigate(R.id.myProfileFragment)
         }
 
         binding.floatingActionButton.setOnClickListener {
-            val action = HomePageFragmentDirections.actionHomePageFragmentToItemsFragment()
-            navCon.navigate(action)
+            navCon.navigate(R.id.itemsFragment)
         }
 
         binding.homeDmBtn.setOnClickListener {
@@ -215,11 +216,11 @@ class HomePageFragment : Fragment() {
     }
 
 
-    private val launcher = registerForActivityResult(ActivityResultContracts.RequestPermission()){}
 
 
 
     private fun observe(dis: Float){
+
         when (PackageManager.PERMISSION_GRANTED) {
             this.let {
                 ActivityCompat.checkSelfPermission(

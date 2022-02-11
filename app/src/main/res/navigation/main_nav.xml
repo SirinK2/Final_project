@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_myProfileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <argument
+            android:name="id"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/usersProfileFragment"
@@ -43,6 +46,9 @@
         <argument
             android:name="owner"
             app:argType="string" />
+        <action
+            android:id="@+id/action_usersProfileFragment_to_previewFragment"
+            app:destination="@id/previewFragment" />
     </fragment>
     <fragment
         android:id="@+id/itemsFragment"

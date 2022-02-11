@@ -1,9 +1,11 @@
 package com.tuwaiq.finalproject.presentation.buyItem
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tuwaiq.finalproject.R
@@ -28,6 +30,7 @@ class PaymentBottomSheet:BottomSheetDialogFragment() {
             STYLE_NORMAL,
             R.style.AppBottomSheetDialogTheme
         )
+
     }
 
     override fun onCreateView(
@@ -37,6 +40,8 @@ class PaymentBottomSheet:BottomSheetDialogFragment() {
     ): View {
 
         binding = PaymentBottomSheetBinding.inflate(layoutInflater)
+
+
         return binding.root
 
 
@@ -46,6 +51,8 @@ class PaymentBottomSheet:BottomSheetDialogFragment() {
 
     override fun onStart() {
         super.onStart()
+
+
 
 
         binding.buyBtn.setOnClickListener {
@@ -63,6 +70,15 @@ class PaymentBottomSheet:BottomSheetDialogFragment() {
         }
 
 
+    }
+
+    private fun closeKeyboard() {
+
+        val view = activity?.currentFocus
+        if (view != null) {
+            val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
     }
 
 

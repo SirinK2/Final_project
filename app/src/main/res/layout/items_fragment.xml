@@ -12,67 +12,85 @@
         android:layout_height="match_parent"
         tools:context=".presentation.post.newPost.ItemsFragment">
 
-        <EditText
-            android:id="@+id/items_title_et"
-            android:layout_width="350dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/custom_edit_text"
-            android:ems="10"
-            android:hint="@string/item_title"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:paddingStart="14sp"
-            android:paddingEnd="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/items_descrip_et"
-            android:layout_width="350dp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/title_til"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/custom_edit_text"
-            android:ems="10"
-            android:hint="@string/item_description"
-            android:inputType="textMultiLine"
-            android:lines="8"
-            android:maxLines="5"
-            android:minHeight="48dp"
-            android:paddingStart="14sp"
-            android:paddingEnd="14sp"
+            android:layout_marginTop="100dp"
+            app:errorEnabled="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.473"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/items_title_et"
+                android:layout_width="350dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/custom_edit_text"
+                android:hint="@string/item_title"
+                android:inputType="textPersonName"
+                 />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/descrip_til"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/items_title_et" />
+            app:layout_constraintTop_toBottomOf="@+id/title_til"
+            app:errorEnabled="true"
+            >
+            <EditText
+                android:id="@+id/items_descrip_et"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edit_text"
+                android:hint="@string/item_description"
+                android:inputType="textMultiLine"
+                android:maxLines="5"
+                android:minHeight="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.504"
+                app:layout_constraintStart_toStartOf="parent"
+                 />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/items_price_et"
-            android:layout_width="103dp"
-            android:layout_height="53dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/custom_edit_text"
-            android:ems="10"
-            android:hint="@string/item_price"
-            android:inputType="number|textPersonName"
-            android:paddingStart="14sp"
-            android:paddingEnd="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/items_descrip_et" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/price_til"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            app:errorEnabled="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/category_et">
+
+            <EditText
+                android:id="@+id/items_price_et"
+                android:layout_width="250sp"
+                android:layout_height="match_parent"
+                android:background="@drawable/custom_edit_text"
+                android:ems="10"
+                android:hint="@string/item_price"
+                android:inputType="number|textPersonName"
+                android:paddingStart="14sp"
+                android:paddingEnd="14sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/item_done_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="664dp"
-            android:layout_marginEnd="28dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="16dp"
             android:text="@string/item_done_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -80,20 +98,20 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/category_et"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="245dp"
-            android:layout_height="57dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginEnd="5dp"
             android:hint="@string/categories"
             android:minHeight="48dp"
-            app:layout_constraintEnd_toStartOf="@+id/items_price_et"
-            app:layout_constraintHorizontal_bias="0.742"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/items_descrip_et">
+            app:layout_constraintTop_toBottomOf="@+id/descrip_til"
+            app:errorEnabled="true">
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextView2"
-                android:layout_width="match_parent"
+                android:layout_width="350sp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:inputType="none"
@@ -108,14 +126,13 @@
             android:id="@+id/camera_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="664dp"
+            android:layout_marginEnd="28dp"
             android:background="@drawable/circle"
             android:elevation="10sp"
             android:minWidth="48dp"
             android:minHeight="48dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/category_et"
             app:srcCompat="@drawable/ic_camera"
             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -123,9 +140,10 @@
             android:id="@+id/photo_rv"
             android:layout_width="wrap_content"
             android:layout_height="283dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="92dp"
             android:scrollbars="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.512"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/category_et" />
 

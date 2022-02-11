@@ -6,12 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.databinding.ImagePostItemsBinding
 import com.tuwaiq.finalproject.databinding.ItemsFragmentBinding
@@ -86,9 +89,20 @@ class ItemsFragment : Fragment(){
             val price = binding.itemsPriceEt.text.toString()
             val category = binding.autoCompleteTextView2.text.toString()
 
-            addPost(category, title, description, price).also {
-                binding.progressBar2.visibility = View.VISIBLE
+            when{
+                title.trim().isEmpty() -> binding.titleTil.error = getString(R.string.add_item_title)
+                description.trim().isEmpty() -> binding.descripTil.error = getString(R.string.add_description)
+                price.trim().isEmpty() -> binding.priceTil.error = getString(R.string.add_post_price)
+                category.contains(getString(R.string.choose_category)) -> binding.categoryEt.error = getString(R.string.add_post_category)
+                !::photosUri.isInitialized -> Snackbar.make(binding.cameraBtn,getString(R.string.add_post_photos),Snackbar.LENGTH_LONG).show()
+                else -> addPost(category, title, description, price).also {
+                    binding.progressBar2.visibility = View.VISIBLE
+                }
+
+
             }
+
+
 
 
 
@@ -106,6 +120,7 @@ class ItemsFragment : Fragment(){
     }
 
     private fun addPost(category:String, title:String, description:String, price:String){
+
         viewModel.uploadImg(photosUri).observe(
             viewLifecycleOwner,{ url ->
 
@@ -115,8 +130,6 @@ class ItemsFragment : Fragment(){
             }
 
         )
-
-
 
 
     }

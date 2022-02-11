@@ -87,7 +87,7 @@ class PreviewFragment : Fragment() {
 
                     users.authId = post.owner
 //                    Log.e(TAG, "onViewCreated: post owner ${post.owner}", )
-                    Log.e(TAG, "onViewCreated: ${users.authId}", )
+                    Log.e(TAG, "onViewCreated: ${users.authId}" )
                     binding.apply {
                         prevTitle.text = post.title
                         prevDate.text = DateFormat.format(dateFormat,post.postDate)
@@ -97,10 +97,10 @@ class PreviewFragment : Fragment() {
                     }
                     previewViewModel.getUser(users.authId).observe(
                         viewLifecycleOwner,{ user ->
-                            Log.e(TAG, "onViewCreated: $user", )
+                            Log.e(TAG, "onViewCreated: $user" )
 
                             binding.apply {
-                                Log.e(TAG, "onViewCreated: post owner ${users.authId}", )
+                                Log.e(TAG, "onViewCreated: post owner ${users.authId}" )
 
                                 prevUsername.text = user.name
                                 Glide.with(requireContext())

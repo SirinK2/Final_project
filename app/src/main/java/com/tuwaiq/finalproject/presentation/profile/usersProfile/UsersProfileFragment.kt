@@ -7,11 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.databinding.HomePageItemsBinding
+import com.tuwaiq.finalproject.databinding.ProfilePostItemBinding
 import com.tuwaiq.finalproject.databinding.UsersProfileFragmentBinding
 import com.tuwaiq.finalproject.domain.model.Post
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,7 +60,10 @@ class UsersProfileFragment : Fragment() {
                 usersProfileViewModel.getUser(args.owner).observe(
                     viewLifecycleOwner,{ user ->
                         binding.apply {
-                            Glide.with(requireContext()).load(user.photoUrl).into(usersProfIv)
+                            Glide.with(requireContext())
+                                .load(user.photoUrl)
+                                .placeholder(R.drawable.ic_person)
+                                .into(usersProfIv)
                             usersProfNameTv.text = user.name
                             Log.d(TAG, "onViewCreated: ${user.name}// ${user.authId}")
                             usersProfBioTv.text = user.bio
@@ -73,22 +79,45 @@ class UsersProfileFragment : Fragment() {
     }
 
 
-    private inner class ProfileHolder(val binding: HomePageItemsBinding):RecyclerView.ViewHolder(binding.root){
+    private inner class ProfileHolder(val binding: ProfilePostItemBinding)
+        :RecyclerView.ViewHolder(binding.root), View.OnClickListener{
+        var post = Post()
+        init {
+            itemView.setOnClickListener(this)
+            binding.deleteIv.visibility = View.GONE
+        }
         fun bind(post: Post){
+
+            this.post = post
             binding.apply {
 
-                Glide.with(requireContext()).load(post.photoUrl).into(homeItemIv)
-                homeTitleTv.text = post.title
-                homeDescriptionTv.text = post.price
+                post.photoUrl.forEach {
+                    Glide.with(requireContext())
+                        .load(it)
+                        .into(postPhotoIv)
+                }
+                postTitleTv.text = post.title
             }
 
+        }
+
+        override fun onClick(v: View?) {
+
+            if (v == itemView){
+
+                findNavController()
+                    .navigate(
+                    UsersProfileFragmentDirections
+                        .actionUsersProfileFragmentToPreviewFragment(post.id)
+                    )
+            }
         }
     }
 
 
     private inner class ProfileAdapter(val posts: List<Post>):RecyclerView.Adapter<ProfileHolder>(){
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileHolder {
-            val binding = HomePageItemsBinding.inflate(
+            val binding = ProfilePostItemBinding.inflate(
                 layoutInflater,
                 parent,
                 false

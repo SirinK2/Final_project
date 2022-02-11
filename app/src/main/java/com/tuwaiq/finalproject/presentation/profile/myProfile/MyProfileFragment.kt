@@ -1,5 +1,6 @@
 package com.tuwaiq.finalproject.presentation.profile.myProfile
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,8 +13,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tuwaiq.finalproject.R
-import com.tuwaiq.finalproject.databinding.HomePageItemsBinding
 import com.tuwaiq.finalproject.databinding.MyProfileFragmentBinding
+import com.tuwaiq.finalproject.databinding.ProfilePostItemBinding
 import com.tuwaiq.finalproject.domain.model.Post
 import com.tuwaiq.finalproject.domain.model.User
 import dagger.hilt.android.AndroidEntryPoint
@@ -85,6 +86,7 @@ class MyProfileFragment : Fragment() {
         super.onStart()
 
 
+
         binding.settingBtn.setOnClickListener {
             val action = MyProfileFragmentDirections.actionMyProfileFragmentToEditProfileFragment(user.id)
             findNavController().navigate(action)
@@ -92,31 +94,81 @@ class MyProfileFragment : Fragment() {
     }
 
 
-    private inner class MyListHolder(val binding: HomePageItemsBinding):RecyclerView.ViewHolder(binding.root){
-        fun bind(post: Post){
 
-            binding.apply {
-                homeTitleTv.text = post.title
-                homeDescriptionTv.text = post.price
-                post.photoUrl.forEach {
-                    Glide.with(requireContext())
-                        .load(it)
-                        .into(binding.homeItemIv)
+
+
+
+    private inner class MyListAdapter(val posts: List<Post>)
+        :RecyclerView.Adapter<MyListAdapter.MyListHolder>() {
+
+
+        val mList : MutableList<Post> = posts as MutableList<Post>
+        private inner class MyListHolder(val binding: ProfilePostItemBinding)
+            :RecyclerView.ViewHolder(binding.root),View.OnClickListener{
+
+            var post = Post()
+            init {
+                itemView.setOnClickListener(this)
+            }
+            fun bind(post: Post, index: Int){
+
+                this.post = post
+                binding.apply {
+
+                    postTitleTv.text = post.title
+
+                    post.photoUrl.forEach {
+                        Glide.with(requireContext())
+                            .load(it)
+                            .into(postPhotoIv)
+                    }
+
                 }
+                binding.deleteIv.setOnClickListener {
+                    deleteDialog(index)
+                }
+
+
             }
 
-        }
-    }
 
-    private inner class MyListAdapter(val posts: List<Post>):RecyclerView.Adapter<MyListHolder>() {
+
+            override fun onClick(v: View?) {
+                if (v == itemView){
+                    findNavController()
+                        .navigate(MyProfileFragmentDirections
+                            .actionMyProfileFragmentToPreviewFragment(post.id))
+                }
+
+
+            }
+
+            private fun deleteDialog(index: Int){
+                AlertDialog.Builder(requireContext()).apply {
+                    setTitle("Delete post? ")
+                    setIcon(R.drawable.ic_baseline_cancel_24)
+                    setMessage("Are you sure?")
+                    setPositiveButton("Yes"){ _, _ ->
+                        viewModel.deletePost(post.id).also {
+                            mList.removeAt(index)
+                            notifyDataSetChanged()
+                        }
+                    }
+                    setNegativeButton("No",null)
+                    show()
+                }
+            }
+        }
+
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyListHolder {
-            val binding = HomePageItemsBinding.inflate(layoutInflater,parent,false)
+            val binding = ProfilePostItemBinding.inflate(layoutInflater,parent,false)
             return MyListHolder(binding)
         }
 
         override fun onBindViewHolder(holder: MyListHolder, position: Int) {
             val post = posts[position]
-            holder.bind(post)
+            holder.bind(post,position)
         }
 
         override fun getItemCount(): Int = posts.size

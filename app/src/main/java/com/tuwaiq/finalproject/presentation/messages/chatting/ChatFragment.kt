@@ -4,11 +4,12 @@ import android.content.Context
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.util.Log
-import android.view.*
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -48,7 +49,7 @@ class ChatFragment : Fragment() {
 
         binding.chatRv.apply {
             layoutManager = LinearLayoutManager(context)
-            closeKeyboard()
+
         }
 
         return binding.root
@@ -93,23 +94,31 @@ class ChatFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        binding.chatLayout.setOnClickListener {
+
+            closeKeyboard()
+        }
+
         binding.sendMessageBtn.setOnClickListener {
             val messageText = binding.messageEt.text.toString()
             val senderId = uid
             val receiverId = args.receiverId
 
-            val chat = Chat(senderId,receiverId,messageText)
+            val chat = Chat(senderId, receiverId, messageText)
 
-            viewModel.sendMessage(chat).also {
-                binding.messageEt.text.clear()
-                binding.chatRv.adapter?.let { it1 -> binding.chatRv.smoothScrollToPosition(it1.itemCount) }
+            if (messageText.trim().isEmpty()) {
+                return@setOnClickListener
+            } else {
+                viewModel.sendMessage(chat).also {
+                    binding.messageEt.text.clear()
+                    binding.chatRv.adapter?.let { it1 -> binding.chatRv.smoothScrollToPosition(it1.itemCount) }
+                }
             }
         }
-
     }
 
 
-    fun closeKeyboard() {
+    private fun closeKeyboard() {
 
         val view = activity?.currentFocus
         if (view != null) {

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.tuwaiq.finalproject.R
@@ -64,12 +65,12 @@ class RegisterFragment : Fragment() {
     private fun validateRegistration(userName: String, email:String, password: String, confirmPass:String){
 
         when{
-            userName.isEmpty() -> binding.registerUsernameEt.error = "enter username"
-            email.isEmpty() -> binding.registerEmailEt.error = "please enter email"
-            password.isEmpty() -> binding.registerPasswordEt.error = "please enter password"
+            userName.trim().isEmpty() -> binding.usernameTil.error = getString(R.string.enter_username)
+            email.trim().isEmpty() -> binding.emailTil.error = getString(R.string.enter_email)
+            password.trim().isEmpty() -> binding.passwordTil.error = getString(R.string.enter_password)
             password != confirmPass -> binding.apply {
-                registerPasswordEt.error = "passwords must be matched"
-                registerComPassEt.error = "passwords must be matched"
+                passwordTil.error = getString(R.string.passwor_mismatch)
+                confirmPasswordTil.error = getString(R.string.passwor_mismatch)
             }
             else -> {
                 viewModel.register(email,password).addOnCompleteListener {
@@ -80,7 +81,7 @@ class RegisterFragment : Fragment() {
                     }
 
                 }.addOnFailureListener {
-                    Toast.makeText(requireContext(),it.localizedMessage, Toast.LENGTH_LONG).show()
+                    Snackbar.make(binding.root,it.localizedMessage, Snackbar.LENGTH_LONG).show()
                     Log.e(TAG, "onStart: $it", )
 
                 }
