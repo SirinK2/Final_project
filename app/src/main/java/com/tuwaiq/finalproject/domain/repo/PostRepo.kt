@@ -23,6 +23,8 @@ interface PostRepo {
 
     fun deletePost(id:String)
 
+    suspend fun getPayments():List<Payment>
+
 
 
 

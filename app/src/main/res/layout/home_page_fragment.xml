@@ -21,6 +21,221 @@
         tools:layout_editor_absoluteY="107dp">
 
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/home_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+        <ImageButton
+            android:id="@+id/home_dm_btn"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/circle"
+            android:backgroundTint="#FFFFFF"
+            android:elevation="10sp"
+            android:src="@drawable/message"
+            app:layout_constraintEnd_toStartOf="@+id/home_profile_btn"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <ImageButton
+            android:id="@+id/home_profile_btn"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/circle"
+            android:backgroundTint="#FFFFFF"
+            android:elevation="10sp"
+            android:src="@drawable/ic_baseline_perm_identity_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="12dp"
+            android:clickable="true"
+            android:src="@drawable/ic_baseline_add_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_filter_list"
+            tools:ignore="SpeakableTextPresentCheck">
+
+        </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/cars"
+            android:layout_width="90sp"
+            android:layout_height="60sp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/green"
+            android:clickable="true"
+            android:elevation="10sp"
+            android:focusable="true"
+            android:gravity="center"
+            android:onClick="@{()->viewModel.carsBtn()}"
+            android:rotation="90"
+            android:shadowRadius="10"
+            android:text="@string/vehicles"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/floatingActionButton2" />
+
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/electronic"
+            android:layout_width="90sp"
+            android:layout_height="60sp"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/green"
+            android:clickable="true"
+            android:elevation="10sp"
+            android:focusable="true"
+            android:onClick="@{()->viewModel.electronicBtn()}"
+            android:rotation="90"
+            android:shadowRadius="10"
+            android:text="@string/electronic"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cars" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/furniture"
+            android:layout_width="90sp"
+            android:layout_height="60sp"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/green"
+            android:clickable="true"
+            android:elevation="10sp"
+            android:focusable="true"
+            android:onClick="@{()->viewModel.furnitureBtn()}"
+            android:rotation="90"
+            android:shadowRadius="10"
+            android:text="@string/furniture"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/electronic" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/clothes"
+            android:layout_width="90sp"
+            android:layout_height="60sp"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/green"
+            android:clickable="true"
+            android:elevation="10sp"
+            android:focusable="true"
+            android:onClick="@{()->viewModel.clothesBtn()}"
+            android:rotation="90"
+            android:shadowRadius="10"
+            android:text="@string/clothes"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/furniture" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/realestate"
+            android:layout_width="90sp"
+            android:layout_height="60sp"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/green"
+            android:clickable="true"
+            android:textSize="12sp"
+            android:elevation="10sp"
+            android:focusable="true"
+            android:fontFamily="sans-serif-black"
+            android:onClick="@{()->viewModel.realEstateBtn()}"
+            android:rotation="90"
+            android:shadowRadius="10"
+            android:text="@string/real_estate"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clothes" />
+
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/three_km"
+            android:layout_width="90sp"
+            android:layout_height="50sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/green"
+            android:clickable="true"
+            android:elevation="10sp"
+            android:focusable="true"
+            android:fontFamily="sans-serif-black"
+            android:shadowRadius="10"
+            android:text="@string/_3km"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/floatingActionButton2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/five_km"
+            android:layout_width="90sp"
+            android:layout_height="50sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/green"
+            android:clickable="true"
+            android:elevation="10sp"
+            android:focusable="true"
+            android:fontFamily="sans-serif-black"
+            android:shadowRadius="10"
+            android:text="@string/_5km"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/three_km"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmer_layout"
             android:layout_width="match_parent"
@@ -46,235 +261,10 @@
 
                 <include layout="@layout/home_page_shimmer_items" />
 
-                <include layout="@layout/home_page_shimmer_items" />
-
-                <include layout="@layout/home_page_shimmer_items" />
-
-                <include layout="@layout/home_page_shimmer_items" />
-
-                <include layout="@layout/home_page_shimmer_items" />
-
-                <include layout="@layout/home_page_shimmer_items" />
-
-                <include layout="@layout/home_page_shimmer_items" />
-
-                <include layout="@layout/home_page_shimmer_items" />
-
-                <include layout="@layout/home_page_shimmer_items" />
 
             </LinearLayout>
 
         </com.facebook.shimmer.ShimmerFrameLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/home_rv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-
-        <ImageButton
-            android:id="@+id/home_dm_btn"
-            android:layout_width="40sp"
-            android:layout_height="40sp"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/circle"
-            android:backgroundTint="#FFFFFF"
-            android:elevation="10sp"
-            android:src="@drawable/message"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/home_profile_btn"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-        <ImageButton
-            android:id="@+id/home_profile_btn"
-            android:layout_width="40sp"
-            android:layout_height="40sp"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/circle"
-            android:backgroundTint="#FFFFFF"
-            android:elevation="10sp"
-            android:src="@drawable/ic_baseline_perm_identity_24"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-        <ImageButton
-            android:id="@+id/settingBtn"
-            android:layout_width="40sp"
-            android:layout_height="40sp"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/circle"
-            android:elevation="10sp"
-            android:minWidth="48dp"
-            android:minHeight="48dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/home_dm_btn"
-            app:srcCompat="@drawable/ic_settings"
-            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="12dp"
-            android:clickable="true"
-            android:src="@drawable/ic_baseline_add_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <TextView
-            android:id="@+id/three_km"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/_3km"
-            app:layout_constraintStart_toEndOf="@+id/five_km"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/five_km"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/_5km"
-            app:layout_constraintStart_toEndOf="@+id/home_profile_btn"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:clickable="true"
-            app:layout_constraintEnd_toEndOf="@+id/settingBtn"
-            app:layout_constraintStart_toStartOf="@+id/settingBtn"
-            app:layout_constraintTop_toBottomOf="@+id/settingBtn"
-            app:srcCompat="@drawable/ic_filter_list"
-            tools:ignore="SpeakableTextPresentCheck">
-
-        </com.google.android.material.floatingactionbutton.FloatingActionButton>
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/cars"
-            android:layout_width="wrap_content"
-            android:layout_height="60sp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="@color/green"
-            android:clickable="true"
-            android:elevation="10sp"
-            android:focusable="true"
-            android:gravity="center"
-            android:rotation="90"
-            android:shadowRadius="10"
-            android:onClick="@{()->viewModel.carsBtn()}"
-            android:text="@string/cars"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/floatingActionButton2" />
-
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/electronic"
-            android:layout_width="wrap_content"
-            android:layout_height="60sp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="@color/green"
-            android:clickable="true"
-            android:elevation="10sp"
-            android:focusable="true"
-            android:rotation="90"
-            android:shadowRadius="10"
-            android:text="@string/electronic"
-            android:textAlignment="center"
-            android:onClick="@{()->viewModel.electronicBtn()}"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cars" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/furniture"
-            android:layout_width="wrap_content"
-            android:layout_height="60sp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="@color/green"
-            android:clickable="true"
-            android:elevation="10sp"
-            android:focusable="true"
-            android:rotation="90"
-            android:shadowRadius="10"
-            android:onClick="@{()->viewModel.furnitureBtn()}"
-            android:text="@string/furniture"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/electronic" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/clothes"
-            android:layout_width="wrap_content"
-            android:layout_height="60sp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="@color/green"
-            android:clickable="true"
-            android:elevation="10sp"
-            android:focusable="true"
-            android:rotation="90"
-            android:shadowRadius="10"
-            android:text="@string/clothes"
-            android:onClick="@{()->viewModel.clothesBtn()}"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/furniture" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/realestate"
-            android:layout_width="wrap_content"
-            android:layout_height="60sp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="@color/green"
-            android:clickable="true"
-            android:elevation="10sp"
-            android:focusable="true"
-            android:fontFamily="sans-serif-black"
-            android:rotation="90"
-            android:shadowRadius="10"
-            android:text="@string/real_estate"
-            android:onClick="@{()->viewModel.realEstateBtn()}"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/clothes" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

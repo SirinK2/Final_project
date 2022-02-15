@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Final project</string>
+    <string name="app_name">Yard Sale</string>
     <string name="item_title">Title</string>
     <string name="item_description">Description</string>
     <string name="item_price">Price</string>
@@ -17,18 +17,18 @@
     <string name="_100m">100m</string>
     <string name="_3km">3km</string>
     <string name="_5km">5km</string>
-    <string name="cars">Cars</string>
+    <string name="vehicles">Vehicles</string>
     <string name="electronic">Electronic</string>
     <string name="furniture">Furniture</string>
     <string name="clothes">Clothes</string>
-    <string name="real_estate">real estate</string>
+    <string name="real_estate">Real estate</string>
     <string name="log_out">Log out</string>
     <string name="update_name">Name</string>
     <string name="eng">Eng</string>
     <string name="ar">Ar</string>
     <string name="notification">notification</string>
     <string name="notification_channel_name">weekly notification</string>
-    <string name="new_notification">New notification</string>
+    <string name="new_notification">Let\'s see the new sales 😍 </string>
     <string name="off">Off</string>
     <string name="on">On</string>
     <string name="yes_tv">Yes</string>
@@ -48,14 +48,17 @@
     <string name="passwor_mismatch">passwords must be matched</string>
     <string name="username">Username</string>
     <string name="confirm_password">Confirm password</string>
+    <string name="password_length">Password length should be between 7-15 letters</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="delete_post">Delete post?</string>
 
 
     <string-array name="categories">
-        <item> Electronic</item>
-        <item> Furniture</item>
-        <item> Cars</item>
+        <item>Electronic</item>
+        <item>Furniture</item>
+        <item>Vehicles</item>
         <item>Clothes</item>
-        <item>real estate</item>
+        <item>Real estate</item>
     </string-array>
 
 

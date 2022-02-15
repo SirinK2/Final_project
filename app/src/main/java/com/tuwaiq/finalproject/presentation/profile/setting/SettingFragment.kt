@@ -75,7 +75,8 @@ class SettingFragment : Fragment() {
                     .setRequiredNetworkType(NetworkType.CONNECTED)
                     .build()
 
-                val workRequest = PeriodicWorkRequest.Builder(NotificationWorker::class.java, 15,TimeUnit.MINUTES)
+                val workRequest = PeriodicWorkRequest
+                    .Builder(NotificationWorker::class.java, 4,TimeUnit.DAYS)
                     .setConstraints(constraint)
                     .build()
 
@@ -110,7 +111,7 @@ class SettingFragment : Fragment() {
 
         binding.languageBtn.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked && checkedId == R.id.Eng_btn){
-                Log.e(TAG, "onStart: Eng", )
+                Log.e(TAG, "onStart: Eng" )
                 activity?.let {
                     SharedPref.setLanguageState(requireContext(),true,"en")
                     setLocale(it,SharedPref.getLangCode(requireContext(),"en"))
@@ -135,23 +136,19 @@ class SettingFragment : Fragment() {
 
     }
 
-    override fun onStop() {
-        super.onStop()
 
-
-    }
 
 
     private fun logOutDialog(){
         AlertDialog.Builder(requireContext()).apply {
-            setTitle("Log out")
+            setTitle(getString(R.string.log_out))
             setIcon(R.drawable.logout)
-            setMessage("Are you sure?")
-            setPositiveButton("Yes"){ dialog, which ->
+            setMessage(getString(R.string.are_you_sure))
+            setPositiveButton(getString(R.string.yes_tv)){ _, _ ->
                 Firebase.auth.signOut()
                 findNavController().navigate(R.id.action_settingFragment_to_singInFragment)
             }
-            setNegativeButton("No",null)
+            setNegativeButton(getString(R.string.no_tv),null)
             show()
         }
     }

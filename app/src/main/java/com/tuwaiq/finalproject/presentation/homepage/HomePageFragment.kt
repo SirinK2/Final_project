@@ -47,80 +47,10 @@ class HomePageFragment : Fragment() {
     private val homePageViewModel: HomePageViewModel by viewModels()
     private lateinit var binding : HomePageFragmentBinding
     private var snapHelper: SnapHelper = LinearSnapHelper()
-    private val fromBottom: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.from_bottom_anim) }
-    private val toBottom: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.to_bottom_anim) }
-    private var clicked = false
 
     private val launcher = registerForActivityResult(ActivityResultContracts.RequestPermission()){}
 
 
-
-
-    private fun onAddButtonClicked(){
-        visibility(clicked)
-        clickable(clicked)
-        setAnimation(clicked)
-        clicked = !clicked
-    }
-
-
-    private fun clickable(clicked: Boolean){
-        if (!clicked){
-            //binding.floatingActionButton2.isClickable = true
-            binding.cars.isCheckable = true
-            binding.furniture.isCheckable = true
-            binding.electronic.isCheckable = true
-            binding.clothes.isCheckable =true
-            binding.realestate.isCheckable = true
-
-        }else{
-            binding.cars.isCheckable = false
-            binding.furniture.isCheckable = false
-            binding.electronic.isCheckable = false
-            binding.clothes.isCheckable =false
-            binding.realestate.isCheckable = false
-
-        }
-    }
-
-    private fun visibility(clicked: Boolean){
-        if (!clicked){
-
-            binding.cars.visibility = View.VISIBLE
-            binding.furniture.visibility = View.VISIBLE
-            binding.electronic.visibility = View.VISIBLE
-            binding.clothes.visibility = View.VISIBLE
-            binding.realestate.visibility = View.VISIBLE
-
-        }else{
-            binding.cars.visibility = View.GONE
-            binding.furniture.visibility = View.GONE
-            binding.electronic.visibility = View.GONE
-            binding.clothes.visibility = View.GONE
-            binding.realestate.visibility = View.GONE
-
-
-        }
-    }
-
-    private fun setAnimation(clicked: Boolean) {
-       if (!clicked){
-           binding.cars.startAnimation(fromBottom)
-           binding.electronic.startAnimation(fromBottom)
-           binding.furniture.startAnimation(fromBottom)
-           binding.clothes.startAnimation(fromBottom)
-           binding.realestate.startAnimation(fromBottom)
-
-       }else{
-
-           binding.cars.startAnimation(toBottom)
-           binding.electronic.startAnimation(toBottom)
-           binding.furniture.startAnimation(toBottom)
-           binding.clothes.startAnimation(toBottom)
-           binding.realestate.startAnimation(toBottom)
-
-       }
-    }
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -192,7 +122,6 @@ class HomePageFragment : Fragment() {
         super.onStart()
 
         binding.floatingActionButton2.setOnClickListener {
-            onAddButtonClicked()
         }
 
         val navCon = findNavController()
@@ -208,9 +137,7 @@ class HomePageFragment : Fragment() {
             navCon.navigate(R.id.directMessageFragment)
         }
 
-        binding.settingBtn.setOnClickListener {
-            navCon.navigate(R.id.settingFragment)
-        }
+
 
 
     }

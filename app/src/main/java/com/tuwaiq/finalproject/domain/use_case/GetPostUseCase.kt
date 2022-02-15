@@ -4,16 +4,18 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Location
 import android.util.Log
-import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.*
 import com.tuwaiq.finalproject.data.remote.dto.PostDto
 import com.tuwaiq.finalproject.data.remote.dto.toPost
 import com.tuwaiq.finalproject.domain.model.Post
 import com.tuwaiq.finalproject.domain.repo.PostRepo
 import kotlinx.coroutines.tasks.await
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 private const val TAG = "GetPostUseCase"
 class GetPostUseCase @Inject constructor(val repo: PostRepo) {
+
 
     @SuppressLint("MissingPermission")
     suspend operator fun invoke(context: Context, dist: Float): List<Post> {
@@ -23,8 +25,8 @@ class GetPostUseCase @Inject constructor(val repo: PostRepo) {
 
         val listPost: MutableList<PostDto> = mutableListOf()
         val toLocation = Location("ToLocation")
-        repo.getPost().forEach { p ->
 
+        repo.getPost().forEach { p ->
 
             toLocation.apply {
                 this.longitude = p.location.longitude ?: 0.0

@@ -1,5 +1,6 @@
 package com.tuwaiq.finalproject.util
 
+import android.app.Notification.BADGE_ICON_LARGE
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
@@ -7,6 +8,7 @@ import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.tuwaiq.finalproject.MainActivity
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationCompat.BADGE_ICON_LARGE
 import com.tuwaiq.finalproject.CHANNEL_NOTIFICATION_ID
 import com.tuwaiq.finalproject.R
 
@@ -20,7 +22,7 @@ class NotificationWorker(val context: Context, workerParameters: WorkerParameter
 
         val notification =  NotificationCompat.Builder(context, CHANNEL_NOTIFICATION_ID)
             .setTicker(resource.getString(R.string.new_notification))
-            .setSmallIcon(R.drawable.ic_baseline_perm_identity_24)
+            .setSmallIcon(R.drawable.table)
             .setContentTitle(resource.getString(R.string.new_notification))
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)

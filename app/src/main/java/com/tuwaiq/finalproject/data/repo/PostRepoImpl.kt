@@ -40,8 +40,15 @@ class PostRepoImpl : PostRepo {
         ref.set(payment)
     }
 
+
+
+
     override fun deletePost(id: String) {
         postCollectionRef.document(id).delete()
+    }
+
+    override suspend fun getPayments(): List<Payment> {
+        return paymentCollectionRef.get().await().toObjects(Payment::class.java)
     }
 
 

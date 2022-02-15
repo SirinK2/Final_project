@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2984375" />
+        <entry key="app/src/main/res/drawable-v24/ic_yard_round.xml" value="0.2984375" />
         <entry key="app/src/main/res/drawable/bottom_sheet.xml" value="0.18055555555555555" />
         <entry key="app/src/main/res/drawable/circle.xml" value="0.29384615384615387" />
         <entry key="app/src/main/res/drawable/custom_button.xml" value="0.2984375" />
@@ -13,8 +15,10 @@
         <entry key="app/src/main/res/drawable/ic_email.xml" value="0.26296296296296295" />
         <entry key="app/src/main/res/drawable/ic_email_foucsed.xml" value="0.2984375" />
         <entry key="app/src/main/res/drawable/ic_image.xml" value="0.2984375" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2984375" />
         <entry key="app/src/main/res/drawable/ic_lock.xml" value="0.26296296296296295" />
         <entry key="app/src/main/res/drawable/ic_lock_foucsed.xml" value="0.15648148148148147" />
+        <entry key="app/src/main/res/drawable/ic_money.xml" value="0.2984375" />
         <entry key="app/src/main/res/drawable/ic_person.xml" value="0.2814814814814815" />
         <entry key="app/src/main/res/drawable/message_item.xml" value="0.2984375" />
         <entry key="app/src/main/res/drawable/message_item_sender.xml" value="0.2984375" />
@@ -28,7 +32,7 @@
         <entry key="app/src/main/res/layout/direct_message_item_list.xml" value="0.2922083090899667" />
         <entry key="app/src/main/res/layout/dorpdown_items.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/edit_profile_fragment.xml" value="0.28229166666666666" />
-        <entry key="app/src/main/res/layout/home_page_fragment.xml" value="0.33715312300818745" />
+        <entry key="app/src/main/res/layout/home_page_fragment.xml" value="0.2972222222222222" />
         <entry key="app/src/main/res/layout/home_page_items.xml" value="0.335" />
         <entry key="app/src/main/res/layout/home_page_shimmer_items.xml" value="0.265625" />
         <entry key="app/src/main/res/layout/image_items.xml" value="0.4463161133860127" />
@@ -46,6 +50,8 @@
         <entry key="app/src/main/res/layout/sing_in_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/users_profile_fragment.xml" value="0.3163956934215679" />
         <entry key="app/src/main/res/layout/users_profile_items_list.xml" value="0.2505862122587436" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2984375" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2984375" />
         <entry key="app/src/main/res/xml/photo_file.xml" value="0.28229166666666666" />
       </map>
     </option>

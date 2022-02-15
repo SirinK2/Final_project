@@ -33,7 +33,7 @@ class HomePageViewModel @Inject constructor(
 
 
     fun carsBtn(){
-        mAdapter.filter.filter("cars")
+        mAdapter.filter.filter("vehicles")
 
     }
     fun electronicBtn(){

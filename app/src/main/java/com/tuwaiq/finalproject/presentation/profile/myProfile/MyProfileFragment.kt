@@ -17,6 +17,7 @@ import com.tuwaiq.finalproject.databinding.MyProfileFragmentBinding
 import com.tuwaiq.finalproject.databinding.ProfilePostItemBinding
 import com.tuwaiq.finalproject.domain.model.Post
 import com.tuwaiq.finalproject.domain.model.User
+import com.tuwaiq.finalproject.util.Constant.uid
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "MyProfileFragment"
@@ -39,7 +40,6 @@ class MyProfileFragment : Fragment() {
 
         binding.myPostRv.layoutManager = GridLayoutManager(context, 2)
 
-//        binding.myProfIv.load(R.drawable.ic_person)
 
         return binding.root
     }
@@ -55,6 +55,7 @@ class MyProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewModel.getUser().observe(
             viewLifecycleOwner,{
                 user = it
@@ -66,9 +67,7 @@ class MyProfileFragment : Fragment() {
                     .placeholder(R.drawable.ic_person)
                     .into(binding.myProfIv)
 
-//                binding.myProfIv.load(it.photoUrl){
-//                    placeholder(R.drawable.ic_person)
-//                }
+
                 Log.e(TAG, "onViewCreated: $it", )
             }
         )
@@ -80,6 +79,18 @@ class MyProfileFragment : Fragment() {
 
         }
 
+        binding.purchases.setOnClickListener {
+            viewModel.myPurchases().observe(
+                viewLifecycleOwner,{
+                    binding.myPostRv.adapter = MyListAdapter(it)
+
+                }
+            )
+
+        }
+
+
+
     }
 
     override fun onStart() {
@@ -87,9 +98,14 @@ class MyProfileFragment : Fragment() {
 
 
 
-        binding.settingBtn.setOnClickListener {
+        binding.updateProfile.setOnClickListener {
             val action = MyProfileFragmentDirections.actionMyProfileFragmentToEditProfileFragment(user.id)
             findNavController().navigate(action)
+        }
+
+
+        binding.settingBtn.setOnClickListener {
+            findNavController().navigate(R.id.settingFragment)
         }
     }
 
@@ -124,9 +140,10 @@ class MyProfileFragment : Fragment() {
                     }
 
                 }
-                binding.deleteIv.setOnClickListener {
-                    deleteDialog(index)
-                }
+                if (post.owner != uid){ binding.deleteIv.visibility = View.GONE }
+
+
+                binding.deleteIv.setOnClickListener { deleteDialog(index) }
 
 
             }
@@ -145,16 +162,16 @@ class MyProfileFragment : Fragment() {
 
             private fun deleteDialog(index: Int){
                 AlertDialog.Builder(requireContext()).apply {
-                    setTitle("Delete post? ")
+                    setTitle(getString(R.string.delete_post))
                     setIcon(R.drawable.ic_baseline_cancel_24)
-                    setMessage("Are you sure?")
-                    setPositiveButton("Yes"){ _, _ ->
+                    setMessage(getString(R.string.are_you_sure))
+                    setPositiveButton(getString(R.string.yes_tv)){ _, _ ->
                         viewModel.deletePost(post.id).also {
                             mList.removeAt(index)
                             notifyDataSetChanged()
                         }
                     }
-                    setNegativeButton("No",null)
+                    setNegativeButton(getString(R.string.no_tv),null)
                     show()
                 }
             }
