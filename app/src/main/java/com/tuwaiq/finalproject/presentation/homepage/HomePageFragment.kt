@@ -14,8 +14,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.activity.result.contract.ActivityResultContracts
@@ -24,10 +22,12 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.tuwaiq.finalproject.R
 import com.tuwaiq.finalproject.databinding.HomePageFragmentBinding
@@ -47,8 +47,24 @@ class HomePageFragment : Fragment() {
     private val homePageViewModel: HomePageViewModel by viewModels()
     private lateinit var binding : HomePageFragmentBinding
     private var snapHelper: SnapHelper = LinearSnapHelper()
+    private lateinit var filterBottomSheet: FilterBottomSheet
+
+//    private val args: HomePageFragmentArgs by navArgs()
+
 
     private val launcher = registerForActivityResult(ActivityResultContracts.RequestPermission()){}
+
+    private val refreshListener = SwipeRefreshLayout.OnRefreshListener {
+
+        binding.swipeRefreshLayout.isRefreshing = true
+
+        observe(5000.0f)
+
+        binding.swipeRefreshLayout.isRefreshing = false
+
+        Log.d(TAG, "swipe: j")
+
+    }
 
 
 
@@ -98,52 +114,43 @@ class HomePageFragment : Fragment() {
 
 
 
+
         observe(100.0f)
 
 
-        binding.threeKm.setOnClickListener {
-            observe(3000.0f)
-        }
 
 
-        binding.fiveKm.setOnClickListener {
-            observe(5000.0f)
 
-        }
+        binding.swipeRefreshLayout.setOnRefreshListener(refreshListener)
 
 
 
 
     }
+
 
 
 
     override fun onStart() {
         super.onStart()
 
-        binding.floatingActionButton2.setOnClickListener {
-        }
-
         val navCon = findNavController()
-        binding.homeProfileBtn.setOnClickListener {
-            navCon.navigate(R.id.myProfileFragment)
-        }
 
-        binding.floatingActionButton.setOnClickListener {
-            navCon.navigate(R.id.itemsFragment)
-        }
+        binding.filterFab.setOnClickListener { navCon.navigate(R.id.filterBottomSheet) }
 
-        binding.homeDmBtn.setOnClickListener {
-            navCon.navigate(R.id.directMessageFragment)
-        }
+
+        binding.homeProfileBtn.setOnClickListener { navCon.navigate(R.id.myProfileFragment) }
+
+
+        binding.postFab.setOnClickListener { navCon.navigate(R.id.itemsFragment) }
+
+
+        binding.homeDmBtn.setOnClickListener { navCon.navigate(R.id.directMessageFragment) }
 
 
 
 
     }
-
-
-
 
 
     private fun observe(dis: Float){
@@ -169,6 +176,7 @@ class HomePageFragment : Fragment() {
 
                         binding.homeRv.adapter = mAdapter
                         Log.d(TAG, "onViewCreated: $dis")
+
                     }
                 )
             }
@@ -204,12 +212,6 @@ class HomePageFragment : Fragment() {
             show()
         }
     }
-
-
-
-
-
-
 
 
 

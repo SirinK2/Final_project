@@ -136,4 +136,12 @@
             android:name="id"
             app:argType="string" />
     </fragment>
+    <dialog
+        android:id="@+id/filterBottomSheet"
+        android:name="com.tuwaiq.finalproject.presentation.homepage.FilterBottomSheet"
+        android:label="FilterBottomSheet" >
+        <action
+            android:id="@+id/action_filterBottomSheet_to_homePageFragment"
+            app:destination="@id/homePageFragment" />
+    </dialog>
 </navigation>

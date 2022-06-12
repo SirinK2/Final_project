@@ -1,6 +1,7 @@
 package com.tuwaiq.finalproject.presentation.homepage
 
 import android.content.Context
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -32,25 +33,6 @@ class HomePageViewModel @Inject constructor(
     }
 
 
-    fun carsBtn(){
-        mAdapter.filter.filter("vehicles")
-
-    }
-    fun electronicBtn(){
-        mAdapter.filter.filter("electronic")
-
-
-    }
-    fun furnitureBtn(){
-        mAdapter.filter.filter("furniture")
-
-    }
-    fun clothesBtn(){
-        mAdapter.filter.filter("clothes")
-    }
-    fun realEstateBtn(){
-        mAdapter.filter.filter("real estate")
-    }
 
 
 

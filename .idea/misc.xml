@@ -27,11 +27,12 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/buy_item_fragment.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/camera.xml" value="0.3128251310141457" />
-        <entry key="app/src/main/res/layout/chat_fragment.xml" value="0.24880382775119617" />
+        <entry key="app/src/main/res/layout/chat_fragment.xml" value="0.2068816968994927" />
         <entry key="app/src/main/res/layout/direct_message_fragment.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/direct_message_item_list.xml" value="0.2922083090899667" />
         <entry key="app/src/main/res/layout/dorpdown_items.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/edit_profile_fragment.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/filter_bottom_sheet.xml" value="0.42250363435021804" />
         <entry key="app/src/main/res/layout/home_page_fragment.xml" value="0.2972222222222222" />
         <entry key="app/src/main/res/layout/home_page_items.xml" value="0.335" />
         <entry key="app/src/main/res/layout/home_page_shimmer_items.xml" value="0.265625" />

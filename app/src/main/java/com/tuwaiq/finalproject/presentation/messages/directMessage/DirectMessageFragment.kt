@@ -16,9 +16,7 @@ import com.tuwaiq.finalproject.databinding.DirectMessageFragmentBinding
 import com.tuwaiq.finalproject.databinding.DirectMessageItemListBinding
 import com.tuwaiq.finalproject.domain.model.Chat
 import com.tuwaiq.finalproject.domain.model.User
-import com.tuwaiq.finalproject.generated.callback.OnClickListener
 import com.tuwaiq.finalproject.util.Constant.format
-import com.tuwaiq.finalproject.util.Constant.uid
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "DirectMessageFragment"

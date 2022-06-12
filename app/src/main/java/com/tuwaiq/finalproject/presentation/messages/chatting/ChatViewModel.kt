@@ -30,8 +30,7 @@ class ChatViewModel @Inject constructor(
         fun getUser(id:String):LiveData<User> = liveData(Dispatchers.IO) { emit(getUserByIdUseCase(id)) }
 
 
-        fun getMessage(callback: FirebaseCallback)=
-            viewModelScope.launch (Dispatchers.IO) {getMessagesUseCase(callback) }
+        fun getMessage(callback: FirebaseCallback) = viewModelScope.launch (Dispatchers.IO) {getMessagesUseCase(callback) }
 
 
 

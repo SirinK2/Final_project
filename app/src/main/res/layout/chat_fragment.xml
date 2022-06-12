@@ -57,8 +57,8 @@
 
             <LinearLayout
                 android:id="@+id/chat_layout"
-                android:layout_width="match_parent"
-                android:layout_height="662dp"
+                android:layout_width="412dp"
+                android:layout_height="615dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 app:layout_constraintEnd_toEndOf="parent"

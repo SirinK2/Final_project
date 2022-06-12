@@ -94,7 +94,7 @@ class ChatFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        binding.chatLayout.setOnClickListener {
+        binding.chatRv.setOnClickListener {
 
             closeKeyboard()
         }
